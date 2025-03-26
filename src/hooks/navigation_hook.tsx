@@ -8,6 +8,8 @@ const NavigationHooks = () => {
     navigateToHome: () => navigate(AppRoutes.HOME),
     navigateToLogin: () => navigate(AppRoutes.LOGIN),
     navigateToForegot: () => navigate(AppRoutes.FOREGOT),
+    navigateToDashBoard: () => navigate(AppRoutes.DASHBOARD),
+    navigateToProfile: () => navigate(AppRoutes.PROFILE),
   };
 };
 

@@ -22,10 +22,13 @@ type TypographyProps = {
     | "caption"
     | "button_text"
     | "subtitle"
+    | "side_bar_tab"
     | "overline"
     | "onboarding_title";
+
   color?: string;
   children: ReactNode;
+  className?: string;
   onClick?: () => void;
 };
 
@@ -56,6 +59,8 @@ const variantStyles: Record<TypographyProps["variant"], string> = {
   subtitle: "text-[16px] font-normal text-primary-950",
   overline: "text-[10px] text-primary-950",
   onboarding_title: "text-[21px] font-extrabold text-primary-950",
+  side_bar_tab:
+    "text-[18px] font-normal text-primary-50 flex items-center gap-2 cursor-pointer hover:text-primary-950 hover:bg-primary-50 p-2 rounded-md transition-all",
 };
 
 const Typography: React.FC<TypographyProps> = ({
@@ -63,11 +68,12 @@ const Typography: React.FC<TypographyProps> = ({
   color,
   onClick,
   children,
+  className,
 }) => {
   return (
     <p
       onClick={onClick}
-      className={`${variantStyles[variant]}`}
+      className={`${className} ${variantStyles[variant]}`}
       style={{ color }}
     >
       {children}

@@ -5,7 +5,9 @@ import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import GlobalButton from "../components/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
+import LoginService from "../service/login_service";
 const LoginPage = () => {
+  const service = LoginService();
   return (
     <div className="flex items-strat justify-between px-60 py-40  h-screen bg-primary-50">
       <div className="flex flex-col items-start gap-8">
@@ -45,7 +47,7 @@ const LoginPage = () => {
         >
           Esqueci minha senha
         </p>
-        <GlobalButton onClick={() => alert("Botão primário clicado!")}>
+        <GlobalButton onClick={service.onLogin}>
           Entrar <FaArrowRightLong />
         </GlobalButton>
         <div

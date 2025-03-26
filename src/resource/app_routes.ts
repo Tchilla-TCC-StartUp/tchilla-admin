@@ -1,5 +1,5 @@
 class AppRoutes{
-    public static readonly HOME = "/";
+    public static readonly HOME = "";
     public static readonly LOGIN = "/login";
     public static readonly FOREGOT = "/foregot";
     public static readonly REGISTER = "/register";

@@ -1,12 +1,16 @@
-import React from "react";
-import Typography from "../components/typography";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/side_bar";
 
-const HomePage = () => {
+
+const Layout = () => {
   return (
-    <div className="flex items-center justify-center h-screen  bg-primary-50">
-      <Typography variant="h1_bold">Home Page</Typography>
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 p-6 bg-primary-50 ml-64">
+        <Outlet />
+      </main>
     </div>
   );
 };
 
-export default HomePage;
+export default Layout;

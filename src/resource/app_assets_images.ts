@@ -14,6 +14,7 @@ class AppAssetsImages {
         logo3x: `${this.assetspath}/vectores/logo3x.png`,
         logotipo: `${this.assetspath}/vectores/logotipo.svg`,
         logotipo3x: `${this.assetspath}/vectores/logotipo3x.png`,
+        logotipo_white3x: `${this.assetspath}/vectores/logotipo_white3x.svg`,
         logoutIcon: `${this.assetspath}/vectores/logout-icon.svg`,
         monIcon: `${this.assetspath}/vectores/mon-icon.svg`,
         notepadIcon: `${this.assetspath}/vectores/notepad-icon.svg`,
