@@ -24,7 +24,7 @@ const RegisterPage = () => {
           Crie a conta para contribuir com a comunidade
         </Typography>
       </div>
-      <div className="flex flex-col w-[400px] gap-4">
+      <div className="flex flex-col w-[400px] gap-1">
         <GlobalInput
           label="Seu nome"
           type="text"
@@ -53,9 +53,7 @@ const RegisterPage = () => {
           tabIndex={4}
           icon={<MdLockOutline />}
         />
-        <Typography variant="h3_normal" color="var(--gray-900)">
-          Esqueci minha senha
-        </Typography>
+       
         <GlobalButton onClick={() => alert("Botão primário clicado!")}>
           Criar conta <FaArrowRightLong />
         </GlobalButton>

@@ -7,14 +7,17 @@ import ForegotPasswordPage from "./pages/foregot_password_page";
 import DashboardPage from "./pages/dashboard_page";
 import ProfilePage from "./pages/profile_page";
 import PageLayout from "./layouts/page_layout";
-
+import ConfirmEmail from "./pages/confirmEmail";
+import ResetPassword from "./pages/resetPassword";
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
         <Route path={AppRoutes.HOME} element={<HomePage />} />
-        <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
+        <Route path={AppRoutes.Confirm} element={<ConfirmEmail />} />
+        <Route path="/ResetPassword" element={< ResetPassword/>} />
         <Route path={AppRoutes.FOREGOT} element={<ForegotPasswordPage />} />
 
         <Route
@@ -37,5 +40,6 @@ const AppRouter = () => {
     </Router>
   );
 };
+
 
 export default AppRouter;

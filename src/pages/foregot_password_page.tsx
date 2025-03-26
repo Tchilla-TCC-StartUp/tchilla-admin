@@ -5,11 +5,14 @@ import { MdAlternateEmail } from "react-icons/md";
 import GlobalButton from "../components/global_button";
 import { FaArrowRightLong } from "react-icons/fa6";
 import GlobalBackButton from "../components/global_back_button";
+import NavigationHooks from "../hooks/navigation_hook";
 const ForegotPasswordPage = () => {
   return (
     <div className="flex items-center flex-col  py-[60px] px-40 bg-primary-50 h-screen">
       <div className=" flex flex-col items-start justify-center gap-5 w-[400px]">
-        <GlobalBackButton/>
+        <GlobalBackButton href="/login">
+
+        </GlobalBackButton>
         <img
           src={AppAssetsImages.vectores.logotipo}
           alt="Logo"
@@ -27,7 +30,7 @@ const ForegotPasswordPage = () => {
         />
         <GlobalButton
           className="w-[fill] mt-[10px] bg-primary-900"
-          onClick={() => alert("Botão primário clicado!")}
+          onClick={NavigationHooks().navigateToConfirm}
         >
           Recuperar senha <FaArrowRightLong />
         </GlobalButton>
