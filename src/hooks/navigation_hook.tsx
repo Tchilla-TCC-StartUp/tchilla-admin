@@ -7,6 +7,7 @@ const NavigationHooks = () => {
     navigateToRegister: () => navigate(AppRoutes.REGISTER),
     navigateToHome: () => navigate(AppRoutes.HOME),
     navigateToLogin: () => navigate(AppRoutes.LOGIN),
+    navigateToForegot: () => navigate(AppRoutes.FOREGOT),
   };
 };
 

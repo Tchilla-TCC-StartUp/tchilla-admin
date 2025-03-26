@@ -14,6 +14,7 @@ type TypographyProps = {
     | "h2_medium"
     | "h2_bold"
     | "h3_normal"
+    | "h3_ligth"
     | "h3_medium"
     | "h3_bold"
     | "italic"
@@ -25,6 +26,7 @@ type TypographyProps = {
     | "onboarding_title";
   color?: string;
   children: ReactNode;
+  onClick?: () => void;
 };
 
 const variantStyles: Record<TypographyProps["variant"], string> = {
@@ -43,6 +45,7 @@ const variantStyles: Record<TypographyProps["variant"], string> = {
   h2_bold: "text-[20px] font-bold text-primary-950",
 
   h3_normal: "text-[16px] font-normal text-primary-950",
+  h3_ligth: "text-[16px] font-light text-primary-950",
   h3_medium: "text-[16px] font-medium text-primary-950",
   h3_bold: "text-[16px] font-bold text-primary-950",
 
@@ -58,10 +61,15 @@ const variantStyles: Record<TypographyProps["variant"], string> = {
 const Typography: React.FC<TypographyProps> = ({
   variant,
   color,
+  onClick,
   children,
 }) => {
   return (
-    <p className={`${variantStyles[variant]}`} style={{ color }}>
+    <p
+      onClick={onClick}
+      className={`${variantStyles[variant]}`}
+      style={{ color }}
+    >
       {children}
     </p>
   );

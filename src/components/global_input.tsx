@@ -1,20 +1,26 @@
 import React, { InputHTMLAttributes } from "react";
 
-type AppGlobalInputProps = InputHTMLAttributes<HTMLInputElement> & {
+type GlobalInputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   error?: string;
   icon?: React.ReactNode;
+  containerClassName?: string;
+  inputClassName?: string;
+  tabIndex?: number;
 };
 
-const AppGlobalInput: React.FC<AppGlobalInputProps> = ({
+const GlobalInput: React.FC<GlobalInputProps> = ({
   label,
   error,
   icon,
-  className,
+  tabIndex,
+  className = "",
+  containerClassName = "",
+  inputClassName = "",
   ...props
 }) => {
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className={`flex flex-col gap-1 w-full ${containerClassName}`}>
       {label && (
         <label className="text-sm font-semibold text-gray-900 mb-1">
           {label}
@@ -27,13 +33,14 @@ const AppGlobalInput: React.FC<AppGlobalInputProps> = ({
           </span>
         )}
         <input
+          tabIndex={tabIndex}
           className={`w-full p-4 border border-gray-400 rounded-md text-sm transition-colors focus:border-primary-800 focus:outline-none ${
             icon ? "pl-12" : ""
           } ${error ? "border-red-500" : ""} ${
             props.disabled
               ? "bg-gray-200 text-gray-600 cursor-not-allowed opacity-70"
               : ""
-          } ${className}`}
+          } ${inputClassName} ${className}`}
           {...props}
         />
       </div>
@@ -42,4 +49,4 @@ const AppGlobalInput: React.FC<AppGlobalInputProps> = ({
   );
 };
 
-export default AppGlobalInput;
+export default GlobalInput;
