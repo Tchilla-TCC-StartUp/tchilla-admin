@@ -9,6 +9,12 @@ import ProfilePage from "./pages/profile_page";
 import PageLayout from "./layouts/page_layout";
 import ConfirmEmail from "./pages/confirmEmail";
 import ResetPassword from "./pages/resetPassword";
+import AgendamentoPage from "./pages/agendamento_page";
+import AvaliacaoPage from "./pages/avaliacoes";
+import ConfiguracaoPage from "./pages/configuracoes_page";
+import PagamentoPage from "./pages/pagemantos_page";
+import ServEPacotes from "./pages/servicosEpacotes_page";
+
 const AppRouter = () => {
   return (
     <Router>
@@ -25,6 +31,49 @@ const AppRouter = () => {
           element={
             <PageLayout title="DashBoard">
               <DashboardPage />
+            </PageLayout>
+          }
+        />
+         <Route
+          path={AppRoutes.AGENDAMENTO}
+          element={
+            <PageLayout title="Agendamentos">
+              <AgendamentoPage />
+            </PageLayout>
+          }
+        />
+         <Route
+          path={AppRoutes.AVALIACAO}
+          element={
+        <PageLayout title="Avaliações">
+              <AvaliacaoPage />
+            </PageLayout>
+          }
+          
+        />
+        <Route
+          path={AppRoutes.SERVEPACOTE}
+          element={
+            <PageLayout title="Serviços E Pacotes">
+              <ServEPacotes />
+            </PageLayout>
+          }
+          
+        />
+         <Route
+          path={AppRoutes.CONFIG}
+          element={
+            <PageLayout title="Configurações">
+              <ConfiguracaoPage />
+            </PageLayout>
+          }
+          
+        />
+         <Route
+          path={AppRoutes.PAGAMENTOS}
+          element={
+            <PageLayout title="Pagamentos">
+              <PagamentoPage />
             </PageLayout>
           }
         />

@@ -1,12 +1,14 @@
 import { FaArrowRightLong } from "react-icons/fa6";
-import { MdAlternateEmail, MdLockOutline } from "react-icons/md";
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import GlobalButton from "../components/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
 import LoginService from "../service/login_service";
+import { useState } from "react";
 const LoginPage = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const service = LoginService();
   return (
     <div className="flex items-strat justify-between px-60 py-40  h-screen bg-primary-50">
@@ -30,15 +32,15 @@ const LoginPage = () => {
           label="Seu email"
           type="email"
           placeholder="Informe o seu email"
-          tabIndex={1}
-          icon={<MdAlternateEmail />}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <GlobalInput
           label="Sua password"
           type="password"
           placeholder="Informa a password"
-          tabIndex={2}
-          icon={<MdLockOutline />}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <p
@@ -47,7 +49,7 @@ const LoginPage = () => {
         >
           Esqueci minha senha
         </p>
-        <GlobalButton onClick={service.onLogin}>
+        <GlobalButton onClick={() => service.onLogin(email, password)}>
           Entrar <FaArrowRightLong />
         </GlobalButton>
         <div

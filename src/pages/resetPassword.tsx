@@ -11,18 +11,15 @@ const ResetPassword = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white px-20">
     <div className="flex flex-col items-start justify-center min-h-screen px-20 bg-white">
-      {/* Logo */}
       <img
           src={AppAssetsImages.vectores.logotipo}
           alt="Logo"
           className="w-[160px] mb-10"
         />
 
-      {/* Título e descrição */}
       <h1 className="text-2xl font-bold text-gray-900">Definir uma nova senha</h1>
       <p className="text-gray-500 mt-2">Informe a nova senha para sua conta</p>
 
-      {/* Input: Nova Senha */}
       <div className="relative w-[400px] mt-6">
         <MdLockOutline className="absolute left-4 top-4 text-gray-400 text-lg" />
         <input
@@ -38,12 +35,10 @@ const ResetPassword = () => {
         </button>
       </div>
 
-      {/* Requisitos da senha */}
       <p className="text-gray-500 text-sm mt-2 w-[400px]">
         A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial (@, $, %, &, etc.).
       </p>
 
-      {/* Input: Confirmar Senha */}
       <div className="relative w-[400px] mt-4">
         <MdLockOutline className="absolute left-4 top-4 text-gray-400 text-lg" />
         <input
@@ -59,7 +54,6 @@ const ResetPassword = () => {
         </button>
       </div>
 
-      {/* Botão Atualizar Senha */}
       <button className="mt-6 w-[400px] h-12 bg-blue-900 text-white rounded-lg flex items-center justify-center text-base font-semibold gap-2 hover:bg-blue-950 transition">
         Atualizar senha <FaArrowRight />
       </button>

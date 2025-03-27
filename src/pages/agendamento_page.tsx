@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-const ProfilePage = () => {
+const agendamento = () => {
   return (
     <div>
      <Link to="/login">Ir para Login</Link>
-      <p>Profile Page</p>
+      <p>Profile jkgjkg</p>
     </div>
   );
 };
 
-export default ProfilePage;
+export default agendamento;

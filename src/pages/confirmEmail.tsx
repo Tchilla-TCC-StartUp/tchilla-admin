@@ -29,7 +29,6 @@ const confirmEmail = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-white px-20">
         <div className="flex flex-col items-start justify-center min-h-screen bg-white px-20">
-          {/* Logo */}
           
           <img
           src={AppAssetsImages.vectores.logotipo}
@@ -37,13 +36,11 @@ const confirmEmail = () => {
           className="w-[160px] mb-10"
         />
     
-          {/* Texto */}
           <h1 className="text-xl font-bold text-gray-900">PIN</h1>
           <p className="text-gray-500 max-w-sm mt-2">
             Enviamos um PIN de verificação para o seu email. Verifique seu email, por favor.
           </p>
     
-          {/* Campos de PIN */}
           <div className="flex gap-3 mt-6">
             {pin.map((value, index) => (
               <input
@@ -61,7 +58,6 @@ const confirmEmail = () => {
             ))}
           </div>
     
-          {/* Botão ajustado para um tamanho médio */}
           <GlobalButton className="mt-6 w-[400px] bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center justify-center text-base font-semibold gap-2 hover:bg-blue-700 transition" onClick={NavigationHooks().navigateToReset}>
             Recuperar senha <FaArrowRight />
           </GlobalButton>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ProfilePage = () => {
+const ServicosEpacotes = () => {
   return (
     <div>
      <Link to="/login">Ir para Login</Link>
@@ -9,4 +9,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default ServicosEpacotes;

@@ -1,12 +1,13 @@
 import React from "react";
 
 type ButtonProps = {
-  variant?: "primary" | "secondary" | "outline" | "text";
+  variant?: "primary" | "secondary" | "outline" | "text"| "outline" ;
   disabled?: boolean;
   children: React.ReactNode;
   onClick?: () => void;
   fullWidth?: boolean;
   className?: string; // Permite adicionar estilos personalizados
+  
 };
 
 const GlobalButton: React.FC<ButtonProps> = ({
@@ -15,7 +16,7 @@ const GlobalButton: React.FC<ButtonProps> = ({
   children,
   onClick,
   fullWidth = false,
-  className = "",
+  className ,
 }) => {
   const baseStyles =
     "inline-flex items-center justify-center border-none rounded-lg cursor-pointer transition-all  text-center gap-2 px-6 py-5 text-base";
