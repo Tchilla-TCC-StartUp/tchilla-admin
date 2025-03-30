@@ -5,10 +5,7 @@ const NavigationHooks = () => {
 
   return {
     navigateToRegister: () => navigate(AppRoutes.REGISTER),
-    navigateToHome: () => {
-      console.log("Redirecionando para Home...");
-      navigate("/dashboard_page");
-    },
+    navigateToHome: () => navigate(AppRoutes.DASHBOARD),
     navigateToLogin: () => navigate(AppRoutes.LOGIN),
     navigateToConfirm: () => navigate(AppRoutes.Confirm),
     navigateToReset: () => navigate(AppRoutes.Reset),

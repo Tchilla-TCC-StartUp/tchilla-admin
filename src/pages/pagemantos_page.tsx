@@ -1,7 +1,8 @@
 import { FaBox } from "react-icons/fa6";
 import GlobalInput from "../components/global_input";
 import { useState } from "react";
-import Button from "../components/button";
+import GlobalButton from "../components/global_button";
+
 
 type Metric = {
   title: string;
@@ -150,8 +151,11 @@ const CustomerPaymentTable = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-slate-700">Título</h2>
         <div className="flex gap-2">
-          <Button variant="outline" className="text-slate-500 border-slate-500">+Adicionar</Button>
-          <GlobalInput placeholder="Search" className="border rounded-md px-1 py-3 text-slate-500 border-slate-500" />
+          <GlobalButton>+Adicionar</GlobalButton>
+          <GlobalInput
+            placeholder="Search"
+            className="border rounded-md px-1 py-3 text-slate-500 border-slate-500"
+          />
         </div>
       </div>
 
@@ -159,7 +163,11 @@ const CustomerPaymentTable = () => {
         <thead className="bg-slate-50 text-slate-500 text-left">
           <tr>
             <th className="p-3">
-              <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+              <input
+                type="checkbox"
+                checked={selectAll}
+                onChange={handleSelectAll}
+              />
             </th>
             <th className="p-3">Nome do Cliente</th>
             <th className="p-3">Pagamento</th>
@@ -173,12 +181,22 @@ const CustomerPaymentTable = () => {
           {paginatedData.map((customer, index) => (
             <tr key={index} className="border-b text-slate-500">
               <td className="p-3">
-                <input type="checkbox" checked={selectedRows[index] || false} onChange={() => handleRowSelect(index)} />
+                <input
+                  type="checkbox"
+                  checked={selectedRows[index] || false}
+                  onChange={() => handleRowSelect(index)}
+                />
               </td>
               <td className="p-3 flex items-center gap-2">
-                <img src={customer.avatar} alt={customer.name} className="w-10 h-10 rounded-full" />
+                <img
+                  src={customer.avatar}
+                  alt={customer.name}
+                  className="w-10 h-10 rounded-full"
+                />
                 <div>
-                  <p className="font-semibold text-neutral-900">{customer.name}</p>
+                  <p className="font-semibold text-neutral-900">
+                    {customer.name}
+                  </p>
                   <p className="text-sm text-neutral-900">{customer.email}</p>
                 </div>
               </td>
@@ -187,7 +205,7 @@ const CustomerPaymentTable = () => {
               <td className="p-3">{customer.date}</td>
               <td className="p-3">{customer.services}</td>
               <td className="p-3">
-              <button className="w-8 h-8 flex items-center justify-center rounded-full border border-slate-500 hover:bg-gray-100">
+                <button className="w-8 h-8 flex items-center justify-center rounded-full border border-slate-500 hover:bg-gray-100">
                   <span className="text-slate-500 text-lg">•••</span>
                 </button>
               </td>
@@ -197,30 +215,36 @@ const CustomerPaymentTable = () => {
       </table>
 
       <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
-  <p>
-    Mostrando <span className="font-bold">{startIndex + 1}</span> - <span className="font-bold">{Math.min(endIndex, data.length)}</span> de <span className="font-bold">{data.length}</span> resultados
-  </p>
-  <div className="flex gap-2">
-    <button
-      onClick={prevPage}
-      disabled={currentPage === 1}
-      className={`w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 ${
-        currentPage === 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-white text-gray-600 hover:bg-gray-200"
-      }`}
-    >
-      ←
-    </button>
-    <button
-      onClick={nextPage}
-      disabled={currentPage === totalPages}
-      className={`w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 ${
-        currentPage === totalPages ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-white text-gray-600 hover:bg-gray-200"
-      }`}
-    >
-      →
-    </button>
-  </div>
-</div>
+        <p>
+          Mostrando <span className="font-bold">{startIndex + 1}</span> -{" "}
+          <span className="font-bold">{Math.min(endIndex, data.length)}</span>{" "}
+          de <span className="font-bold">{data.length}</span> resultados
+        </p>
+        <div className="flex gap-2">
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className={`w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 ${
+              currentPage === 1
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-white text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            ←
+          </button>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            className={`w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 ${
+              currentPage === totalPages
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-white text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            →
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

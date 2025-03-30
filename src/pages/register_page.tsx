@@ -1,15 +1,22 @@
-import { useState } from "react";
-import { MdAlternateEmail, MdLockOutline } from "react-icons/md";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { MdAlternateEmail, MdCategory, MdLockOutline } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import GlobalButton from "../components/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
-import authService from "../service/authService";
+import GlobalDropdown from "../components/global_dropdown";
+import RegisterInterface from "../interfaces/register_interface";
 
 const RegisterPage = () => {
-  const [formData, setFormData] = useState({
+  const categories = [
+    { label: "Adimin", value: 3 },
+    { label: "Prestador", value: 1 },
+    { label: "Agente", value: 2 },
+  ];
+
+  const [formData, setFormData] = useState<RegisterInterface>({
     nome: "",
     email: "",
     telefone: "",
@@ -17,28 +24,20 @@ const RegisterPage = () => {
     tipo: 0,
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<number | undefined>(
+    undefined
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const navigation = NavigationHooks();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    try {
-      const response = await authService.register(formData);
-      console.log("Usuário cadastrado com sucesso:", response);
-      alert("Cadastro realizado com sucesso!");
-    } catch (err: any) {
-      console.error("Erro ao registrar:", err);
-      setError(err.message || "Erro ao registrar.");
-    } finally {
-      setLoading(false);
-    }
+    console.log("Dados enviados:", formData);
   };
 
   return (
@@ -55,10 +54,11 @@ const RegisterPage = () => {
           na plataforma
         </Typography>
         <Typography variant="h3_ligth" color="var(--gray-700)">
-  Crie a conta para contribuir com a comunidade
-</Typography>
+          Crie a conta para contribuir com a comunidade
+        </Typography>
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col w-[400px] gap-1">
+
+      <form className="flex flex-col w-[400px] gap-5" onSubmit={handleSubmit}>
         <GlobalInput
           label="Seu nome"
           type="text"
@@ -91,6 +91,17 @@ const RegisterPage = () => {
           onChange={handleChange}
           required
         />
+        <GlobalDropdown
+          label="Categoria"
+          options={categories}
+          selectedValue={selectedCategory}
+          onChange={(value) =>
+            setSelectedCategory(typeof value === "number" ? value : undefined)
+          }
+          placeholder="Escolha uma categoria"
+          icon={<MdCategory />}
+        />
+
         <GlobalInput
           label="Sua senha"
           type="password"
@@ -102,22 +113,30 @@ const RegisterPage = () => {
           onChange={handleChange}
           required
         />
-        <GlobalButton onClick={() => handleSubmit(new Event("submit"))} disabled={loading}>
-  {loading ? "Cadastrando..." : "Registrar"}
-</GlobalButton>
-        {error && <p className="text-red-500">{error}</p>}
+
+        <GlobalButton type="submit" className="mt-3">
+          Criar Conta
+        </GlobalButton>
+
         <div className="flex justify-center items-center gap-3 cursor-pointer">
           <div className="w-[100%] h-[1px] bg-gray-400"></div>
-          <Typography variant="p_bold" color="var(--gray-700)">Ou</Typography>
+          <Typography variant="p_bold" color="var(--gray-700)">
+            Ou
+          </Typography>
           <div className="w-[100%] h-[1px] bg-gray-400"></div>
         </div>
-        <GlobalButton variant="secondary" >
+
+        <GlobalButton
+          variant="secondary"
+          onClick={() => console.log("Login com Google")}
+        >
           Entrar com o Google
           <img src={AppAssetsImages.vectores.google} alt="google" />
         </GlobalButton>
+
         <div
           className="flex justify-center gap-1 cursor-pointer"
-          onClick={NavigationHooks().navigateToLogin}
+          onClick={navigation.navigateToLogin}
         >
           <Typography variant="p_light" color="var(--gray-700)">
             Já tem uma conta?
