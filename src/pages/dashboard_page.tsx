@@ -1,4 +1,5 @@
 import { Card, CardContent } from "../components/card";
+import GlobalHelloUser from "../components/global_hello_user";
 import MetricCard from "../components/metric_card";
 import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";
@@ -75,10 +76,7 @@ const Dashboard = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-gray-500">Hello Admin,</h2>
-          <h1 className="text-2xl font-bold">Celson Mamboo</h1>
-        </div>
+        <GlobalHelloUser name="Celson Paixão" rule="Admin" />
       </div>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
