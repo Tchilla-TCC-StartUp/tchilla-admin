@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -32,6 +29,16 @@ export default {
           700: "#646260",
           800: "#53504a",
           900: "#37322d",
+        },
+      },
+      animation: {
+        pulse: "pulse 1.5s ease-in-out infinite",
+      },
+      keyframes: {
+        pulse: {
+          "0%": { opacity: "0.4" },
+          "50%": { opacity: "0.7" },
+          "100%": { opacity: "1" },
         },
       },
     },
