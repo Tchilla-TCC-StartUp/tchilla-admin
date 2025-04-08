@@ -41,7 +41,7 @@ const GlobalSnackbar = () => {
       className={`fixed bottom-5 left-1/2 transform -translate-x-1/2 flex items-center gap-3 px-8 py-4 rounded-lg shadow-lg w-[20rem] ${snackbarStyles[type].bg}`}
     >
       {snackbarStyles[type].icon}
-      <Typography variant="h2_medium" className="text-white">
+      <Typography variant="h3_medium" className="text-white">
         {message}
       </Typography>
     </motion.div>

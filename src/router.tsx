@@ -12,8 +12,8 @@ import ResetPassword from "./pages/resetPassword";
 import AgendamentoPage from "./pages/agendamento_page";
 import AvaliacaoPage from "./pages/avaliacoes";
 import ConfiguracaoPage from "./pages/configuracoes_page";
-import PagamentoPage from "./pages/pagemantos_page";
-import ServEPacotes from "./pages/servicosEpacotes_page";
+import PagamentoPage from "./pages/payments_page";
+import ServEPacotes from "./pages/services_page";
 import ProtectedRoute from "./protected_route";
 
 const AppRouter = () => {

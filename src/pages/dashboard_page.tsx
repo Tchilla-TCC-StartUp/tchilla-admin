@@ -1,10 +1,12 @@
-import { Card, CardContent } from "../components/card";
+import { useEffect } from "react";
+import { Card, CardContent } from "../components/global_cards";
 import GlobalHelloUser from "../components/global_hello_user";
 import MetricCard from "../components/metric_card";
 import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";
 import Typography from "../components/typography";
-
+import newUserData from "../data/jsons/new_users.json";
+import UserService from "../service/user_service";
 const mockMetrics = [
   {
     title: "Total de Agendamentos",
@@ -39,44 +41,20 @@ const salesData = [
   { month: "DEC", sales: 3700 },
 ];
 
-const newUsers = [
-  {
-    name: "Paulo Lopes Estêvão",
-    joinedAt: "2 minutes ago",
-    avatar: "https://i.pravatar.cc/50?img=1",
-  },
-  {
-    name: "Jorge Cristo Neto",
-    joinedAt: "2 hours ago",
-    avatar: "https://i.pravatar.cc/50?img=2",
-  },
-  {
-    name: "Wagner Coche",
-    joinedAt: "1 month ago",
-    avatar: "https://i.pravatar.cc/50?img=3",
-  },
-  {
-    name: "Paulo Lopes Estêvão",
-    joinedAt: "2 minutes ago",
-    avatar: "https://i.pravatar.cc/50?img=1",
-  },
-  {
-    name: "Jorge Cristo Neto",
-    joinedAt: "2 hours ago",
-    avatar: "https://i.pravatar.cc/50?img=2",
-  },
-  {
-    name: "Wagner Coche",
-    joinedAt: "1 month ago",
-    avatar: "https://i.pravatar.cc/50?img=3",
-  },
-];
+const newUsers = newUserData;
 
 const Dashboard = () => {
+  const { fetchUserData } = UserService();
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchUserData();
+    };
+    fetchData();
+  }, []);
   return (
-    <div className="p-6 bg-white min-h-screen">
+    <div className="w-full h-screen overflow-hidden flex-1">
       <div className="flex items-center justify-between">
-        <GlobalHelloUser name="Celson Paixão" rule="Admin" />
+        <GlobalHelloUser />
       </div>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -85,24 +63,17 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="mt-10 grid  gap-6">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <Typography variant="h2_bold">Rendimento</Typography>
-              <div className="flex space-x-2"></div>
-            </div>
-            <div className="h-64 mt-4">
-              <SalesChart data={salesData} />
-            </div>
+      <div className="flex items-center justify-between mt-6 gap-4">
+        <Card className="flex-1">
+          <CardContent className="p-4 h-[28rem]">
+            <Typography variant="h2_bold">Rendimento</Typography>
+            <SalesChart data={salesData} />
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <Typography variant="h2_bold">Novos clientes</Typography>
-            </div>
+        <Card className="flex-1">
+          <CardContent className="p-4 h-[28rem]">
+            <Typography variant="h2_bold">Novos clientes</Typography>
             <NewUserList users={newUsers} />
           </CardContent>
         </Card>

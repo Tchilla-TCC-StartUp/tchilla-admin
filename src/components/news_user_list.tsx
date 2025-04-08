@@ -1,3 +1,5 @@
+import { GlobalTable } from "./global_table";
+import { AppGlobalUserAvatarName } from "./global_user_avatar_name";
 interface NewUser {
   name: string;
   joinedAt: string;
@@ -9,29 +11,30 @@ interface NewUserListProps {
 }
 
 const NewUserList = ({ users }: NewUserListProps) => {
+  const columns = [
+    {
+      key: "avatar",
+      title: "Avatar",
+      render: (item: any) =>
+        item.avatar ? (
+          <AppGlobalUserAvatarName size={30} name={item.name} />
+        ) : null,
+    },
+    { key: "name", title: "Nome" },
+    { key: "email", title: "Email" },
+
+    { key: "joinedAt", title: "Aderiu" },
+  ];
   return (
-    <ul className="mt-4 space-y-3">
-      {users.map((user, index) => (
-        <li
-          key={index}
-          className="flex items-center justify-between p-3 bg-neutral-100 rounded-lg"
-        >
-          <div className="flex items-center space-x-3">
-            <img
-              src={user.avatar}
-              alt={`${user.name}'s avatar`}
-              className="w-10 h-10 rounded-full"
-            />
-            <div>
-              <p className="font-medium">{user.name}</p>
-              <span className="text-sm text-gray-500">
-                Joined {user.joinedAt}
-              </span>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <GlobalTable
+      data={users}
+      columns={columns}
+      selectable
+      paginated
+      styleVariant="clean"
+      withCheckbox={false}
+      itemsPerPage={5}
+    />
   );
 };
 

@@ -1,7 +1,6 @@
 import AppAssetsImages from "../resource/app_assets_images";
-import { GoPerson } from "react-icons/go";
 import { RxDashboard } from "react-icons/rx";
-import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
+import { IoCalendarOutline } from "react-icons/io5";
 import { MdOutlinePayment } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
@@ -28,7 +27,7 @@ const Sidebar = () => {
       badge: 4,
     },
     {
-      label: "Serviços e Pacotes",
+      label: "Serviços",
       icon: <HiOutlineMail size={18} />,
       page: "servicos",
       navigate: navigator.navigateToServicosEpacote,
@@ -47,21 +46,6 @@ const Sidebar = () => {
     },
   ];
 
-  const controlMenuItems = [
-    {
-      label: "Meu Perfil",
-      icon: <GoPerson size={18} />,
-      page: "perfil",
-      navigate: navigator.navigateToProfile,
-    },
-    {
-      label: "Configurações",
-      icon: <IoSettingsOutline size={18} />,
-      page: "configuracoes",
-      navigate: navigator.navigateToconfiguracoes,
-    },
-  ];
-
   const handleNavigation = (page: string, navigate: () => void) => {
     console.log("Navegando para:", page);
     setActivePage(page);
@@ -69,19 +53,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 h-screen bg-primary-950  text-primary-50 p-4 fixed">
+    <div className="w-64 h-screen bg-primary-950  text-primary-50 p-4 fixed z-40">
       <img
         src={AppAssetsImages.vectores.logotipo_white3x}
         alt="Logo"
         className="mb-6 mt-2 w-[130px]"
       />
-
-      <Typography
-        variant="h3_ligth"
-        className="text-gray-300 text-xs uppercase mb-2 mt-4"
-      >
-        NAVEGAÇÃO
-      </Typography>
       <nav>
         <ul className="space-y-4">
           {menuItems.map(({ label, icon, page, navigate, badge }) => (
@@ -101,30 +78,6 @@ const Sidebar = () => {
                     {badge}
                   </span>
                 )}
-              </Typography>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <Typography
-        variant="h3_ligth"
-        className="text-gray-300 text-xs uppercase mb-2 mt-28"
-      >
-        MENU DE CONTROLE
-      </Typography>
-      <nav>
-        <ul className="space-y-1">
-          {controlMenuItems.map(({ label, icon, page, navigate }) => (
-            <li key={page}>
-              <Typography
-                onClick={() => handleNavigation(page, navigate)}
-                variant="side_bar_tab"
-                className={`flex items-center gap-2 ${
-                  activePage === page ? "bg-[#A7F3D0] text-black font-bold" : ""
-                }`}
-              >
-                {icon} {label}
               </Typography>
             </li>
           ))}
