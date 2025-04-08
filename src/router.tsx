@@ -15,6 +15,7 @@ import ConfiguracaoPage from "./pages/configuracoes_page";
 import PagamentoPage from "./pages/payments_page";
 import ServEPacotes from "./pages/services_page";
 import ProtectedRoute from "./protected_route";
+import UsersPage from "./pages/users_page";
 
 const AppRouter = () => {
   return (
@@ -22,7 +23,7 @@ const AppRouter = () => {
       <Routes>
         <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
         <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
-        <Route path={AppRoutes.Confirm} element={<ConfirmEmail />} />
+        <Route path={AppRoutes.CONFIRM} element={<ConfirmEmail />} />
         <Route path={AppRoutes.Reset} element={<ResetPassword />} />
         <Route path={AppRoutes.FOREGOT} element={<ForegotPasswordPage />} />
 
@@ -69,7 +70,7 @@ const AppRouter = () => {
           path={AppRoutes.SERVEPACOTE}
           element={
             <ProtectedRoute>
-              <PageLayout title="Serviços E Pacotes">
+              <PageLayout title="Serviços">
                 <ServEPacotes />
               </PageLayout>
             </ProtectedRoute>
@@ -81,6 +82,16 @@ const AppRouter = () => {
             <ProtectedRoute>
               <PageLayout title="Configurações">
                 <ConfiguracaoPage />
+              </PageLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.USERS}
+          element={
+            <ProtectedRoute>
+              <PageLayout title="Clientes">
+                <UsersPage />
               </PageLayout>
             </ProtectedRoute>
           }

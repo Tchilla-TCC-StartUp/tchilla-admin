@@ -1,9 +1,5 @@
 import AppAssetsImages from "../resource/app_assets_images";
-import { RxDashboard } from "react-icons/rx";
-import { IoCalendarOutline } from "react-icons/io5";
-import { MdOutlinePayment } from "react-icons/md";
-import { BiCommentDetail } from "react-icons/bi";
-import { HiOutlineMail } from "react-icons/hi";
+import { IoCalendarOutline, IoCashOutline, IoChatboxEllipsesOutline, IoDocumentAttachOutline, IoPersonOutline, IoStatsChartOutline } from "react-icons/io5";
 import Typography from "./typography";
 import NavigationHooks from "../hooks/navigation_hook";
 import { useState } from "react";
@@ -15,7 +11,7 @@ const Sidebar = () => {
   const menuItems = [
     {
       label: "Dashboard",
-      icon: <RxDashboard size={18} />,
+      icon: <IoStatsChartOutline size={18} />,
       page: "dashboard",
       navigate: navigator.navigateToDashBoard,
     },
@@ -28,21 +24,27 @@ const Sidebar = () => {
     },
     {
       label: "Serviços",
-      icon: <HiOutlineMail size={18} />,
+      icon: <IoDocumentAttachOutline size={18} />,
       page: "servicos",
       navigate: navigator.navigateToServicosEpacote,
     },
     {
       label: "Pagamentos",
-      icon: <MdOutlinePayment size={18} />,
+      icon: <IoCashOutline size={18} />,
       page: "pagamentos",
       navigate: navigator.navigateTopagemantos,
     },
     {
       label: "Avaliações",
-      icon: <BiCommentDetail size={18} />,
+      icon: <IoChatboxEllipsesOutline size={18} />,
       page: "avaliacoes",
       navigate: navigator.navigateToavaliacoes,
+    },
+    {
+      label: "Clieantes",
+      icon: <IoPersonOutline size={18} />,
+      page: "clientes",
+      navigate: navigator.navigateToUsers,
     },
   ];
 

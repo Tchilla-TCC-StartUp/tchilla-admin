@@ -83,13 +83,13 @@ export function GlobalTable<T>({
     primary: "bg-primary-800 text-primary-50",
     secondary: "bg-gray-800 text-white",
     danger: "bg-red-600 text-white",
-    clean: "bg-white text-gray-900",
+    clean: "bg-white text-gray-900", // Apenas a cor do cabeçalho será alterada
   };
 
   return (
     <div className="flex flex-col h-full">
       <div className="overflow-x-auto flex-1">
-        <table className={`min-w-full bg-white ${tableClasses[styleVariant]}`}>
+        <table className="min-w-full bg-white">
           <thead className={`text-left ${tableClasses[styleVariant]}`}>
             <tr>
               {withCheckbox && (
