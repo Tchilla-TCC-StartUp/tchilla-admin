@@ -9,7 +9,7 @@ export type Column<T> = {
 
 type GlobalTableProps<T> = {
   data: T[];
-  filteredData?: T[]; // novo
+  filteredData?: T[];
   columns: Column<T>[];
   itemsPerPage?: number;
   withCheckbox?: boolean;
@@ -20,7 +20,7 @@ type GlobalTableProps<T> = {
   currentPage?: number;
   onPageChange?: (page: number) => void;
   styleVariant?: "primary" | "secondary" | "danger" | "clean";
-  onFilter?: (search: string) => void; // novo
+  onFilter?: (search: string) => void;
 };
 
 export function GlobalTable<T>({
@@ -39,7 +39,6 @@ export function GlobalTable<T>({
   const [currentPage, setCurrentPage] = useState(propCurrentPage || 1);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
 
-  // Atualiza a página interna se o prop mudar
   useEffect(() => {
     if (propCurrentPage !== undefined) {
       setCurrentPage(propCurrentPage);
@@ -83,7 +82,7 @@ export function GlobalTable<T>({
     primary: "bg-primary-800 text-primary-50",
     secondary: "bg-gray-800 text-white",
     danger: "bg-red-600 text-white",
-    clean: "bg-white text-gray-900", // Apenas a cor do cabeçalho será alterada
+    clean: "bg-white text-gray-900",
   };
 
   return (

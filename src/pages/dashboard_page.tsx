@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
 import { Card, CardContent } from "../components/global_cards";
 import GlobalHelloUser from "../components/global_hello_user";
 import MetricCard from "../components/metric_card";
@@ -7,7 +6,6 @@ import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";
 import Typography from "../components/typography";
 import newUserData from "../data/jsons/new_users.json";
-import UserService from "../service/user_service";
 const mockMetrics = [
   {
     title: "Total de Agendamentos",
@@ -32,13 +30,6 @@ const mockMetrics = [
 const newUsers = newUserData;
 
 const Dashboard = () => {
-  const { fetchUserData } = UserService();
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchUserData();
-    };
-    fetchData();
-  }, []);
   return (
     <div className="w-full h-screen overflow-hidden flex-1">
       <div className="flex items-center justify-between">
