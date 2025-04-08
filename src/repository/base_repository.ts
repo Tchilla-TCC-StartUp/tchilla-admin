@@ -8,21 +8,28 @@ const api: AxiosInstance = axios.create({
     timeout: 10000,
     headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem(AppConstants.keyToken)}`,
     },
 });
 
 
 setupInterceptors(api);
 
-const handleRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
+const handleRequest = async <T>(config: AxiosRequestConfig, token?: string): Promise<T> => {
     try {
+        if (token) {
+            config.headers = {
+                ...(config.headers || {}),
+                Authorization: `Bearer ${token}`,
+            };
+        }
+
         const response = await api.request<T>(config);
         return response.data;
     } catch (error) {
         return handleError(error);
     }
 };
+
 
 const handleError = (error: unknown): never => {
     if (axios.isAxiosError(error)) {
@@ -53,23 +60,24 @@ const handleError = (error: unknown): never => {
 
 const BaseRepository = () => {
     return {
-        get: <T>(url: string, params?: Record<string, unknown>) => {
-            return handleRequest<T>({ method: "GET", url, params });
+        get: <T>(url: string, params?: Record<string, unknown>, token?: string) => {
+            return handleRequest<T>({ method: "GET", url, params }, token);
         },
 
-        post: <T>(url: string, data?: unknown) => {
-            return handleRequest<T>({ method: "POST", url, data });
+        post: <T>(url: string, data?: unknown, token?: string) => {
+            return handleRequest<T>({ method: "POST", url, data }, token);
         },
 
-        put: <T>(url: string, data?: unknown) => {
-            return handleRequest<T>({ method: "PUT", url, data });
+        put: <T>(url: string, data?: unknown, token?: string) => {
+            return handleRequest<T>({ method: "PUT", url, data }, token);
         },
 
-        delete: <T>(url: string) => {
-            return handleRequest<T>({ method: "DELETE", url });
+        delete: <T>(url: string, token?: string) => {
+            return handleRequest<T>({ method: "DELETE", url }, token);
         },
-    }
-}
+    };
+};
+
 
 export default BaseRepository;
 
