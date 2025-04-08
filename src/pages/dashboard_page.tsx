@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Card, CardContent } from "../components/global_cards";
 import GlobalHelloUser from "../components/global_hello_user";
@@ -26,20 +27,7 @@ const mockMetrics = [
   },
 ];
 
-const salesData = [
-  { month: "JAN", sales: 1200 },
-  { month: "FEB", sales: 1500 },
-  { month: "MAR", sales: 1100 },
-  { month: "APR", sales: 2900 },
-  { month: "MAY", sales: 3200 },
-  { month: "JUN", sales: 2700 },
-  { month: "JUL", sales: 3400 },
-  { month: "AUG", sales: 3300 },
-  { month: "SEP", sales: 2500 },
-  { month: "OCT", sales: 2200 },
-  { month: "NOV", sales: 2800 },
-  { month: "DEC", sales: 3700 },
-];
+
 
 const newUsers = newUserData;
 
@@ -67,7 +55,7 @@ const Dashboard = () => {
         <Card className="flex-1">
           <CardContent className="p-4 h-[28rem]">
             <Typography variant="h2_bold">Rendimento</Typography>
-            <SalesChart data={salesData} />
+            <SalesChart />
           </CardContent>
         </Card>
 
