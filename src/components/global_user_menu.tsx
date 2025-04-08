@@ -15,7 +15,7 @@ const GlobalUserMenu = () => {
 
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const { storedUser, onLogout } = UserService();
+  const { storedUser, onLogout, fetchUserData } = UserService();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -25,7 +25,10 @@ const GlobalUserMenu = () => {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-
+    const fetchData = async () => {
+      await fetchUserData();
+    };
+    fetchData();
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 

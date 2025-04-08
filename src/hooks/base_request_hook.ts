@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { ApiErrorType, ApiException } from "../resource/app_exceptions";
 import { useSnackbarStore } from "../stores/snackbar_store";
+import { useAuthStore } from "../stores/auth_store";
 
 interface BaseRequestHook {
     isLoading: boolean;
@@ -10,9 +11,10 @@ interface BaseRequestHook {
     errorStatus?: number;
     errorType?: ApiErrorType;
     onRequest: <R>(
-        request: () => Promise<R>,
+        request: (token?: string) => Promise<R>,
         onSuccess?: (data: R) => void,
-        onError?: (error: ApiException | Error) => void
+        onError?: (error: ApiException | Error) => void,
+        checkToken?: boolean
     ) => Promise<R>;
 }
 
@@ -25,10 +27,19 @@ export const useBaseRequestHook = create<BaseRequestHook>(() => ({
     errorType: undefined,
 
     onRequest: async <R>(
-        request: () => Promise<R>,
+        request: (token?: string) => Promise<R>,
         onSuccess?: (data: R) => void,
-        onError?: (error: ApiException | Error) => void
+        onError?: (error: ApiException | Error) => void,
+        checkToken: boolean = false // 👈 default false
     ): Promise<R> => {
+        const { token } = useAuthStore.getState();
+
+        if (checkToken && !token) {
+            const message = "Token não encontrado.";
+            useSnackbarStore.getState().showSnackbar(message, "error");
+            throw new Error(message);
+        }
+
         try {
             useBaseRequestHook.setState({
                 isLoading: true,
@@ -39,7 +50,7 @@ export const useBaseRequestHook = create<BaseRequestHook>(() => ({
                 errorType: undefined,
             });
 
-            const response = await request();
+            const response = await request(checkToken ? token : undefined);
             onSuccess?.(response);
             return response;
         } catch (error) {
@@ -56,7 +67,6 @@ export const useBaseRequestHook = create<BaseRequestHook>(() => ({
 
                 onError?.(error);
 
-                // Mapeando mensagens de erro
                 const errorMessages: Record<ApiErrorType, string> = {
                     [ApiErrorType.NETWORK]: error.message,
                     [ApiErrorType.TIMEOUT]: error.message,
@@ -78,7 +88,6 @@ export const useBaseRequestHook = create<BaseRequestHook>(() => ({
                 });
 
                 onError?.(error instanceof Error ? error : new Error("Erro desconhecido"));
-
                 showSnackbar("Erro desconhecido ocorrido.", "error");
             }
 

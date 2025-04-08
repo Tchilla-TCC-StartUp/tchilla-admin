@@ -15,23 +15,24 @@ const UserRepository = () => {
             });
         },
 
-        register: async (body: RegisterInterface): Promise<AuthInterface> => {
+        register: async (body: RegisterInterface,): Promise<AuthInterface> => {
             return await post<AuthInterface>("api/Auth/register", {
                 nome: body.nome,
                 email: body.email,
                 telefone: body.telefone,
                 senha: body.senha,
                 tipo: body.tipo,
-            });
+
+            },);
         },
 
-        getUserData: async (): Promise<UserInterface> => {
-            const response = await get("api/Usuario/getInfoByToken") as { data: UserInterface };
+        getUserData: async (token: string): Promise<UserInterface> => {
+            const response = await get("api/Usuario/getInfoByToken", undefined, token) as { data: UserInterface };
             return response.data;
         },
 
-        logout: async (): Promise<AuthInterface> => {
-            return await put<AuthInterface>("api/Auth/logout");
+        logout: async (token: string): Promise<AuthInterface> => {
+            return await put<AuthInterface>("api/Auth/logout", undefined, token);
         },
 
         updateUser: async (body: UpdateUserInterface): Promise<string> => {
@@ -44,11 +45,11 @@ const UserRepository = () => {
             return response.mensagem;
         },
 
-        resetPassword: async (body: ResetPasswordInterface): Promise<AuthInterface> => {
+        resetPassword: async (body: ResetPasswordInterface, token: string): Promise<AuthInterface> => {
             return await put<AuthInterface>(
                 `api/Auth/change-password?oldPassword=${body.oldPassword}&newPassword=${body.newPassword}`,
                 null,
-
+                token
             );
         },
     };

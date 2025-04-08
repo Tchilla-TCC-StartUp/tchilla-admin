@@ -9,7 +9,7 @@ export type Column<T> = {
 
 type GlobalTableProps<T> = {
   data: T[];
-  filteredData?: T[]; // novo
+  filteredData?: T[];
   columns: Column<T>[];
   itemsPerPage?: number;
   withCheckbox?: boolean;
@@ -20,7 +20,7 @@ type GlobalTableProps<T> = {
   currentPage?: number;
   onPageChange?: (page: number) => void;
   styleVariant?: "primary" | "secondary" | "danger" | "clean";
-  onFilter?: (search: string) => void; // novo
+  onFilter?: (search: string) => void;
 };
 
 export function GlobalTable<T>({
@@ -39,7 +39,6 @@ export function GlobalTable<T>({
   const [currentPage, setCurrentPage] = useState(propCurrentPage || 1);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
 
-  // Atualiza a página interna se o prop mudar
   useEffect(() => {
     if (propCurrentPage !== undefined) {
       setCurrentPage(propCurrentPage);
@@ -89,7 +88,7 @@ export function GlobalTable<T>({
   return (
     <div className="flex flex-col h-full">
       <div className="overflow-x-auto flex-1">
-        <table className={`min-w-full bg-white ${tableClasses[styleVariant]}`}>
+        <table className="min-w-full bg-white">
           <thead className={`text-left ${tableClasses[styleVariant]}`}>
             <tr>
               {withCheckbox && (
