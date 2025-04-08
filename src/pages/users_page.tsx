@@ -3,7 +3,7 @@ import usersData from "../data/jsons/users.json";
 import { AppGlobalUserAvatarName } from "../components/global_user_avatar_name";
 import { useEffect, useState } from "react";
 import { GlobalTable } from "../components/global_table";
-import { Card } from "../components/global_cards";
+import { Card, CardContent } from "../components/global_cards";
 import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import { IoSearchOutline } from "react-icons/io5";
@@ -94,37 +94,39 @@ const UsersPage = () => {
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
       <GlobalHelloUser />
-      <Card>
-        <div className="flex justify-between items-center p-4">
-          <Typography variant="h2_bold">Lista de Clientes</Typography>
-          <div className="flex gap-2">
-            <GlobalInput
-              placeholder="Pesquisar"
-              icon={<IoSearchOutline />}
-              value={searchTerm}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearchTerm(e.target.value)
-              }
-              className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
-            />
+      <Card >
+        <CardContent className="p-4">
+          <div className="flex justify-between items-center p-4">
+            <Typography variant="h2_bold">Lista de Clientes</Typography>
+            <div className="flex gap-2">
+              <GlobalInput
+                placeholder="Pesquisar"
+                icon={<IoSearchOutline />}
+                value={searchTerm}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchTerm(e.target.value)
+                }
+                className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
+              />
+            </div>
           </div>
-        </div>
 
-        <GlobalTable
-          data={data}
-          filteredData={filteredData}
-          columns={columns}
-          selectable
-          paginated
-          styleVariant="clean"
-          itemsPerPage={10}
-          withCheckbox={false}
-          currentPage={currentPage}
-          onPageChange={(page: number) => setCurrentPage(page)}
-          onRowSelect={(selectedItems) =>
-            console.log("Selecionados:", selectedItems)
-          }
-        />
+          <GlobalTable
+            data={data}
+            filteredData={filteredData}
+            columns={columns}
+            selectable
+            paginated
+            styleVariant="clean"
+            itemsPerPage={10}
+            withCheckbox={false}
+            currentPage={currentPage}
+            onPageChange={(page: number) => setCurrentPage(page)}
+            onRowSelect={(selectedItems) =>
+              console.log("Selecionados:", selectedItems)
+            }
+          />
+        </CardContent>
       </Card>
 
       <GlobalConfirmModal
