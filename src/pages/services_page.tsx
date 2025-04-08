@@ -26,6 +26,34 @@ const ServiceAndPack: React.FC = () => {
         item.image ? <GlobalAvatar src={item.image} /> : null,
     },
     { key: "title", title: "Titulo" },
+    {
+      key: "deletar",
+      title: "Apagar",
+      render: (item: any) => (
+        <button
+          className="bg-red-500 text-white px-2 py-1 rounded"
+          onClick={() => {
+            console.log("Deletar", item.id);
+          }}
+        >
+          <Typography variant="p_normal">Apagar</Typography>
+        </button>
+      ),
+    },
+    {
+      key: "edit",
+      title: "Editar",
+      render: (item: any) => (
+        <button
+          className="bg-primary-500 text-white px-2 py-1 rounded"
+          onClick={() => {
+            console.log("Deletar", item.id);
+          }}
+        >
+          <Typography variant="p_normal">Editar</Typography>
+        </button>
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -53,7 +81,7 @@ const ServiceAndPack: React.FC = () => {
           <div className="flex gap-2">
             <GlobalInput
               placeholder="Pesquisar"
-              icon={<IoSearchOutline  />}
+              icon={<IoSearchOutline />}
               value={searchTerm}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSearchTerm(e.target.value)
