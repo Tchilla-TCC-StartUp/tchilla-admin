@@ -12,83 +12,102 @@ import ResetPassword from "./pages/resetPassword";
 import AgendamentoPage from "./pages/agendamento_page";
 import AvaliacaoPage from "./pages/avaliacoes";
 import ConfiguracaoPage from "./pages/configuracoes_page";
-import PagamentoPage from "./pages/pagemantos_page";
-import ServEPacotes from "./pages/servicosEpacotes_page";
+import PagamentoPage from "./pages/payments_page";
+import ServEPacotes from "./pages/services_page";
+import ProtectedRoute from "./protected_route";
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path={AppRoutes.HOME} element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
         <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
         <Route path={AppRoutes.Confirm} element={<ConfirmEmail />} />
-        <Route path="/ResetPassword" element={< ResetPassword/>} />
+        <Route path={AppRoutes.Reset} element={<ResetPassword />} />
         <Route path={AppRoutes.FOREGOT} element={<ForegotPasswordPage />} />
+
+        <Route
+          path={AppRoutes.HOME}
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path={AppRoutes.DASHBOARD}
           element={
-            <PageLayout title="DashBoard">
-              <DashboardPage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="DashBoard">
+                <DashboardPage />
+              </PageLayout>
+            </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path={AppRoutes.AGENDAMENTO}
           element={
-            <PageLayout title="Agendamentos">
-              <AgendamentoPage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Agendamentos">
+                <AgendamentoPage />
+              </PageLayout>
+            </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path={AppRoutes.AVALIACAO}
           element={
-        <PageLayout title="Avaliações">
-              <AvaliacaoPage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Avaliações">
+                <AvaliacaoPage />
+              </PageLayout>
+            </ProtectedRoute>
           }
-          
         />
         <Route
           path={AppRoutes.SERVEPACOTE}
           element={
-            <PageLayout title="Serviços E Pacotes">
-              <ServEPacotes />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Serviços E Pacotes">
+                <ServEPacotes />
+              </PageLayout>
+            </ProtectedRoute>
           }
-          
         />
-         <Route
+        <Route
           path={AppRoutes.CONFIG}
           element={
-            <PageLayout title="Configurações">
-              <ConfiguracaoPage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Configurações">
+                <ConfiguracaoPage />
+              </PageLayout>
+            </ProtectedRoute>
           }
-          
         />
-         <Route
+        <Route
           path={AppRoutes.PAGAMENTOS}
           element={
-            <PageLayout title="Pagamentos">
-              <PagamentoPage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Pagamentos">
+                <PagamentoPage />
+              </PageLayout>
+            </ProtectedRoute>
           }
         />
         <Route
           path={AppRoutes.PROFILE}
           element={
-            <PageLayout title="Perfil">
-              <ProfilePage />
-            </PageLayout>
+            <ProtectedRoute>
+              <PageLayout title="Perfil">
+                <ProfilePage />
+              </PageLayout>
+            </ProtectedRoute>
           }
         />
       </Routes>
     </Router>
   );
 };
-
 
 export default AppRouter;

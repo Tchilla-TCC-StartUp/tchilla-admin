@@ -1,12 +1,16 @@
 import React from "react";
 
-interface AvatarProps {
+interface GlobalAvatarProps {
   src: string;
   alt?: string;
   className?: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, alt = "User Avatar", className }) => {
+const GlobalAvatar: React.FC<GlobalAvatarProps> = ({
+  src,
+  alt = "User GlobalAvatar",
+  className,
+}) => {
   return (
     <img
       src={src}
@@ -16,4 +20,4 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt = "User Avatar", className }) 
   );
 };
 
-export default Avatar;
+export default GlobalAvatar;

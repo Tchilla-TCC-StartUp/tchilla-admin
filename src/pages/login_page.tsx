@@ -4,14 +4,26 @@ import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import GlobalButton from "../components/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
-import LoginService from "../service/login_service";
+
 import { useState } from "react";
+import UserService from "../service/user_service";
+import { useBaseRequestHook } from "../hooks/base_request_hook";
+import GlobalSnackbar from "../components/global_snackbar";
+
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const service = LoginService();
+  const { onleLogin } = UserService();
+  const { isLoading } = useBaseRequestHook();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onleLogin({ email, password });
+  };
+
   return (
-    <div className="flex items-strat justify-between px-60 py-40  h-screen bg-primary-50">
+    <div className="flex items-start justify-between px-60 py-40 h-screen bg-primary-50">
+      {/* Seção da esquerda */}
       <div className="flex flex-col items-start gap-8">
         <img
           className="w-[268px] h-auto"
@@ -27,7 +39,9 @@ const LoginPage = () => {
           Iniciar sessão para poder navegar na plataforma
         </Typography>
       </div>
-      <div className="flex flex-col w-[400px] gap-8">
+
+      {/* Seção do formulário */}
+      <form onSubmit={handleSubmit} className="flex flex-col w-[400px] gap-8">
         <GlobalInput
           label="Seu email"
           type="email"
@@ -38,7 +52,7 @@ const LoginPage = () => {
         <GlobalInput
           label="Sua password"
           type="password"
-          placeholder="Informa a password"
+          placeholder="Informe a sua senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -49,9 +63,11 @@ const LoginPage = () => {
         >
           Esqueci minha senha
         </p>
-        <GlobalButton onClick={() => service.onLogin(email, password)}>
+
+        <GlobalButton type="submit" isLoading={isLoading}>
           Entrar <FaArrowRightLong />
         </GlobalButton>
+
         <div
           className="flex justify-center gap-1 cursor-pointer"
           onClick={NavigationHooks().navigateToRegister}
@@ -71,6 +87,7 @@ const LoginPage = () => {
           </Typography>
           <div className="w-[100%] h-[1px] bg-gray-400"></div>
         </div>
+
         <GlobalButton
           variant="secondary"
           onClick={() => alert("Botão primário clicado!")}
@@ -78,7 +95,9 @@ const LoginPage = () => {
           Entrar com o Google
           <img src={AppAssetsImages.vectores.google} alt="google" />
         </GlobalButton>
-      </div>
+      </form>
+
+      <GlobalSnackbar />
     </div>
   );
 };
