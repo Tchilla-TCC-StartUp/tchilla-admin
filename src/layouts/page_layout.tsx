@@ -14,8 +14,8 @@ const PageLayout = ({
     <div className="flex">
       <Sidebar />
       <div className="flex flex-col flex-1 ml-64 w-full min-h-screen ">
-        <div className="w-full h-20 flex items-center justify-between px-6 border-b bg-primary-950 fixed z-[1000]">
-          <Typography variant="h2_bold" color="white">
+        <div className="w-full h-20 flex items-center justify-between px-6 border-b bg-white border-d border-gray-300 fixed z-[1000]">
+          <Typography variant="h2_bold" color="text-primary-800">
             {title}
           </Typography>
 
