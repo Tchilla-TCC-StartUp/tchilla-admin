@@ -4,11 +4,11 @@ import Typography from "./typography";
 import NavigationHooks from "../hooks/navigation_hook";
 import { useState } from "react";
 import { GoPerson } from "react-icons/go";
-import { label } from "framer-motion/client";
+
 
 const Sidebar = () => {
   const [activePage, setActivePage] = useState<string>("dashboard");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+ 
   const navigator = NavigationHooks();
 
   const menuItems = [
