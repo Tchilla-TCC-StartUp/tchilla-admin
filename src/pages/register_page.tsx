@@ -8,7 +8,7 @@ import GlobalButton from "../components/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
 import GlobalDropdown from "../components/global_dropdown";
 import RegisterInterface from "../interfaces/register_interface";
-
+ 
 const RegisterPage = () => {
   const categories = [
     { label: "Adimin", value: 3 },
@@ -116,22 +116,6 @@ const RegisterPage = () => {
 
         <GlobalButton type="submit" className="mt-3">
           Criar Conta
-        </GlobalButton>
-
-        <div className="flex justify-center items-center gap-3 cursor-pointer">
-          <div className="w-[100%] h-[1px] bg-gray-400"></div>
-          <Typography variant="p_bold" color="var(--gray-700)">
-            Ou
-          </Typography>
-          <div className="w-[100%] h-[1px] bg-gray-400"></div>
-        </div>
-
-        <GlobalButton
-          variant="secondary"
-          onClick={() => console.log("Login com Google")}
-        >
-          Entrar com o Google
-          <img src={AppAssetsImages.vectores.google} alt="google" />
         </GlobalButton>
 
         <div

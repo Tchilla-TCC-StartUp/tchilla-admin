@@ -77,23 +77,7 @@ const LoginPage = () => {
           <Typography variant="p_bold" color="var(--primary-950)">
             Criar conta
           </Typography>
-        </div>
-
-        <div className="flex justify-center items-center gap-3 cursor-pointer">
-          <div className="w-[100%] h-[1px] bg-gray-400"></div>
-          <Typography variant="p_bold" color="var(--gray-700)">
-            Ou
-          </Typography>
-          <div className="w-[100%] h-[1px] bg-gray-400"></div>
-        </div>
-
-        <GlobalButton
-          variant="secondary"
-          onClick={() => alert("Botão primário clicado!")}
-        >
-          Entrar com o Google
-          <img src={AppAssetsImages.vectores.google} alt="google" />
-        </GlobalButton>
+        </div>   
       </form>
       <GlobalModalLoading isVisible={isLoading} message="Fazendo login..." />
       <GlobalSnackbar />
