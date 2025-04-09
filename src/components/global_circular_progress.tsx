@@ -1,27 +1,32 @@
 import React from "react";
 
 type GlobalCircularProgressProps = {
-  size?: number;
   className?: string;
+  size?: string;
+  color?: string;
+  speed?: string;
 };
 
 const GlobalCircularProgress: React.FC<GlobalCircularProgressProps> = ({
-  size = 40,
   className = "",
+  size = "h-12 w-12",
+  color = "border-primary-500",
+  speed = "animate-spin",
 }) => {
   return (
     <div
-      className={`relative flex items-center justify-center ${className}`}
-      style={{ width: size, height: size }}
+      className={`relative flex items-center justify-center ${className} ${size}`}
+      role="progressbar"
+      aria-label="Carregando"
     >
       <div
-        className="absolute inset-0 border-2 border-primary-500 rounded-full"
-        style={{ width: size, height: size }}
+        className={`absolute inset-0 border-4 ${color} rounded-full opacity-40`}
       ></div>
-
       <div
-        className="absolute inset-0 border-2 border-primary-50 border-t-transparent rounded-full animate-spin"
-        style={{ width: size, height: size }}
+        className={`absolute inset-0 border-4 ${color} border-t-transparent rounded-full ${speed}`}
+        style={{
+          animationDuration: "1.5s",
+        }}
       ></div>
     </div>
   );

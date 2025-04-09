@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes } from "react";
-import GlobalCircularProgress from "./global_circular_progress";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "text" |"darck";
 
@@ -10,7 +9,6 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   fullWidth?: boolean;
   className?: string;
-  isLoading?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 };
 
@@ -21,11 +19,10 @@ const GlobalButton: React.FC<ButtonProps> = ({
   onClick,
   fullWidth = false,
   className = "",
-  isLoading,
   type = "button",
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center border-none rounded-lg cursor-pointer transition-all text-center gap-2 px-6 py-5";
+    "inline-flex items-center justify-center border-none rounded-lg cursor-pointer transition-all text-center gap-2 px-6 py-5 min-h-[48px]";
 
   const variants: Record<ButtonVariant, string> = {
     primary: "bg-gradient-to-r from-[#00DED8] to-[#002F6C] text-white hover:from-[#00c6c1] hover:to-[#001f4d]",
@@ -33,7 +30,7 @@ const GlobalButton: React.FC<ButtonProps> = ({
     darck:"bg-sky-900 text-white hover:bg-primary-300",
     outline:
       "bg-transparent border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-normal",
-    text: "bg-transparent text-primary-500  hover:underline",
+    text: "bg-transparent text-primary-500 hover:underline",
   };
 
   const disabledStyles =
@@ -48,7 +45,7 @@ const GlobalButton: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {isLoading ? <GlobalCircularProgress /> : children}
+      {children}
     </button>
   );
 };
