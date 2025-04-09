@@ -1,5 +1,6 @@
 import { useBaseRequestHook } from "../hooks/base_request_hook";
 import NavigationHooks from "../hooks/navigation_hook";
+import useValidation from "../hooks/validation_hook";
 import LoginInterface from "../interfaces/login_interface";
 import RegisterInterface from "../interfaces/register_interface";
 import {
@@ -22,8 +23,14 @@ const UserService = () => {
   const { setUser, clearUser } = useUserStore();
   const { onRequest } = useBaseRequestHook();
   const { navigateToDashBoard, navigateToLogin } = NavigationHooks();
+  const { validateForm } = useValidation();
+  const onLogin = async (loginData: LoginInterface) => {
+    const { isValid } = validateForm(loginData.email, loginData.password);
 
-  const onleLogin = async (loginData: LoginInterface) => {
+    if (!isValid) {
+      return;
+    }
+
     return onRequest(
       async () => {
         const response = await login(loginData);
@@ -99,7 +106,7 @@ const UserService = () => {
   };
 
   return {
-    onleLogin,
+    onLogin,
     onRegister,
     fetchUserData,
     onLogout,

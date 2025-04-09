@@ -9,21 +9,21 @@ import { useState } from "react";
 import UserService from "../service/user_service";
 import { useBaseRequestHook } from "../hooks/base_request_hook";
 import GlobalSnackbar from "../components/global_snackbar";
+import GlobalModalLoading from "../components/global_modal_loading";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { onleLogin } = UserService();
+  const { onLogin } = UserService();
   const { isLoading } = useBaseRequestHook();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onleLogin({ email, password });
+    onLogin({ email, password });
   };
 
   return (
     <div className="flex items-start justify-between px-60 py-40 h-screen bg-primary-50">
-      {/* Seção da esquerda */}
       <div className="flex flex-col items-start gap-8">
         <img
           className="w-[268px] h-auto"
@@ -40,7 +40,6 @@ const LoginPage = () => {
         </Typography>
       </div>
 
-      {/* Seção do formulário */}
       <form onSubmit={handleSubmit} className="flex flex-col w-[400px] gap-8">
         <GlobalInput
           label="Seu email"
@@ -64,7 +63,7 @@ const LoginPage = () => {
           Esqueci minha senha
         </p>
 
-        <GlobalButton type="submit" isLoading={isLoading}>
+        <GlobalButton type="submit">
           Entrar <FaArrowRightLong />
         </GlobalButton>
 
@@ -96,7 +95,7 @@ const LoginPage = () => {
           <img src={AppAssetsImages.vectores.google} alt="google" />
         </GlobalButton>
       </form>
-
+      <GlobalModalLoading isVisible={isLoading} message="Fazendo login..." />
       <GlobalSnackbar />
     </div>
   );
