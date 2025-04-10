@@ -1,5 +1,5 @@
 class AppAssetsImages {
-    static readonly assetspath = "/src/assets";
+    static readonly assetspath = "public/assets";
     static readonly vectores = {
         arrowLeft2: `${this.assetspath}/vectores/arrow-left-2.svg`,
         arrowLeft: `${this.assetspath}/vectores/arrow-left.svg`,
