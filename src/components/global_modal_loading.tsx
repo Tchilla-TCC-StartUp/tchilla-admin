@@ -11,13 +11,24 @@ const GlobalModalLoading: React.FC<GlobalModalLoadingProps> = ({
   isVisible,
   message = "Carregando...",
 }) => {
+  React.useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black bg-opacity-30">
       <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center gap-4 w-full max-w-xs">
-        <GlobalCircularProgress />
-        <Typography variant="h3_ligth" color="var(--primary-900)">
+        <GlobalCircularProgress size="w-[6rem] h-[6rem]" />
+        <Typography variant="h3_medium" color="var(--primary-900)">
           {message}
         </Typography>
       </div>

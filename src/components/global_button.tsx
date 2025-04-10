@@ -22,10 +22,10 @@ const GlobalButton: React.FC<ButtonProps> = ({
   type = "button",
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center border-none rounded-lg cursor-pointer transition-all text-center gap-2 px-6 py-5 min-h-[48px]";
+    "inline-flex items-center justify-center border-none rounded-[8px] cursor-pointer transition-all text-center gap-2 px-[18px] py-[16px] min-h-[48px]";
 
   const variants: Record<ButtonVariant, string> = {
-    primary: "bg-gradient-to-r from-[#00DED8] to-[#002F6C] text-white hover:from-[#00c6c1] hover:to-[#001f4d]",
+    primary: "bg-gradient-to-r from-[#00DED8] to-[#002F6C] text-white ",
     secondary: "bg-primary-200 text-gray-600 hover:bg-primary-300",
     darck:"bg-sky-900 text-white hover:bg-primary-300",
     outline:

@@ -38,7 +38,7 @@ const GlobalSnackbar = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.3 }}
-      className={`fixed bottom-0 left-0 right-0 flex items-center gap-3 px-8 py-4 ${snackbarStyles[type].bg}`}
+      className={`fixed bottom-0 left-0 right-0 flex items-center gap-3 px-8 py-4 z-[102] ${snackbarStyles[type].bg}`}
     >
       {snackbarStyles[type].icon}
       <Typography variant="h3_medium" className="text-white">
