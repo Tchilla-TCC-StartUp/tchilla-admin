@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Card, CardContent } from "../components/global_cards";
 import GlobalHelloUser from "../components/global_hello_user";
 import MetricCard from "../components/metric_card";

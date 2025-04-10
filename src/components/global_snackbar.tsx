@@ -16,7 +16,7 @@ const GlobalSnackbar = () => {
   const snackbarStyles = {
     info: {
       bg: "bg-blue-600 text-white",
-      icon: <FaInfoCircle className="text-white" size={80} />,
+      icon: <FaInfoCircle className="text-white" />,
     },
     success: {
       bg: "bg-green-600 text-white",

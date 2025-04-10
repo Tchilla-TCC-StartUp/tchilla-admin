@@ -6,7 +6,7 @@ import FiltroHeader from "../components/filtroheader";
 import { useEffect, useState } from "react";
 import CalendarioMensal from "../components/calendariomensal";
 
-// Tipos
+
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
 type Evento = {
   nome: string;
@@ -150,7 +150,7 @@ const agendamento = () => {
   }, []);
   return (
     <div className="p-6 bg-white min-h-screen">
-      <div className="sticky top-0 bg-white z-10 shadow-md">
+      <div className="sticky top-0 bg-white z-10">
         <div className="flex items-center justify-between">
           <GlobalHelloUser />
         </div>
