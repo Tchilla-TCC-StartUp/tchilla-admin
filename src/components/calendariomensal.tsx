@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, startOfWeek, addDays, isSameMonth, isToday } from "date-fns";
+import { format, startOfMonth, eachDayOfInterval, startOfWeek, addDays, isSameMonth, isToday } from "date-fns";
 import { pt, ptBR } from "date-fns/locale";
 
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
@@ -24,8 +24,6 @@ const statusColorMap: Record<StatusEvento, string> = {
 
 export default function CalendarioMensal({ eventos, ano, mes }: Props) {
     const primeiroDia = startOfMonth(new Date(ano, mes));
-    const ultimoDia = endOfMonth(new Date(ano, mes));
-
     const diasVisiveis = useMemo(() => {
         const inicio = startOfWeek(primeiroDia, { locale: pt });
         const fim = addDays(inicio, 41); // 6 semanas

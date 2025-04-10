@@ -1,7 +1,12 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import { ApiErrorType, ApiException } from "../resource/app_exceptions";
 import AppConstants from "../resource/app_constants";
 import setupInterceptors from "../resource/app_interceptor";
+
+interface RequestHeaders extends Record<string, string | undefined> {
+    Authorization?: string;
+    "Content-Type"?: string;
+}
 
 const api: AxiosInstance = axios.create({
     baseURL: AppConstants.baseURL,
@@ -11,73 +16,90 @@ const api: AxiosInstance = axios.create({
     },
 });
 
-
 setupInterceptors(api);
 
-const handleRequest = async <T>(config: AxiosRequestConfig, token?: string): Promise<T> => {
-    try {
-        if (token) {
-            config.headers = {
-                ...(config.headers || {}),
-                Authorization: `Bearer ${token}`,
-            };
-        }
+interface ApiErrorResponse {
+    error?: string;
+    message?: string;
+    [key: string]: unknown;
+}
 
-        const response = await api.request<T>(config);
+const handleRequest = async <T>(
+    config: AxiosRequestConfig,
+    token?: string
+): Promise<T> => {
+    try {
+        const requestConfig: AxiosRequestConfig = {
+            ...config,
+            headers: {
+                ...(config.headers as RequestHeaders),
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+        };
+
+        const response = await api.request<T>(requestConfig);
         return response.data;
     } catch (error) {
-        return handleError(error);
+        return handleError(error as AxiosError<ApiErrorResponse>);
     }
 };
 
-
-const handleError = (error: unknown): never => {
+const handleError = (error: AxiosError<ApiErrorResponse>): never => {
     if (axios.isAxiosError(error)) {
         const status = error.response?.status || 500;
-        const data = error.response?.data;
+        const data = error.response?.data || {};
+        const errorMessage = data.error || data.message || "Erro desconhecido";
 
-        switch (status) {
-            case 400:
-                throw new ApiException(data['error'] ?? data?.message ?? "Erro de validação", status, ApiErrorType.VALIDATION, data);
-            case 401:
-                throw new ApiException(data['error'] ?? data?.message ?? "Não autorizado", status, ApiErrorType.UNAUTHORIZED);
-            case 403:
-                throw new ApiException(data['error'] ?? data?.message ?? "Acesso proibido", status, ApiErrorType.FORBIDDEN);
-            case 404:
-                throw new ApiException(data['error'] ?? data?.message ?? "Recurso não encontrado", status, ApiErrorType.NOT_FOUND);
-            case 408:
-                throw new ApiException(data['error'] ?? data?.message ?? "Tempo limite da requisição esgotado", status, ApiErrorType.TIMEOUT);
-            case 500:
-                throw new ApiException(data['error'] ?? data?.message ?? "Erro interno do servidor", status, ApiErrorType.SERVER);
-            default:
-                throw new ApiException(data['error'] ?? data?.message ?? "Erro desconhecido", status, ApiErrorType.UNKNOWN);
-        }
+        const errorMap: Record<number, [string, ApiErrorType]> = {
+            400: ["Erro de validação", ApiErrorType.VALIDATION],
+            401: ["Não autorizado", ApiErrorType.UNAUTHORIZED],
+            403: ["Acesso proibido", ApiErrorType.FORBIDDEN],
+            404: ["Recurso não encontrado", ApiErrorType.NOT_FOUND],
+            408: ["Tempo limite da requisição esgotado", ApiErrorType.TIMEOUT],
+            500: ["Erro interno do servidor", ApiErrorType.SERVER],
+        };
+
+        const [defaultMessage, errorType] =
+            errorMap[status] || ["Erro desconhecido", ApiErrorType.UNKNOWN];
+
+        throw new ApiException(
+            errorMessage !== "Erro desconhecido" ? errorMessage : defaultMessage,
+            status,
+            errorType,
+            data
+        );
     }
 
-    throw new ApiException("Erro de rede", 0, ApiErrorType.NETWORK);
+    throw new ApiException(
+        error || "Erro de rede",
+        0,
+        ApiErrorType.NETWORK
+    );
 };
 
+interface BaseRepositoryInterface {
+    get<T>(
+        url: string,
+        params?: Record<string, unknown>,
+        token?: string
+    ): Promise<T>;
+    post<T>(url: string, data?: unknown, token?: string): Promise<T>;
+    put<T>(url: string, data?: unknown, token?: string): Promise<T>;
+    delete<T>(url: string, token?: string): Promise<T>;
+}
 
-const BaseRepository = () => {
-    return {
-        get: <T>(url: string, params?: Record<string, unknown>, token?: string) => {
-            return handleRequest<T>({ method: "GET", url, params }, token);
-        },
+const BaseRepository = (): BaseRepositoryInterface => ({
+    get: <T>(url: string, params?: Record<string, unknown>, token?: string) =>
+        handleRequest<T>({ method: "GET", url, params }, token),
 
-        post: <T>(url: string, data?: unknown, token?: string) => {
-            return handleRequest<T>({ method: "POST", url, data }, token);
-        },
+    post: <T>(url: string, data?: unknown, token?: string) =>
+        handleRequest<T>({ method: "POST", url, data }, token),
 
-        put: <T>(url: string, data?: unknown, token?: string) => {
-            return handleRequest<T>({ method: "PUT", url, data }, token);
-        },
+    put: <T>(url: string, data?: unknown, token?: string) =>
+        handleRequest<T>({ method: "PUT", url, data }, token),
 
-        delete: <T>(url: string, token?: string) => {
-            return handleRequest<T>({ method: "DELETE", url }, token);
-        },
-    };
-};
-
+    delete: <T>(url: string, token?: string) =>
+        handleRequest<T>({ method: "DELETE", url }, token),
+});
 
 export default BaseRepository;
-

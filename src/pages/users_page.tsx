@@ -1,33 +1,69 @@
-import GlobalHelloUser from "../components/global_hello_user";
-import usersData from "../data/jsons/users.json";
-import { AppGlobalUserAvatarName } from "../components/global_user_avatar_name";
 import { useEffect, useState } from "react";
+import GlobalHelloUser from "../components/global_hello_user";
+import { AppGlobalUserAvatarName } from "../components/global_user_avatar_name";
 import { GlobalTable } from "../components/global_table";
 import { Card, CardContent } from "../components/global_cards";
 import Typography from "../components/typography";
 import GlobalInput from "../components/global_input";
 import { IoSearchOutline } from "react-icons/io5";
 import GlobalConfirmModal from "../components/gloal_modals";
+import { UserInterface } from "../interfaces/user_interface";
+import ClientService from "../service/client_service";
 
 const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(usersData);
+  const [data, setData] = useState<UserInterface[]>([]);
+  const [filteredData, setFilteredData] = useState<UserInterface[]>([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<any>(null);
+  const [userToDelete, setUserToDelete] = useState<UserInterface | null>(null);
 
-  const data = usersData;
+  const { getAllClients } = ClientService();
 
-  const handleDeleteClick = (user: any) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const clients = await getAllClients();
+      setData(clients);
+      setFilteredData(clients);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const term = searchTerm.toLowerCase();
+    const filtered = data.filter((item: UserInterface) => {
+      return (
+        item.id.toString().toLowerCase().includes(term) ||
+        item.nome?.toLowerCase().includes(term) ||
+        item.email?.toLowerCase().includes(term) ||
+        item.telefone?.toLowerCase().includes(term)
+      );
+    });
+    setFilteredData(filtered);
+    setCurrentPage(1);
+  }, []);
+
+  const handleDeleteClick = (user: UserInterface) => {
     setUserToDelete(user);
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
-    console.log("Deletado:", userToDelete?.id);
-    // lógica real de exclusão aqui...
-    setShowDeleteModal(false);
-    setUserToDelete(null);
+  const confirmDelete = async () => {
+    if (userToDelete) {
+      try {
+        console.log("Deleting user:", userToDelete.id);
+        setData((prev) => prev.filter((user) => user.id !== userToDelete.id));
+        setFilteredData((prev) =>
+          prev.filter((user) => user.id !== userToDelete.id)
+        );
+      } catch (error) {
+        console.error("Failed to delete user:", error);
+      } finally {
+        setShowDeleteModal(false);
+        setUserToDelete(null);
+      }
+    }
   };
 
   const cancelDelete = () => {
@@ -40,18 +76,18 @@ const UsersPage = () => {
     {
       key: "avatar",
       title: "Avatar",
-      render: (item: any) =>
+      render: (item: UserInterface) =>
         item.nome ? (
           <AppGlobalUserAvatarName size={30} name={item.nome} />
         ) : null,
     },
-    { key: "nome", title: "Nome" },
+    { key: "name", title: "Nome" },
     { key: "email", title: "Email" },
-    { key: "telefone", title: "Telefone" },
+    { key: "phone", title: "Telefone" },
     {
-      key: "deletar",
+      key: "delete",
       title: "Apagar",
-      render: (item: any) => (
+      render: (item: UserInterface) => (
         <button
           className="bg-red-500 text-white px-2 py-1 rounded"
           onClick={() => handleDeleteClick(item)}
@@ -61,14 +97,12 @@ const UsersPage = () => {
       ),
     },
     {
-      key: "detalhes",
+      key: "details",
       title: "Ver Detalhes",
-      render: (item: any) => (
+      render: (item: UserInterface) => (
         <button
           className="bg-gray-500 text-white px-2 py-1 rounded"
-          onClick={() => {
-            console.log("Ver Detalhes", item.id);
-          }}
+          onClick={() => console.log("Ver Detalhes", item.id)}
         >
           <Typography variant="p_normal">Detalhes</Typography>
         </button>
@@ -76,25 +110,10 @@ const UsersPage = () => {
     },
   ];
 
-  useEffect(() => {
-    const term = searchTerm.toLowerCase();
-    const filtered = data.filter((item: any) => {
-      return (
-        item.name?.toLowerCase().includes(term) ||
-        item.email?.toLowerCase().includes(term) ||
-        item.method?.toLowerCase().includes(term) ||
-        item.date?.toLowerCase().includes(term) ||
-        item.services?.toLowerCase().includes(term)
-      );
-    });
-    setFilteredData(filtered);
-    setCurrentPage(1);
-  }, [searchTerm]);
-
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
       <GlobalHelloUser />
-      <Card >
+      <Card>
         <CardContent className="p-4">
           <div className="flex justify-between items-center p-4">
             <Typography variant="h2_bold">Lista de Clientes</Typography>

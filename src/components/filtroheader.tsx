@@ -1,4 +1,3 @@
-import React from "react";
 import { CalendarDays, LayoutGrid } from "lucide-react";
 
 interface Props {

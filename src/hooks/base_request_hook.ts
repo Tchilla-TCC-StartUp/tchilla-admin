@@ -1,99 +1,113 @@
 import { create } from "zustand";
 import { ApiErrorType, ApiException } from "../resource/app_exceptions";
-import { useSnackbarStore } from "../stores/snackbar_store";
 import { useAuthStore } from "../stores/auth_store";
+import { useErrorHandlerHook } from "./error_handler_hook";
 
 interface BaseRequestHook {
     isLoading: boolean;
-    isError: boolean;
-    errorMessage: string;
-    errorDetails?: Record<string, unknown>;
-    errorStatus?: number;
-    errorType?: ApiErrorType;
     onRequest: <R>(
         request: (token?: string) => Promise<R>,
         onSuccess?: (data: R) => void,
         onError?: (error: ApiException | Error) => void,
-        checkToken?: boolean
+        checkToken?: boolean,
+        useFullScreenError?: boolean
     ) => Promise<R>;
 }
 
-export const useBaseRequestHook = create<BaseRequestHook>(() => ({
+// Tipos de erro que devem sempre usar tela cheia
+const FULL_SCREEN_ERROR_TYPES: ApiErrorType[] = [
+    ApiErrorType.NETWORK,
+    ApiErrorType.TIMEOUT,
+    ApiErrorType.NOT_FOUND,
+    ApiErrorType.SERVER,
+    ApiErrorType.UNKNOWN,
+];
+
+export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     isLoading: false,
-    isError: false,
-    errorMessage: "",
-    errorDetails: undefined,
-    errorStatus: undefined,
-    errorType: undefined,
 
     onRequest: async <R>(
         request: (token?: string) => Promise<R>,
         onSuccess?: (data: R) => void,
         onError?: (error: ApiException | Error) => void,
-        checkToken: boolean = false // 👈 default false
+        checkToken: boolean = false,
+        useFullScreenError: boolean = false
     ): Promise<R> => {
         const { token } = useAuthStore.getState();
+        const { setError, clearError } = useErrorHandlerHook.getState();
 
         if (checkToken && !token) {
             const message = "Token não encontrado.";
-            useSnackbarStore.getState().showSnackbar(message, "error");
-            throw new Error(message);
+            setError(
+                message,
+                ApiErrorType.UNAUTHORIZED,
+                useFullScreenError ? "fullScreen" : "snackbar",
+                401,
+                undefined,
+                () =>
+                    useBaseRequestHook.getState().onRequest(
+                        request,
+                        onSuccess,
+                        onError,
+                        checkToken,
+                        useFullScreenError
+                    ) // Callback para retentativa
+            );
+            throw new ApiException(message, 401, ApiErrorType.UNAUTHORIZED);
         }
 
+        const errorMessages: Record<ApiErrorType, string> = {
+            [ApiErrorType.NETWORK]: "Erro de conexão com a rede.",
+            [ApiErrorType.TIMEOUT]: "Tempo limite da requisição esgotado.",
+            [ApiErrorType.UNAUTHORIZED]: "Não autorizado. Faça login novamente.",
+            [ApiErrorType.FORBIDDEN]: "Acesso proibido.",
+            [ApiErrorType.NOT_FOUND]: "Recurso não encontrado.",
+            [ApiErrorType.VALIDATION]: "Erro de validação nos dados enviados.",
+            [ApiErrorType.SERVER]: "Erro interno do servidor.",
+            [ApiErrorType.UNKNOWN]: "Ocorreu um erro inesperado.",
+        };
+
         try {
-            useBaseRequestHook.setState({
-                isLoading: true,
-                isError: false,
-                errorMessage: "",
-                errorDetails: undefined,
-                errorStatus: undefined,
-                errorType: undefined,
-            });
+            set({ isLoading: true });
+            clearError();
 
             const response = await request(checkToken ? token : undefined);
             onSuccess?.(response);
             return response;
         } catch (error) {
-            const { showSnackbar } = useSnackbarStore.getState();
+            const isApiException = error instanceof ApiException;
+            const errorType = isApiException ? error.type : ApiErrorType.UNKNOWN;
+            const message = isApiException
+                ? error.message !== "Erro desconhecido"
+                    ? error.message
+                    : errorMessages[errorType]
+                : error instanceof Error
+                    ? error.message
+                    : "Erro desconhecido";
 
-            if (error instanceof ApiException) {
-                useBaseRequestHook.setState({
-                    isError: true,
-                    errorMessage: error.message,
-                    errorDetails: error.details,
-                    errorStatus: error.status,
-                    errorType: error.type,
-                });
+            const shouldUseFullScreen =
+                useFullScreenError || FULL_SCREEN_ERROR_TYPES.includes(errorType);
 
-                onError?.(error);
+            setError(
+                message,
+                errorType,
+                shouldUseFullScreen ? "fullScreen" : "snackbar",
+                isApiException ? error.status : undefined,
+                isApiException ? error.details : undefined,
+                () =>
+                    useBaseRequestHook.getState().onRequest(
+                        request,
+                        onSuccess,
+                        onError,
+                        checkToken,
+                        useFullScreenError
+                    ) // Callback para retentativa
+            );
 
-                const errorMessages: Record<ApiErrorType, string> = {
-                    [ApiErrorType.NETWORK]: error.message,
-                    [ApiErrorType.TIMEOUT]: error.message,
-                    [ApiErrorType.UNAUTHORIZED]: error.message,
-                    [ApiErrorType.FORBIDDEN]: error.message,
-                    [ApiErrorType.NOT_FOUND]: error.message,
-                    [ApiErrorType.VALIDATION]: error.message,
-                    [ApiErrorType.SERVER]: error.message,
-                    [ApiErrorType.UNKNOWN]: "Ocorreu um erro inesperado.",
-                };
-
-                showSnackbar(errorMessages[error.type] ?? "Erro desconhecido.", "error");
-            } else {
-                const genericError = error instanceof Error ? error.message : "Erro desconhecido";
-                useBaseRequestHook.setState({
-                    isError: true,
-                    errorMessage: genericError,
-                    errorType: ApiErrorType.UNKNOWN,
-                });
-
-                onError?.(error instanceof Error ? error : new Error("Erro desconhecido"));
-                showSnackbar("Erro desconhecido ocorrido.", "error");
-            }
-
+            onError?.(error instanceof Error ? error : new Error(message));
             throw error;
         } finally {
-            useBaseRequestHook.setState({ isLoading: false });
+            set({ isLoading: false });
         }
     },
 }));
