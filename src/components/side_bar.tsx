@@ -38,12 +38,6 @@ const Sidebar = () => {
       navigate: navigator.navigateTopagemantos,
     },
     {
-      label: "Avaliações",
-      icon: <IoChatboxEllipsesOutline size={18} />,
-      page: "avaliacoes",
-      navigate: navigator.navigateToavaliacoes,
-    },
-    {
       label: "Clieantes",
       icon: <IoPersonOutline size={18} />,
       page: "clientes",

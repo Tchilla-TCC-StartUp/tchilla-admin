@@ -10,7 +10,6 @@ import PageLayout from "./layouts/page_layout";
 import ConfirmEmail from "./pages/confirmEmail";
 import ResetPassword from "./pages/resetPassword";
 import AgendamentoPage from "./pages/agendamento_page";
-import AvaliacaoPage from "./pages/avaliacoes";
 import ConfiguracaoPage from "./pages/configuracoes_page";
 import PagamentoPage from "./pages/payments_page";
 import ServEPacotes from "./pages/services_page";
@@ -52,16 +51,6 @@ const AppRouter = () => {
             <ProtectedRoute>
               <PageLayout title="Agendamentos">
                 <AgendamentoPage />
-              </PageLayout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={AppRoutes.AVALIACAO}
-          element={
-            <ProtectedRoute>
-              <PageLayout title="Avaliações">
-                <AvaliacaoPage />
               </PageLayout>
             </ProtectedRoute>
           }
