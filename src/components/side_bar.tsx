@@ -1,9 +1,10 @@
 import AppAssetsImages from "../resource/app_assets_images";
-import { IoCalendarOutline, IoCashOutline, IoChatboxEllipsesOutline, IoDocumentAttachOutline, IoPersonOutline, IoSettingsOutline, IoStatsChartOutline } from "react-icons/io5";
+import { IoCalendarOutline, IoCashOutline , IoDocumentAttachOutline, IoPersonOutline, IoSettingsOutline, IoStatsChartOutline } from "react-icons/io5";
 import Typography from "./typography";
 import NavigationHooks from "../hooks/navigation_hook";
 import { useState } from "react";
 import { GoPerson } from "react-icons/go";
+import { BiCategory } from "react-icons/bi";
 
 
 const Sidebar = () => {
@@ -36,6 +37,12 @@ const Sidebar = () => {
       icon: <IoCashOutline size={18} />,
       page: "pagamentos",
       navigate: navigator.navigateTopagemantos,
+    },
+    {
+      label: "Categoria",
+      icon: <BiCategory   size={18} />,
+      page: "categoria",
+      navigate: navigator.navigateToCategorias,
     },
     {
       label: "Clieantes",

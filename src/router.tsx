@@ -15,6 +15,7 @@ import PagamentoPage from "./pages/payments_page";
 import ServEPacotes from "./pages/services_page";
 import ProtectedRoute from "./protected_route";
 import UsersPage from "./pages/users_page";
+import Categorias from "./pages/categorias_page";
 
 const AppRouter = () => {
   return (
@@ -51,6 +52,16 @@ const AppRouter = () => {
             <ProtectedRoute>
               <PageLayout title="Agendamentos">
                 <AgendamentoPage />
+              </PageLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.CATEGORIAS}
+          element={
+            <ProtectedRoute>
+              <PageLayout title="Caregorias">
+                <Categorias />
               </PageLayout>
             </ProtectedRoute>
           }
