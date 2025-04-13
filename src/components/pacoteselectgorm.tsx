@@ -12,6 +12,7 @@ type PacoteSelectFormProps = {
     { label: 'Iluminação', value: 'Iluminação' },
     { label: 'Segurança', value: 'Segurança' },
   ];
+  
   const PacoteSelectForm = ({ pacotes, setPacotes }: PacoteSelectFormProps) => (
     <div>
       <GlobalSelect

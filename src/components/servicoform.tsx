@@ -2,22 +2,22 @@ import { useState } from 'react';
 import GlobalButton from './global_button';
 import Typography from './typography';
 import CategoriaDiasForm from './categoriadiasform';
-import PacoteSelectForm from './pacoteselectgorm';
 import PromocaoForm from './promocaoform';
 import NomePrecoForm from './servicoselecionadores';
 import FotosForm from './fotosform';
 import DescricaoForm from './descricaoform';
+import HorarioDisponibilidadeForm from './horariodisponibilidadeform';
 type ServicoData = {
     nome?: string;
     preco?: string;
     categoria?: string;
-    diasDisponiveis?: string;
-    valorAtual?: string;
+    ValorAtual?: string;
     valorPromocional?: string;
     resultadoPercentual?: string;
     descricao?: string;
     fotos?: (File | null)[];
     pacotes?: string[];
+    DiasDaSemana?: string[]
 };
 type ServicoFormProps = {
 
@@ -26,15 +26,18 @@ type ServicoFormProps = {
     onSubmit: (data: any) => void;
 };
 export const ServicoForm = ({ onSubmit, onClose, initialData = {} }: ServicoFormProps) => {
+    const [tipoDisponibilidade, setTipoDisponibilidade] = useState<"sempre" | "intervalo" | "nenhum">("sempre");
+    const [horarioInicio, setHorarioInicio] = useState("12:00");
+    const [horarioFim, setHorarioFim] = useState("22:00");
     const [nome, setNome] = useState(initialData.nome || '');
     const [preco, setPreco] = useState(initialData.preco || '');
     const [categoria, setCategoria] = useState<string | number>('');
-    const [diasDisponiveis, setDiasDisponiveis] = useState<string | number>(''); const [valorAtual, setValorAtual] = useState(initialData.valorAtual || '');
+    const [DiasDaSemana, setDiasDisponiveis] = useState(initialData.DiasDaSemana || ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo']);
     const [valorPromocional, setValorPromocional] = useState(initialData.valorPromocional || '');
+    const [valorAtual, setValorAtual] = useState(initialData.ValorAtual || '');
     const [resultadoPercentual, setResultadoPercentual] = useState(initialData.resultadoPercentual || '');
     const [descricao, setDescricao] = useState(initialData.descricao || '');
     const [fotos, setFotos] = useState(initialData.fotos || [null, null, null, null]);
-    const [pacotes, setPacotes] = useState(initialData.pacotes || ['Decoração', 'Garçons', 'Bufet']);
     const handleFotoChange = (index: number, file: File | null) => {
         const newFotos = [...fotos];
         newFotos[index] = file;
@@ -44,8 +47,19 @@ export const ServicoForm = ({ onSubmit, onClose, initialData = {} }: ServicoForm
         if (onSubmit) {
             onSubmit({
                 categoria: String(categoria),
-                diasDisponiveis: String(diasDisponiveis),
-                nome, preco, valorAtual, valorPromocional, resultadoPercentual, descricao, fotos, pacotes
+                nome,
+                preco,
+                DiasDaSemana,
+                valorPromocional,
+                resultadoPercentual,
+                descricao,
+                fotos,
+                disponibilidade:
+                    tipoDisponibilidade === "sempre"
+                        ? "Sempre disponível"
+                        : tipoDisponibilidade === "nenhum"
+                            ? "Sem horário necessário"
+                            : `${horarioInicio} - ${horarioFim}`,
             });
         }
     };
@@ -55,7 +69,7 @@ export const ServicoForm = ({ onSubmit, onClose, initialData = {} }: ServicoForm
 
                 <div className="flex justify-between items-start mb-8">
                     <div>
-                        <Typography className="text-2xl font-bold text-gray-900" variant="h2_bold">
+                        <Typography className="text-2xl font-bold text-gray-900" variant="h1_medium">
                             Adicionar os seus serviços
                         </Typography>
                         <Typography className="text-gray-500 mt-1" variant="h2_normal">
@@ -66,15 +80,31 @@ export const ServicoForm = ({ onSubmit, onClose, initialData = {} }: ServicoForm
                 </div>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <NomePrecoForm nome={nome} setNome={setNome} preco={preco} setPreco={setPreco} />
-                    <PacoteSelectForm pacotes={pacotes} setPacotes={setPacotes} />
-                    <CategoriaDiasForm
-                        categoria={categoria}
-                        setCategoria={setCategoria}
-                        diasDisponiveis={diasDisponiveis}
-                        setDiasDisponiveis={setDiasDisponiveis}
-                    />
+
+
+                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <CategoriaDiasForm
+                                categoria={categoria}
+                                setCategoria={setCategoria}
+                                diasDisponiveis={DiasDaSemana}
+                                setDiasDisponiveis={setDiasDisponiveis}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <HorarioDisponibilidadeForm
+                                tipoDisponibilidade={tipoDisponibilidade}
+                                setTipoDisponibilidade={setTipoDisponibilidade}
+                                horarioInicio={horarioInicio}
+                                setHorarioInicio={setHorarioInicio}
+                                horarioFim={horarioFim}
+                                setHorarioFim={setHorarioFim}
+                            />
+                        </div>
+                    </div>
+
                 </form>
-                <Typography className="mt-6 text-lg font-semibold text-gray-700" variant="h2_bold">
+                <Typography className="mt-6 text-lg font-semibold text-gray-500" variant="h2_bold">
                     Configurar promoção
                 </Typography>
                 <PromocaoForm
@@ -85,7 +115,7 @@ export const ServicoForm = ({ onSubmit, onClose, initialData = {} }: ServicoForm
                     resultadoPercentual={resultadoPercentual}
                     setResultadoPercentual={setResultadoPercentual}
                 />
-                <Typography className="text-lg font-semibold mb-2 text-gray-700" variant="h2_bold">
+                <Typography className="text-lg font-semibold mb-2 text-gray-500" variant="h2_bold">
                     Fotos do serviço
                 </Typography>
                 <FotosForm fotos={fotos} onFotoChange={handleFotoChange} />

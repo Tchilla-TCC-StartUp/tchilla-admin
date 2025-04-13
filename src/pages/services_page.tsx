@@ -14,7 +14,7 @@ const ServiceAndPack: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(serviceData);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
   const [servicos, setServicos] = useState(serviceData);
 
   const columns = [
