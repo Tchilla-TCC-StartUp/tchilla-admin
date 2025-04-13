@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import GlobalButton from "../components/global_button";
-import GlobalHelloUser from "../components/global_hello_user";
+import GlobalButton from "../components/Global/global_button";
+import GlobalHelloUser from "../components/Global/global_hello_user";
 import { IoAddCircleOutline, IoSearchOutline } from "react-icons/io5";
 import Typography from "../components/typography";
-import GlobalAvatar from "../components/global_avatar";
-import { GlobalTable } from "../components/global_table";
-import GlobalInput from "../components/global_input";
-import { Card } from "../components/global_cards";
+import GlobalAvatar from "../components/Global/global_avatar";
+import { GlobalTable } from "../components/Global/global_table";
+import GlobalInput from "../components/Global/global_input";
+import { Card } from "../components/Global/global_cards";
 import serviceData from "../data/jsons/services.json";
 import { ServicoForm } from "../components/servicoform";
 

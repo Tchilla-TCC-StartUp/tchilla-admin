@@ -1,5 +1,5 @@
-import { Card, CardContent } from "../components/global_cards";
-import GlobalHelloUser from "../components/global_hello_user";
+import { Card, CardContent } from "../components/Global/global_cards";
+import GlobalHelloUser from "../components/Global/global_hello_user";
 import MetricCard from "../components/metric_card";
 import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";

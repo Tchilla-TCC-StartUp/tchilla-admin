@@ -1,6 +1,6 @@
 import { CalendarDays, Search } from "lucide-react";
-import GlobalHelloUser from "../components/global_hello_user";
-import GlobalButton from "../components/global_button";
+import GlobalHelloUser from "../components/Global/global_hello_user";
+import GlobalButton from "../components/Global/global_button";
 import { EventoCard } from "../components/eventocard";
 import FiltroHeader from "../components/filtroheader";
 import { useEffect, useState } from "react";

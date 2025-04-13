@@ -1,15 +1,15 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
-import GlobalInput from "../components/global_input";
-import GlobalButton from "../components/global_button";
+import GlobalInput from "../components/Global/global_input";
+import GlobalButton from "../components/Global/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
 
 import { useState } from "react";
 import UserService from "../service/user_service";
 import { useBaseRequestHook } from "../hooks/base_request_hook";
-import GlobalSnackbar from "../components/global_snackbar";
-import GlobalModalLoading from "../components/global_modal_loading";
+import GlobalSnackbar from "../components/Global/global_snackbar";
+import GlobalModalLoading from "../components/Global/global_modal_loading";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");

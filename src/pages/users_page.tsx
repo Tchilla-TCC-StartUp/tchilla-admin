@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import GlobalHelloUser from "../components/global_hello_user";
-import { AppGlobalUserAvatarName } from "../components/global_user_avatar_name";
-import { GlobalTable } from "../components/global_table";
-import { Card, CardContent } from "../components/global_cards";
+import GlobalHelloUser from "../components/Global/global_hello_user";
+import { AppGlobalUserAvatarName } from "../components/Global/global_user_avatar_name";
+import { GlobalTable } from "../components/Global/global_table";
+import { Card, CardContent } from "../components/Global/global_cards";
 import Typography from "../components/typography";
-import GlobalInput from "../components/global_input";
+import GlobalInput from "../components/Global/global_input";
 import { IoSearchOutline } from "react-icons/io5";
-import GlobalConfirmModal from "../components/gloal_modals";
+import GlobalConfirmModal from "../components/Global/gloal_modals";
 import { UserInterface } from "../interfaces/user_interface";
 import ClientService from "../service/client_service";
 

@@ -1,5 +1,5 @@
-import GlobalDropdown from "./global_dropdown";
-import GlobalSelect from "./global_select";
+import GlobalDropdown from "./Global/global_dropdown";
+import GlobalSelect from "./Global/global_select";
 
 type CategoriaDiasFormProps = {
   categoria: string | number;

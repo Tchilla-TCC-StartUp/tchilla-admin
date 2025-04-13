@@ -1,4 +1,4 @@
-import GlobalSelect from "./global_select";
+import GlobalSelect from "./Global/global_select";
 
 type PacoteSelectFormProps = {
     pacotes: string[];

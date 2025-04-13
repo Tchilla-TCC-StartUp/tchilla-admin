@@ -1,4 +1,4 @@
-import GlobalInput from "./global_input";
+import GlobalInput from "./Global/global_input";
 
 type NomePrecoFormProps = {
     nome: string;

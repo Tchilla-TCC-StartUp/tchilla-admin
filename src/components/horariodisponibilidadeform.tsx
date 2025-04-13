@@ -1,5 +1,5 @@
 import Typography from "./typography";
-import GlobalInput from "./global_input";
+import GlobalInput from "./Global/global_input";
 
 type HorarioDisponibilidadeProps = {
     tipoDisponibilidade: "sempre" | "intervalo" | "nenhum";

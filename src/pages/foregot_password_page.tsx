@@ -1,10 +1,10 @@
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
-import GlobalInput from "../components/global_input";
+import GlobalInput from "../components/Global/global_input";
 import { MdAlternateEmail } from "react-icons/md";
-import GlobalButton from "../components/global_button";
+import GlobalButton from "../components/Global/global_button";
 import { FaArrowRightLong } from "react-icons/fa6";
-import GlobalBackButton from "../components/global_back_button";
+import GlobalBackButton from "../components/Global/global_back_button";
 import NavigationHooks from "../hooks/navigation_hook";
 const ForegotPasswordPage = () => {
   return (

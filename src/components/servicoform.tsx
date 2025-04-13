@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import GlobalButton from './global_button';
+import GlobalButton from './Global/global_button';
 import Typography from './typography';
 import CategoriaDiasForm from './categoriadiasform';
 import PromocaoForm from './promocaoform';

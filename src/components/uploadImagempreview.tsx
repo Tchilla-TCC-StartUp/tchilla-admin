@@ -1,5 +1,5 @@
 import React from 'react';
-import GlobalInput from './global_input';
+import GlobalInput from './Global/global_input';
 
 type UploadImagemPreviewProps = {
   foto: File | null;

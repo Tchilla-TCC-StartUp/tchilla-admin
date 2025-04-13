@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import AppAssetsImages from "../resource/app_assets_images";
 import NavigationHooks from "../hooks/navigation_hook";
-import GlobalButton from "../components/global_button";
+import GlobalButton from "../components/Global/global_button";
 
 const confirmEmail = () => {
     const [pin, setPin] = useState(["", "", "", "", "", ""]);
