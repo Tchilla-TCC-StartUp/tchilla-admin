@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { AppGlobalUserAvatarName } from "./global_user_avatar_name";
-import Typography from "./typography";
+import Typography from "../typography";
 import { IoChevronDownOutline, IoLogOutOutline } from "react-icons/io5";
-import UserService from "../service/user_service";
 import Shimmer from "./global_shimmers";
 import GlobalModalLoading from "./global_modal_loading";
+import UserService from "../../service/user_service";
 
 const GlobalUserMenu = () => {
   const [open, setOpen] = useState(false);
