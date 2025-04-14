@@ -1,6 +1,6 @@
 import { useErrorHandlerHook } from "../hooks/error_handler_hook";
 import Typography from "../components/typography";
-import GlobalButton from "../components/global_button";
+import GlobalButton from "../components/Global/global_button";
 
 const ErrorScreen = () => {
   const { isError, errorMessage, screenType, retryLastRequest } =

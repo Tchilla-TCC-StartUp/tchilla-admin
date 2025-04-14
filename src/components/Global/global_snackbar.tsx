@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { useSnackbarStore } from "../stores/snackbar_store";
-import Typography from "./typography";
+import Typography from "../typography";
 import {
   FaInfoCircle,
   FaCheckCircle,
   FaExclamationTriangle,
   FaTimesCircle,
 } from "react-icons/fa";
+import { useSnackbarStore } from "../../stores/snackbar_store";
 
 const GlobalSnackbar = () => {
   const { isVisible, message, type } = useSnackbarStore();
@@ -16,7 +16,7 @@ const GlobalSnackbar = () => {
   const snackbarStyles = {
     info: {
       bg: "bg-blue-600 text-white",
-      icon: <FaInfoCircle className="text-white" size={80} />,
+      icon: <FaInfoCircle className="text-white" />,
     },
     success: {
       bg: "bg-green-600 text-white",

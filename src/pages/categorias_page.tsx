@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const avaliacoes = () => {
+const Categorias = () => {
   return (
     <div>
      <Link to="/login">Ir para Login</Link>
@@ -9,4 +9,4 @@ const avaliacoes = () => {
   );
 };
 
-export default avaliacoes;
+export default Categorias;

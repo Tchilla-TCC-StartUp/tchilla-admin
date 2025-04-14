@@ -6,7 +6,7 @@ class AppRoutes {
     public static readonly REGISTER = "/register";
     public static readonly Reset = "/ResetPassword";
     public static readonly AGENDAMENTO = "/agendamento";
-    public static readonly AVALIACAO = "/reviews";
+    public static readonly CATEGORIAS = "/categorias";
     public static readonly CONFIG = "/configurations";
     public static readonly SERVEPACOTE = "/services";
     public static readonly PAGAMENTOS = "/payments";

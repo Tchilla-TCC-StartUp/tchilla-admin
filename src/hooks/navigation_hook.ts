@@ -13,7 +13,7 @@ const NavigationHooks = () => {
     navigateToForegot: () => navigate(AppRoutes.FOREGOT),
     navigateToDashBoard: () => navigate(AppRoutes.DASHBOARD),
     navigateToagendamento: () => navigate(AppRoutes.AGENDAMENTO),
-    navigateToavaliacoes: () => navigate(AppRoutes.AVALIACAO),
+    navigateToCategorias: () => navigate(AppRoutes.CATEGORIAS),
     navigateToconfiguracoes: () => navigate(AppRoutes.CONFIG),
     navigateToServicosEpacote: () => navigate(AppRoutes.SERVEPACOTE),
     navigateTopagemantos: () => navigate(AppRoutes.PAGAMENTOS),

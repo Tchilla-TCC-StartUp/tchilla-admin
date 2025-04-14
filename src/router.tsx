@@ -10,12 +10,12 @@ import PageLayout from "./layouts/page_layout";
 import ConfirmEmail from "./pages/confirmEmail";
 import ResetPassword from "./pages/resetPassword";
 import AgendamentoPage from "./pages/agendamento_page";
-import AvaliacaoPage from "./pages/avaliacoes";
 import ConfiguracaoPage from "./pages/configuracoes_page";
 import PagamentoPage from "./pages/payments_page";
 import ServEPacotes from "./pages/services_page";
 import ProtectedRoute from "./protected_route";
 import UsersPage from "./pages/users_page";
+import Categorias from "./pages/categorias_page";
 
 const AppRouter = () => {
   return (
@@ -57,11 +57,11 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={AppRoutes.AVALIACAO}
+          path={AppRoutes.CATEGORIAS}
           element={
             <ProtectedRoute>
-              <PageLayout title="Avaliações">
-                <AvaliacaoPage />
+              <PageLayout title="Caregorias">
+                <Categorias />
               </PageLayout>
             </ProtectedRoute>
           }

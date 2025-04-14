@@ -9,7 +9,7 @@ type MetricCardProps = {
 
 const MetricCard = ({ title, value, description }: MetricCardProps) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col h-full">
+    <div className="bg-white rounded-lg p-4 border border-gray-200 flex flex-col h-full">
       <div className="flex-grow">
       <div className="flex justify-between items-center">
         <Typography variant="h3_bold">{title}</Typography>

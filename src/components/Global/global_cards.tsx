@@ -1,12 +1,11 @@
 import React from "react";
-
 interface CardProps {
   children: React.ReactNode;
-  className?: string; // Permite passar className como prop
+  className?: string;
 }
 
 export function Card({ children, className }: CardProps) {
-  return <div className={`border rounded-lg p-1 shadow-md bg-white ${className}`}>{children}</div>;
+  return <div className={`border rounded-lg p-1  bg-white ${className}`}>{children}</div>;
 }
 
 export function CardContent({ children, className }: CardProps) {

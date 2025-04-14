@@ -1,4 +1,4 @@
-import AuthInterface from "../interfaces/auth_interface";
+import ResponseInterface from "../interfaces/response_interface";
 import LoginInterface from "../interfaces/login_interface";
 import RegisterInterface from "../interfaces/register_interface";
 import { ResetPasswordInterface, UpdateUserInterface, UserInterface } from "../interfaces/user_interface";
@@ -8,15 +8,15 @@ const UserRepository = () => {
     const { post, get, put } = BaseRepository();
 
     return {
-        login: async (body: LoginInterface): Promise<AuthInterface> => {
-            return await post<AuthInterface>("api/Auth/login", {
+        login: async (body: LoginInterface): Promise<ResponseInterface> => {
+            return await post<ResponseInterface>("api/Auth/login", {
                 emailOrUsername: body.email,
                 password: body.password,
             });
         },
 
-        register: async (body: RegisterInterface,): Promise<AuthInterface> => {
-            return await post<AuthInterface>("api/Auth/register", {
+        register: async (body: RegisterInterface,): Promise<ResponseInterface> => {
+            return await post<ResponseInterface>("api/Auth/register", {
                 nome: body.nome,
                 email: body.email,
                 telefone: body.telefone,
@@ -31,8 +31,8 @@ const UserRepository = () => {
             return response.data;
         },
 
-        logout: async (token: string): Promise<AuthInterface> => {
-            return await put<AuthInterface>("api/Auth/logout", undefined, token);
+        logout: async (token: string): Promise<ResponseInterface> => {
+            return await put<ResponseInterface>("api/Auth/logout", undefined, token);
         },
 
         updateUser: async (body: UpdateUserInterface): Promise<string> => {
@@ -45,8 +45,8 @@ const UserRepository = () => {
             return response.mensagem;
         },
 
-        resetPassword: async (body: ResetPasswordInterface, token: string): Promise<AuthInterface> => {
-            return await put<AuthInterface>(
+        resetPassword: async (body: ResetPasswordInterface, token: string): Promise<ResponseInterface> => {
+            return await put<ResponseInterface>(
                 `api/Auth/change-password?oldPassword=${body.oldPassword}&newPassword=${body.newPassword}`,
                 null,
                 token

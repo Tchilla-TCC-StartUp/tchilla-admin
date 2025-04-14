@@ -1,9 +1,9 @@
 import React from "react";
 import Sidebar from "../components/side_bar";
 import Typography from "../components/typography";
-import GlobalUserMenu from "../components/global_user_menu";
-import GlobalSnackbar from "../components/global_snackbar";
-import GlobalModalLoading from "../components/global_modal_loading";
+import GlobalUserMenu from "../components/Global/global_user_menu";
+import GlobalSnackbar from "../components/Global/global_snackbar";
+import GlobalModalLoading from "../components/Global/global_modal_loading";
 import { useBaseRequestHook } from "../hooks/base_request_hook";
 import { useErrorHandlerHook } from "../hooks/error_handler_hook";
 import ErrorScreen from "../pages/error_page";

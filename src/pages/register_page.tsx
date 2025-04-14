@@ -3,10 +3,10 @@ import { MdAlternateEmail, MdCategory, MdLockOutline } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
-import GlobalInput from "../components/global_input";
-import GlobalButton from "../components/global_button";
+import GlobalInput from "../components/Global/global_input";
+import GlobalButton from "../components/Global/global_button";
 import NavigationHooks from "../hooks/navigation_hook";
-import GlobalDropdown from "../components/global_dropdown";
+import GlobalDropdown from "../components/Global/global_dropdown";
 import RegisterInterface from "../interfaces/register_interface";
  
 const RegisterPage = () => {

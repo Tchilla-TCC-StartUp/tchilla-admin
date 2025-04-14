@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import GlobalHelloUser from "../components/global_hello_user";
-import { AppGlobalUserAvatarName } from "../components/global_user_avatar_name";
-import { GlobalTable } from "../components/global_table";
-import { Card, CardContent } from "../components/global_cards";
+import GlobalHelloUser from "../components/Global/global_hello_user";
+import { AppGlobalUserAvatarName } from "../components/Global/global_user_avatar_name";
+import { GlobalTable } from "../components/Global/global_table";
+import { Card, CardContent } from "../components/Global/global_cards";
 import Typography from "../components/typography";
-import GlobalInput from "../components/global_input";
+import GlobalInput from "../components/Global/global_input";
 import { IoSearchOutline } from "react-icons/io5";
-import GlobalConfirmModal from "../components/gloal_modals";
+import GlobalConfirmModal from "../components/Global/gloal_modals";
 import { UserInterface } from "../interfaces/user_interface";
 import ClientService from "../service/client_service";
 
@@ -18,7 +18,7 @@ const UsersPage = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDelete, setUserToDelete] = useState<UserInterface | null>(null);
 
-  const { getAllClients } = ClientService();
+  const { getAllClients, deleteUser } = ClientService();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,15 +52,23 @@ const UsersPage = () => {
   const confirmDelete = async () => {
     if (userToDelete) {
       try {
-        console.log("Deleting user:", userToDelete.id);
-        setData((prev) => prev.filter((user) => user.id !== userToDelete.id));
-        setFilteredData((prev) =>
-          prev.filter((user) => user.id !== userToDelete.id)
-        );
-      } catch (error) {
-        console.error("Failed to delete user:", error);
-      } finally {
         setShowDeleteModal(false);
+        console.log("Deleting user:", userToDelete.id);
+        const response = await deleteUser(userToDelete.id);
+        if (response.isSuccess) {
+          setData((prev) => prev.filter((user) => user.id !== userToDelete.id));
+          setFilteredData((prev) =>
+            prev.filter((user) => user.id !== userToDelete.id)
+          );
+        } else {
+          console.error(
+            "Erro ao excluir:",
+            response.errorMessage || "Erro desconhecido"
+          );
+        }
+      } catch (error) {
+        console.error("Erro ao excluir usuário:", error);
+      } finally {
         setUserToDelete(null);
       }
     }
@@ -130,21 +138,29 @@ const UsersPage = () => {
             </div>
           </div>
 
-          <GlobalTable
-            data={data}
-            filteredData={filteredData}
-            columns={columns}
-            selectable
-            paginated
-            styleVariant="clean"
-            itemsPerPage={10}
-            withCheckbox={false}
-            currentPage={currentPage}
-            onPageChange={(page: number) => setCurrentPage(page)}
-            onRowSelect={(selectedItems) =>
-              console.log("Selecionados:", selectedItems)
-            }
-          />
+          {filteredData.length > 0 ? (
+            <GlobalTable
+              data={data}
+              filteredData={filteredData}
+              columns={columns}
+              selectable
+              paginated
+              styleVariant="clean"
+              itemsPerPage={10}
+              withCheckbox={false}
+              currentPage={currentPage}
+              onPageChange={(page: number) => setCurrentPage(page)}
+              onRowSelect={(selectedItems) =>
+                console.log("Selecionados:", selectedItems)
+              }
+            />
+          ) : (
+            <div className="text-center text-gray-500 py-10">
+              <Typography variant="p_normal">
+                Nenhum cliente encontrado.
+              </Typography>
+            </div>
+          )}
         </CardContent>
       </Card>
 
