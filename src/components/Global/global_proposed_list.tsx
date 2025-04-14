@@ -1,8 +1,8 @@
 
 import React from "react";
 import { FaEllipsisH } from "react-icons/fa";
-import Typography from "./typography";
-import { ProposedModel, ServiceModel } from "../model/proposed_model";
+import Typography from "../typography";
+import { ProposedModel, ServiceModel } from "../../model/proposed_model";
 
 interface ProposedListProps {
   proposals: ProposedModel[];

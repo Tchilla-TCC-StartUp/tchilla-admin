@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { useSnackbarStore } from "../stores/snackbar_store";
-import Typography from "./typography";
+import Typography from "../typography";
 import {
   FaInfoCircle,
   FaCheckCircle,
   FaExclamationTriangle,
   FaTimesCircle,
 } from "react-icons/fa";
+import { useSnackbarStore } from "../../stores/snackbar_store";
 
 const GlobalSnackbar = () => {
   const { isVisible, message, type } = useSnackbarStore();
