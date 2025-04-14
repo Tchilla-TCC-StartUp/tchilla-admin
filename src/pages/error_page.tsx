@@ -13,7 +13,7 @@ const ErrorScreen = () => {
         <Typography variant="h1_bold" className="text-red-500">
           Erro
         </Typography>
-        <Typography variant="p_normal" className="mt-2">
+        <Typography variant="h2_normal" className="mt-2">
           {errorMessage}
         </Typography>
         <div className="mt-4 flex gap-4">
