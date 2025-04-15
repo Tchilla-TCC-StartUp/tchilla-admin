@@ -81,8 +81,7 @@ const ServiceAndPack: React.FC = () => {
 
       setServicos((prev) => [...prev, novoServico]);
       setShowModal(false);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Erro ao salvar serviço:", error);
     }
   };
@@ -99,8 +98,10 @@ const ServiceAndPack: React.FC = () => {
         </GlobalButton>
       </div>
       <Card className="p-4">
-        <div className="flex justify-between items-center p-4">
-          <Typography variant="h2_bold">Tipos de Serviços</Typography>
+        <div className="flex  flex-col justify-center items-start p-0 gap-3 mb-1 md:flex-row md:justify-between md:items-center md:gap-0 border-b pb-5">
+          <Typography variant="h2_bold" className="w-full">
+            Tipos de Serviços
+          </Typography>
           <GlobalInput
             placeholder="Pesquisar"
             icon={<IoSearchOutline />}
@@ -108,7 +109,6 @@ const ServiceAndPack: React.FC = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setSearchTerm(e.target.value)
             }
-            className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
           />
         </div>
         <GlobalTable
@@ -133,7 +133,6 @@ const ServiceAndPack: React.FC = () => {
           onSubmit={handleAddService}
         />
       )}
-
     </div>
   );
 };

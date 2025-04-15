@@ -79,7 +79,7 @@ export function GlobalTable<T>({
   };
 
   const tableClasses = {
-    primary: "bg-primary-800 text-primary-50",
+    primary: "bg-primary-800 text-prAbril - 2025imary-50",
     secondary: "bg-gray-800 text-white",
     danger: "bg-red-600 text-white",
     clean: "bg-white text-gray-900",
@@ -87,12 +87,12 @@ export function GlobalTable<T>({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="overflow-x-auto flex-1">
-        <table className="min-w-full bg-white">
+      <div className="w-full overflow-x-auto flex-1">
+        <table className="min-w-[700px] w-full text-sm sm:text-base bg-white">
           <thead className={`text-left ${tableClasses[styleVariant]}`}>
             <tr>
               {withCheckbox && (
-                <th className="p-3">
+                <th className="p-2 sm:p-3 whitespace-nowrap text-xs sm:text-sm">
                   <input
                     type="checkbox"
                     onChange={toggleAll}
@@ -103,18 +103,27 @@ export function GlobalTable<T>({
                 </th>
               )}
               {columns.map((col, i) => (
-                <th key={i} className={`p-3 ${col.className || ""}`}>
+                <th
+                  key={i}
+                  className={`p-2 sm:p-3 whitespace-nowrap text-xs sm:text-sm ${
+                    col.className || ""
+                  }`}
+                >
                   {col.title}
                 </th>
               ))}
-              {actions && <th className="p-3 text-center">Ações</th>}
+              {actions && (
+                <th className="p-2 sm:p-3 text-center text-xs sm:text-sm">
+                  Ações
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
             {paginatedData.map((item, rowIndex) => (
               <tr key={rowIndex} className="border-b hover:bg-gray-50">
                 {withCheckbox && (
-                  <td className="p-3">
+                  <td className="p-2 sm:p-3 whitespace-nowrap text-xs sm:text-sm">
                     <input
                       type="checkbox"
                       checked={selectedRows.has(startIndex + rowIndex)}
@@ -123,12 +132,17 @@ export function GlobalTable<T>({
                   </td>
                 )}
                 {columns.map((col, colIndex) => (
-                  <td key={colIndex} className="p-3">
+                  <td
+                    key={colIndex}
+                    className="p-2 sm:p-3 whitespace-nowrap text-xs sm:text-sm"
+                  >
                     {col.render ? col.render(item) : (item as any)[col.key]}
                   </td>
                 ))}
                 {actions && (
-                  <td className="p-3 text-center">{actions(item)}</td>
+                  <td className="p-2 sm:p-3 text-center text-xs sm:text-sm">
+                    {actions(item)}
+                  </td>
                 )}
               </tr>
             ))}
@@ -137,7 +151,7 @@ export function GlobalTable<T>({
       </div>
 
       {paginated && (
-        <div className="flex justify-between items-center p-4 text-sm text-gray-500">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-4 text-sm text-gray-500">
           <span>
             Mostrando {displayData.length === 0 ? 0 : startIndex + 1} -{" "}
             {Math.min(startIndex + itemsPerPage, displayData.length)} de{" "}

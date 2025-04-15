@@ -64,20 +64,19 @@ const CustomerPaymentTable = () => {
   }, [searchTerm]);
 
   return (
-    <Card>
-      <div className="flex justify-between items-center p-4">
-        <Typography variant="h2_bold">Histórico de Pagamentos</Typography>
-        <div className="flex gap-2">
-          <GlobalInput
-            placeholder="Pesquisar"
-            icon={<IoSearchOutline />}
-            value={searchTerm}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearchTerm(e.target.value)
-            }
-            className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
-          />
-        </div>
+    <Card className="p-4">
+      <div className="flex  flex-col justify-center items-start p-0 gap-3 mb-1 md:flex-row md:justify-between md:items-center md:gap-0 border-b pb-5">
+        <Typography variant="h2_bold" className="w-full">
+          Histórico de Pagamentos
+        </Typography>
+        <GlobalInput
+          placeholder="Pesquisar"
+          icon={<IoSearchOutline />}
+          value={searchTerm}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchTerm(e.target.value)
+          }
+        />
       </div>
 
       <GlobalTable
