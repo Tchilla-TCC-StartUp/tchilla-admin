@@ -100,7 +100,7 @@ const ServiceAndPack: React.FC = () => {
       </div>
       <Card className="p-4">
         <div className="flex justify-between items-center p-4">
-          <Typography variant="h2_bold">Tipos de Serviços</Typography>
+          <Typography variant="h2_bold" className="px-2">Serviços</Typography>
           <GlobalInput
             placeholder="Pesquisar"
             icon={<IoSearchOutline />}
