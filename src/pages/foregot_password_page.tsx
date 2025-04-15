@@ -1,41 +1,66 @@
+import { FaArrowRightLong } from "react-icons/fa6";
+import { MdAlternateEmail } from "react-icons/md";
 import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
-import { MdAlternateEmail } from "react-icons/md";
 import GlobalButton from "../components/Global/global_button";
-import { FaArrowRightLong } from "react-icons/fa6";
-import GlobalBackButton from "../components/Global/global_back_button";
+import AppRoutes from "../resource/app_routes";
+import { useState } from "react";
+import GlobalAbsolutBackButton from "../components/Global/global_absolut_back_button";
 import NavigationHooks from "../hooks/navigation_hook";
+import AuthLayout from "../layouts/auth_layout";
+
 const ForegotPasswordPage = () => {
+  const { navigateToConfirm } = NavigationHooks();
+  const [email, setEmail] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigateToConfirm();
+  };
+
   return (
-    <div className="flex items-center flex-col  py-[60px] px-40 bg-primary-50 h-screen">
-      <div className=" flex flex-col items-start justify-center gap-5 w-[400px]">
-        <GlobalBackButton href="/login">
+    <>
+      <GlobalAbsolutBackButton href={AppRoutes.LOGIN} />
 
-        </GlobalBackButton>
-        <img
-          src={AppAssetsImages.vectores.logotipo}
-          alt="Logo"
-          className="w-[250px]"
-        />
-        <Typography variant="h1_ultra_bold">Recuperar senha</Typography>
-        <Typography variant="h3_ligth" color="var(--gray-600)">
-          Informe o seu email para recuperar a senha
-        </Typography>
-
-        <GlobalInput
-          placeholder="Insira o seu email"
-          type="email"
-          icon={<MdAlternateEmail />}
-        />
-        <GlobalButton
-          className="w-[fill] mt-[10px] bg-primary-900"
-          onClick={NavigationHooks().navigateToConfirm}
-        >
-          Recuperar senha <FaArrowRightLong />
-        </GlobalButton>
-      </div>
-    </div>
+      <AuthLayout
+        left={
+          <div className="mt-9">
+            <img
+              src={AppAssetsImages.vectores.logotipo}
+              alt="Logo"
+              className="w-[168px] h-auto lg:w-[268px] md:w-[200px] sm:w-[168px]"
+            />
+            <Typography variant="h1_ultra_bold" color="var(--primary-950)">
+              Recuperar senha
+            </Typography>
+            <Typography variant="h3_ligth" color="var(--gray-700)">
+              Informe o seu email para recuperar a senha
+            </Typography>
+          </div>
+        }
+        right={
+          <>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-5 w-full lg:w-[550px]"
+            >
+              <GlobalInput
+                label="Seu email"
+                placeholder="Insira o seu email"
+                type="email"
+                icon={<MdAlternateEmail />}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <GlobalButton type="submit">
+                Recuperar senha <FaArrowRightLong />
+              </GlobalButton>
+            </form>
+          </>
+        }
+      ></AuthLayout>
+    </>
   );
 };
 

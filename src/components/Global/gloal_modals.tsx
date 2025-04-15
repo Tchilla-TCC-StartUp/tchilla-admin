@@ -1,6 +1,7 @@
 import React from "react";
 import Typography from "../typography";
 
+
 type ModalVariant = "confirmation" | "success" | "warning" | "error" | "info";
 
 interface GlobalConfirmModalProps {

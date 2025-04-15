@@ -36,7 +36,7 @@ const GlobalDropdown: React.FC<GlobalDropdownProps> = ({
   return (
     <div className={`flex flex-col gap-1 w-full ${containerClassName}`}>
       {label && (
-        <label className="text-sm font-semibold text-gray-900 mb-1">
+        <label className="text-sm font-semibold text-gray-900 mb-1 truncate overflow-hidden whitespace-nowrap">
           {label}
         </label>
       )}
@@ -47,10 +47,12 @@ const GlobalDropdown: React.FC<GlobalDropdownProps> = ({
             ${dropdownClassName}`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-hidden flex-1">
             {icon && <span className="text-gray-500 text-lg">{icon}</span>}
             <span
-              className={selectedOption ? "text-gray-900" : "text-gray-500"}
+              className={`block truncate overflow-hidden whitespace-nowrap ${
+                selectedOption ? "text-gray-900" : "text-gray-500"
+              }`}
             >
               {selectedOption ? selectedOption.label : placeholder}
             </span>
@@ -67,7 +69,7 @@ const GlobalDropdown: React.FC<GlobalDropdownProps> = ({
             {options.map((opt) => (
               <li
                 key={opt.value}
-                className="p-3 text-sm cursor-pointer hover:bg-gray-100 transition"
+                className="p-3 text-sm truncate overflow-hidden whitespace-nowrap cursor-pointer hover:bg-gray-100 transition"
                 onClick={() => {
                   onChange(opt.value);
                   setIsOpen(false);

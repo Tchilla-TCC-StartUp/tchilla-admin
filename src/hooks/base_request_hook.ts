@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { ApiErrorType, ApiException } from "../resource/app_exceptions";
 import { useAuthStore } from "../stores/auth_store";
 import { useErrorHandlerHook } from "./error_handler_hook";
+import NavigationHooks from "./navigation_hook";
 
 interface BaseRequestHook {
     isLoading: boolean;
@@ -35,9 +36,10 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     ): Promise<R> => {
         const { token } = useAuthStore.getState();
         const { setError, clearError } = useErrorHandlerHook.getState();
-
+        const { navigateToLogin } = NavigationHooks();
         if (checkToken && !token) {
             const message = "Token não encontrado.";
+            navigateToLogin();
             setError(
                 message,
                 ApiErrorType.UNAUTHORIZED,
@@ -51,7 +53,7 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
                         onError,
                         checkToken,
                         useFullScreenError
-                    ) // Callback para retentativa
+                    )
             );
             throw new ApiException(message, 401, ApiErrorType.UNAUTHORIZED);
         }
@@ -101,7 +103,7 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
                         onError,
                         checkToken,
                         useFullScreenError
-                    ) // Callback para retentativa
+                    )
             );
 
             onError?.(error instanceof Error ? error : new Error(message));
