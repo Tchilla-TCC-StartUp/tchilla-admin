@@ -24,13 +24,11 @@ const mockMetrics = [
   },
 ];
 
-
-
 const newUsers = newUserData;
 
 const Dashboard = () => {
   return (
-    <div className="w-full h-screen overflow-hidden flex-1">
+    <div className="w-full h-auto idden flex-1">
       <div className="flex items-center justify-between">
         <GlobalHelloUser />
       </div>
@@ -41,16 +39,16 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="flex items-center justify-between mt-6 gap-4">
-        <Card className="flex-1">
+      <div className="flex flex-col items-center justify-between mt-6 gap-4 lg:flex-row">
+        <Card className="flex-1 w-[100%] h-[500px] overflow-hidden">
           <CardContent className="p-4 h-[28rem]">
             <Typography variant="h2_bold">Rendimento</Typography>
             <SalesChart />
           </CardContent>
         </Card>
 
-        <Card className="flex-1">
-          <CardContent className="p-4 h-[28rem]">
+        <Card className="flex-1 w-[100%] h-[500px] overflow-hidden">
+          <CardContent className="p-4 xl:h-[28rem]">
             <Typography variant="h2_bold">Novos clientes</Typography>
             <NewUserList users={newUsers} />
           </CardContent>
