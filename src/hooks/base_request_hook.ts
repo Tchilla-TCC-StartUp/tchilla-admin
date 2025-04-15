@@ -26,7 +26,6 @@ const FULL_SCREEN_ERROR_TYPES: ApiErrorType[] = [
 
 export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     isLoading: false,
-
     onRequest: async <R>(
         request: (token?: string) => Promise<R>,
         onSuccess?: (data: R) => void,
@@ -36,10 +35,10 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     ): Promise<R> => {
         const { token } = useAuthStore.getState();
         const { setError, clearError } = useErrorHandlerHook.getState();
-        const { navigateToLogin } = NavigationHooks();
+
         if (checkToken && !token) {
             const message = "Token não encontrado.";
-            navigateToLogin();
+
             setError(
                 message,
                 ApiErrorType.UNAUTHORIZED,
@@ -89,7 +88,10 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
 
             const shouldUseFullScreen =
                 useFullScreenError || FULL_SCREEN_ERROR_TYPES.includes(errorType);
-
+            if (errorType === ApiErrorType.UNAUTHORIZED) {
+                NavigationHooks().navigateToLogin();
+                useAuthStore.getState().clearToken();
+            }
             setError(
                 message,
                 errorType,

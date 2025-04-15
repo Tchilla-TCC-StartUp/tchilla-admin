@@ -15,7 +15,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ left, right }) => {
       <div className="w-full md:w-1/2 flex flex-col gap-6">{left}</div>
       <div className="w-full md:w-1/2 flex flex-col gap-6">{right}</div>
 
-      <GlobalModalLoading isVisible={isLoading} message="Fazendo login..." />
+      <GlobalModalLoading isVisible={isLoading} message="Fazendo login..."/>
       <GlobalSnackbar />
     </div>
   );
