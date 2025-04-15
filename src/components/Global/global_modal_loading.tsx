@@ -1,6 +1,7 @@
 import React from "react";
 import GlobalCircularProgress from "./global_circular_progress";
-import Typography from "./typography";
+import Typography from "../typography";
+
 
 type GlobalModalLoadingProps = {
   isVisible: boolean;

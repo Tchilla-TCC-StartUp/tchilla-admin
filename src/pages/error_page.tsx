@@ -17,7 +17,7 @@ const ErrorScreen = () => {
           {errorMessage}
         </Typography>
         <div className="mt-4 flex gap-4">
-          <GlobalButton onClick={retryLastRequest} className="w-full">
+          <GlobalButton onClick={retryLastRequest} variant="error" className="w-full">
             Tentar Novamente
           </GlobalButton>
         </div>

@@ -5,7 +5,10 @@ import { EventoCard } from "../components/eventocard";
 import FiltroHeader from "../components/filtroheader";
 import { useEffect, useState } from "react";
 import CalendarioMensal from "../components/calendariomensal";
-
+import Typography from "../components/typography";
+import GlobalInput from "../components/Global/global_input";
+import GlobalDropdown from "../components/Global/global_dropdown";
+import { Card } from "../components/Global/global_cards";
 
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
 type Evento = {
@@ -19,7 +22,7 @@ type MesComEventos = {
   cor: string;
   eventos: Evento[];
 };
-const agendamento = () => {
+const Agendamento = () => {
   const [abaAtiva, setAbaAtiva] = useState("todos");
   const [visao, setVisao] = useState("cartoes");
   const [eventosPorMes, setEventosPorMes] = useState<MesComEventos[]>([]);
@@ -149,97 +152,95 @@ const agendamento = () => {
     }, 1000);
   }, []);
   return (
-    <div className="p-6 bg-white min-h-screen">
-      <div className="sticky top-0 bg-white z-10">
-        <div className="flex items-center justify-between">
-          <GlobalHelloUser />
-        </div>
-        <div className="border rounded-md p-2 mt-4 bg-white flex items-center gap-4">
-          <div className="flex flex-col flex-1">
-            <label className="text-sm font-semibold text-gray-800 mb-1">Pesquisa</label>
-            <input
-              type="text"
-              placeholder="Pesquise por nome ou data"
-              className="rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            />
-          </div>
-          <select className="rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none">
-            <option>Selecionar período</option>
-            <option>Hoje</option>
-            <option>Últimos 7 dias</option>
-            <option>Últimos 30 dias</option>
-          </select>
-
-          <select className="rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none">
-            <option>Selecionar tipo de eventos</option>
-            <option>Reunião</option>
-            <option>Chamada</option>
-            <option>Email</option>
-          </select>
-          <GlobalButton className="flex items-center gap-2 px-4 py-2 rounded-md text-white">
-            <Search className="w-4 h-4" />
-            Pesquisar contatos
+    <div className="bg-white min-h-screen">
+      <GlobalHelloUser />
+      <div className="sticky top-0 bg-white z-10 mt-3">
+        <Card className="flex flex-col items-center justify-center gap-5 p-4 w-full md:flex-row md:gap-2">
+          <GlobalInput placeholder="Pesquisar" />
+          <GlobalDropdown
+            placeholder="Selecionar período"
+            onChange={() => {}}
+            options={[
+              { label: "Hoje", value: 3 },
+              { label: "Últimos 7 dias", value: 1 },
+              { label: "Últimos 30 dias", value: 2 },
+            ]}
+          ></GlobalDropdown>
+          <GlobalDropdown
+            placeholder="Tipo de Evento"
+            onChange={() => {}}
+            options={[
+              { label: "Hoje", value: 3 },
+              { label: "Últimos 7 dias", value: 1 },
+              { label: "Últimos 30 dias", value: 2 },
+            ]}
+          ></GlobalDropdown>
+          <GlobalButton className="w-full">
+            <Search />
+            Pesquisar
           </GlobalButton>
-        </div>
+        </Card>
       </div>
-      <div className="mt-12 overflow-y-auto">
-        <div className="pb-6">
-          <FiltroHeader
-            abaAtiva={abaAtiva}
-            visao={visao}
-            onChangeAba={setAbaAtiva}
-            onChangeVisao={setVisao}
-          />
-        </div>
+      <div className="mt-1 overflow-y-auto">
+        <FiltroHeader
+          abaAtiva={abaAtiva}
+          visao={visao}
+          onChangeAba={setAbaAtiva}
+          onChangeVisao={setVisao}
+        />
       </div>
       <main className="p-2  overflow-hidden relative z-0 w-full h-screen bg-white">
-          <div className="w-full h-full bg-white mt-6">
-        {loading ? (
-          <div className="text-center text-gray-500 mt-20">Carregando eventos...</div>
-        ) : visao === "cartoes" ? (
-          <div className="h-screen overflow-y-auto overflow-x-auto px-4 py-4 pb-20"> 
-            <div className="flex gap-4 pb-10 min-w-max"> 
-              {eventosPorMes.map((mesObj, idx) => (
-                <div key={idx} className="w-71 flex-shrink-0"> 
-                  <div
-                    className={`${mesObj.cor} px-2 py-2 rounded-md flex justify-between items-center mb-4`}
-                  >
-                    <h2 className="text-base font-bold p-2 text-black">{mesObj.mes}</h2>
-                    <CalendarDays className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    {mesObj.eventos.map((evento, i) => (
-                      <EventoCard
-                        key={i}
-                        nome={evento.nome}
-                        data={evento.data}
-                        local={evento.local}
-                        status={evento.status}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
+        <div className="w-full h-full bg-white mt-6">
+          {loading ? (
+            <div className="text-center text-gray-500 mt-20">
+              Carregando eventos...
             </div>
-          </div>
-        ) : (
-          <div>
-            <CalendarioMensal
-              ano={2025}
-              mes={3} 
-              eventos={[
-                { nome: "Evento ", data: "2025-04-08", status: "Confirmado" },
-                { nome: "Evento 2", data: "2025-04-04", status: "Pendente" },
-                { nome: "Evento 3", data: "2025-04-29", status: "Cancelado" },
-              ]}
-            />
-          </div>
-        )}
-      </div>
-        </main>
-      
+          ) : visao === "cartoes" ? (
+            <div className="h-screen overflow-y-auto overflow-x-auto px-4 py-4 pb-20">
+              <div className="flex gap-4 pb-10 min-w-max">
+                {eventosPorMes.map((mesObj, idx) => (
+                  <div
+                    key={idx}
+                    className="w-[250px] md:w-[300px] lg:w-[350px] flex-shrink-0"
+                  >
+                    <div
+                      className={`${mesObj.cor} px-2 py-2 rounded-md flex justify-between items-center mb-4`}
+                    >
+                      <Typography variant="h2_bold"> {mesObj.mes}</Typography>
+                      <CalendarDays />
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      {mesObj.eventos.map((evento, i) => (
+                        <EventoCard
+                          key={i}
+                          nome={evento.nome}
+                          data={evento.data}
+                          local={evento.local}
+                          status={evento.status}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <CalendarioMensal
+                ano={2025}
+                mes={3}
+                eventos={[
+                  { nome: "Evento ", data: "2025-04-08", status: "Confirmado" },
+                  { nome: "Evento 2", data: "2025-04-04", status: "Pendente" },
+                  { nome: "Evento 3", data: "2025-04-29", status: "Cancelado" },
+                ]}
+              />
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 };
 
-export default agendamento;
+export default Agendamento;
