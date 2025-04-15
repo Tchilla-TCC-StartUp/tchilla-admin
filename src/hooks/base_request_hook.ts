@@ -35,7 +35,7 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     ): Promise<R> => {
         const { token } = useAuthStore.getState();
         const { setError, clearError } = useErrorHandlerHook.getState();
-
+        
         if (checkToken && !token) {
             const message = "Token não encontrado.";
 
