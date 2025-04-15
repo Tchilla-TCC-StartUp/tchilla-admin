@@ -4,7 +4,6 @@ import {
   IoCalendarOutline,
   IoCashOutline,
   IoDocumentAttachOutline,
-  IoPeopleOutline,
   IoPersonOutline,
   IoSettingsOutline,
   IoStatsChartOutline,
