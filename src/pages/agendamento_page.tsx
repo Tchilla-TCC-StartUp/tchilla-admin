@@ -201,7 +201,7 @@ const Agendamento = () => {
                 {eventosPorMes.map((mesObj, idx) => (
                   <div
                     key={idx}
-                    className="w-[250px] md:w-[300px] lg:w-[350px] flex-shrink-0"
+                    className="w-[250px] md:w-[300px] lg:w-[280px] flex-shrink-0"
                   >
                     <div
                       className={`${mesObj.cor} px-2 py-2 rounded-md flex justify-between items-center mb-4`}

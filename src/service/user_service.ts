@@ -26,13 +26,12 @@ const UserService = () => {
   const { validateForm } = useValidation();
   const onLogin = async (loginData: LoginInterface) => {
     const { isValid } = validateForm(loginData.email, loginData.password);
-
     if (!isValid) {
       return;
     }
-
     return onRequest(
       async () => {
+        console.log("Login data:", loginData);
         const response = await login(loginData);
         return response;
       },

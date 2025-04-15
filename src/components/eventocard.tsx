@@ -20,7 +20,7 @@ export const EventoCard = ({
   status: "Confirmado" | "Pendente" | "Cancelado";
 }) => {
   return (
-    <Card>
+    <Card className="shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-2px_rgba(0,0,0,0.05)] rounded-xl border border-transparent">
       <div className="flex items-center justify-between  mt-8 p-3 ">
         <div className="flex gap-3">
           <img
@@ -47,7 +47,7 @@ export const EventoCard = ({
           <span>{local}</span>
         </div>
 
-        <div className={` w-[100px] p-1 flex items-center justify-center  rounded-full ${statusColors[status]}`}>
+        <div className={` w-[100px] p-1 mb-2 flex items-center justify-center  rounded-full ${statusColors[status]}`}>
           <Typography variant="p_normal">{status}</Typography>
         </div>
       </div>
