@@ -63,6 +63,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
       page: "clientes",
       navigate: navigator.navigateToUsers,
     },
+    {
+      label: "Agencias",
+      icon: <IoPersonOutline size={18} />,
+      page: "agencias",
+      navigate: navigator.navigateToAgencias,
+    },
+    
   ];
 
   const menuItems2 = [

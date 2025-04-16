@@ -16,6 +16,7 @@ import ServEPacotes from "./pages/services_page";
 import ProtectedRoute from "./protected_route";
 import UsersPage from "./pages/users_page";
 import Categorias from "./pages/categorias_page";
+import AgenciasPage from "./pages/agencias_page";
 
 const AppRouter = () => {
   return (
@@ -92,6 +93,16 @@ const AppRouter = () => {
             <ProtectedRoute>
               <PageLayout title="Clientes">
                 <UsersPage />
+              </PageLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.AGENCIAS}
+          element={
+            <ProtectedRoute>
+              <PageLayout title="Agencias">
+                <AgenciasPage />
               </PageLayout>
             </ProtectedRoute>
           }
