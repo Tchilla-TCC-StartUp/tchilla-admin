@@ -8,27 +8,32 @@ import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
 import GlobalConfirmModal from "../components/Global/gloal_modals";
 import { CategoriaModal } from "../components/categoriamodal";
+import { CategoryModel } from "../model/category_model";
+import CategoryService from "../service/category_service";
+import AppConstants from "../resource/app_constants";
+import GlobalAvatar from "../components/Global/global_avatar";
 
-type Categoria = {
-  id: number;
-  nome: string;
-  descricao: string;
-};
 
 const CategoriasPage = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [filteredCategorias, setFilteredCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState<CategoryModel[]>([]);
+  const [filteredCategorias, setFilteredCategorias] = useState<CategoryModel[]>(
+    []
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
-  const [categoriaToDelete, setCategoriaToDelete] = useState<Categoria | null>(
-    null
-  );
+  const [showForm, setShowForm] = useState(false);
+  const [categoriaToDelete, setCategoriaToDelete] =
+    useState<CategoryModel | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const fetchCategorias = async () => {};
+  const { fetchAllCategories, deleteCategory } = CategoryService();
 
   useEffect(() => {
+    const fetchCategorias = async () => {
+      const data = await fetchAllCategories();
+      setCategorias(data);
+      setFilteredCategorias(data);
+    };
     fetchCategorias();
   }, []);
 
@@ -36,12 +41,14 @@ const CategoriasPage = () => {
 
   const handleSubmitCategoria = async () => {};
 
-  const handleDeleteClick = (categoria: Categoria) => {
-    setCategoriaToDelete(categoria);
+  const handleDeleteClick = (categoria: CategoryModel) => {
     setShowDeleteModal(true);
+
+    setCategoriaToDelete(categoria);
   };
 
-  const confirmDelete = async () => {};
+  const confirmDelete = async (categoria: CategoryModel) =>
+    deleteCategory(categoria.id);
 
   const cancelDelete = () => {
     setShowDeleteModal(false);
@@ -49,25 +56,43 @@ const CategoriasPage = () => {
   };
 
   const columns = [
+    {
+      key: "foto",
+      title: "Imagem",
+      render: (item: CategoryModel) => (
+        <GlobalAvatar
+          src={`${AppConstants.baseURL}${item.foto}`}
+          alt="Imagem"
+        />
+      ),
+    },
     { key: "nome", title: "Nome" },
     { key: "descricao", title: "Descrição" },
     {
-      key: "actions",
-      title: "Ações",
-      render: (item: Categoria) => (
+      key: "detail",
+      title: "Ver Detalhes",
+      render: (item: CategoryModel) => (
         <div className="flex gap-2">
-          <GlobalButton
-            variant="outline"
+          <button
             onClick={() => console.log("Adicionar sub:", item)}
+            className="bg-gray-500 p-2 rounded-md text-white"
           >
-            Adicionar Subcategoria
-          </GlobalButton>
-          <GlobalButton
-            variant="primary"
+            Ver Detalhes
+          </button>
+        </div>
+      ),
+    },
+    {
+      key: "delete",
+      title: "Apagar Categoria",
+      render: (item: CategoryModel) => (
+        <div className="flex gap-2">
+          <button
             onClick={() => handleDeleteClick(item)}
+            className="bg-red-500 p-2 rounded-md text-white"
           >
             Deletar
-          </GlobalButton>
+          </button>
         </div>
       ),
     },
@@ -75,65 +100,69 @@ const CategoriasPage = () => {
 
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
-      <GlobalHelloUser />
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col  justify-between gap-6 items-center md:flex-row">
-            <Typography variant="h2_bold" className="w-full">
-              Lista de Categorias
-            </Typography>
-            <GlobalInput
-              placeholder="Pesquisar"
-              icon={<IoSearchOutline />}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
-            />
-            <GlobalButton
-              variant="primary"
-              fullWidth={true}
-              onClick={() => setShowModal(true)}
-            >
-              Adicionar Categoria
-              <IoAddCircleOutline />
-            </GlobalButton>
-          </div>
+      {!showForm ? (
+        <>
+          <GlobalHelloUser />
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex flex-col  justify-between gap-6 items-center md:flex-row mb-3">
+                <Typography variant="h2_bold" className="w-full">
+                  Lista de Categorias
+                </Typography>
+                <GlobalInput
+                  placeholder="Pesquisar"
+                  icon={<IoSearchOutline />}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
+                />
+                <GlobalButton
+                  variant="primary"
+                  fullWidth={true}
+                  onClick={() => setShowForm(true)}
+                >
+                  Adicionar Categoria
+                  <IoAddCircleOutline />
+                </GlobalButton>
+              </div>
 
-          {filteredCategorias.length > 0 ? (
-            <GlobalTable
-              data={categorias}
-              filteredData={filteredCategorias}
-              columns={columns}
-              selectable
-              paginated
-              styleVariant="clean"
-              itemsPerPage={5}
-              withCheckbox={false}
-              currentPage={currentPage}
-              onPageChange={(page) => setCurrentPage(page)}
-              onRowSelect={(selected) => console.log("Selecionados:", selected)}
-            />
-          ) : (
-            <div className="text-center text-gray-500 py-10">
-              <Typography variant="p_normal">
-                Nenhuma categoria encontrada.
-              </Typography>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              {filteredCategorias.length > 0 ? (
+                <GlobalTable
+                  data={categorias}
+                  filteredData={filteredCategorias}
+                  columns={columns}
+                  selectable
+                  paginated
+                  styleVariant="clean"
+                  itemsPerPage={5}
+                  withCheckbox={false}
+                  currentPage={currentPage}
+                  onPageChange={(page) => setCurrentPage(page)}
+                  onRowSelect={(selected) =>
+                    console.log("Selecionados:", selected)
+                  }
+                />
+              ) : (
+                <div className="text-center text-gray-500 py-10">
+                  <Typography variant="p_normal">
+                    Nenhuma categoria encontrada.
+                  </Typography>
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
-      <GlobalConfirmModal
-        show={showDeleteModal}
-        title="Confirmar Exclusão"
-        message={`Tem certeza que deseja excluir a categoria "${categoriaToDelete?.nome}"?`}
-        onConfirm={confirmDelete}
-        onCancel={cancelDelete}
-      />
-
-      {showModal && (
+          <GlobalConfirmModal
+            show={showDeleteModal}
+            title="Confirmar Exclusão"
+            message={`Tem certeza que deseja excluir a categoria "${categoriaToDelete?.nome}"?`}
+            onConfirm={() => confirmDelete(categoriaToDelete!)}
+            onCancel={cancelDelete}
+          />
+        </>
+      ) : (
         <CategoriaModal
-          onClose={() => setShowModal(false)}
+          onClose={() => setShowForm(false)}
           onSubmit={handleSubmitCategoria}
         />
       )}

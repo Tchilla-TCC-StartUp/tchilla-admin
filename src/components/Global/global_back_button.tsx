@@ -22,7 +22,7 @@ const GlobalBackButton: React.FC<GlobalBackButtonProps> = ({
 
   return (
     <div
-      className="w-[30px] h-[30px]  md:w-[40px] md:h-[40px] text-gray-600 border mb-10 rounded-lg border-gray-600 flex items-center justify-center text-[25px] cursor-pointer"
+      className="w-[30px] h-[30px]  md:w-[40px] md:h-[40px] text-gray-500 border mb-10 rounded-lg border-gray-500 flex items-center justify-center text-[25px] cursor-pointer"
       onClick={handleClick}
     >
       <FaArrowLeftLong className="text-[15px] md:text-[20px]" />
