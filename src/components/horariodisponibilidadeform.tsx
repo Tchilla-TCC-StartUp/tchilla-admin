@@ -26,11 +26,14 @@ const HorarioDisponibilidadeForm = ({
       </label>
       <div className="mb-2">
         <GlobalDropdown
-          onChange={(value) => setTipoDisponibilidade(value)}
-          placeholder="  Disponibilidade de horário"
+          onChange={(value) =>
+            setTipoDisponibilidade(value as "sempre" | "intervalo" | "nenhum")
+          }
+          placeholder="Disponibilidade de horário"
           options={[
             { label: "Sempre disponível", value: "sempre" },
             { label: "Não se aplica (sem horário)", value: "nenhum" },
+            { label: "Intervalo", value: "intervalo" },
           ]}
         />
       </div>

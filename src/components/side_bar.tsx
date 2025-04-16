@@ -104,7 +104,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     },
   ];
 
-  const handleNavigation = (page: string, navigate: () => void) => {
+  const handleNavigation = (_page: string, navigate: () => void) => {
     navigate();
     if (onClose) onClose();
   };
