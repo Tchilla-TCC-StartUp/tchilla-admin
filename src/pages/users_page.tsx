@@ -123,19 +123,19 @@ const UsersPage = () => {
       <GlobalHelloUser />
       <Card>
         <CardContent className="p-4">
-          <div className="flex justify-between items-center p-4">
-            <Typography variant="h2_bold">Lista de Clientes</Typography>
-            <div className="flex gap-2">
-              <GlobalInput
-                placeholder="Pesquisar"
-                icon={<IoSearchOutline />}
-                value={searchTerm}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearchTerm(e.target.value)
-                }
-                className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
-              />
-            </div>
+          <div className="flex flex-col justify-between items-center md:flex-row gap-6">
+            <Typography variant="h2_bold" className="w-full">
+              Lista de Clientes
+            </Typography>
+            <GlobalInput
+              placeholder="Pesquisar"
+              icon={<IoSearchOutline />}
+              value={searchTerm}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchTerm(e.target.value)
+              }
+              className="border rounded-md px-1 py-3 text-primary-950 w-[30rem]"
+            />
           </div>
 
           {filteredData.length > 0 ? (

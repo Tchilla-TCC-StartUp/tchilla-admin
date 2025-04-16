@@ -21,109 +21,27 @@ const CategoriasPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [categoriaToDelete, setCategoriaToDelete] = useState<Categoria | null>(null);
+  const [categoriaToDelete, setCategoriaToDelete] = useState<Categoria | null>(
+    null
+  );
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const fetchCategorias = async () => {
-    try {
-      const token = localStorage.getItem("token");
-  
-      const response = await fetch("https://ecotrack-udd9.onrender.com/api/Categoria/getAll", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
-      const data = await response.json();
-  
-      if (data.isSuccess && Array.isArray(data.data)) {
-        setCategorias(data.data);
-        setFilteredCategorias(data.data);
-      } else {
-        console.error("Erro ao buscar categorias:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao buscar categorias:", error);
-    }
-  };
-  
+  const fetchCategorias = async () => {};
 
   useEffect(() => {
     fetchCategorias();
   }, []);
 
-  useEffect(() => {
-    const term = searchTerm.toLowerCase();
-    console.log("Categorias filtradas:", filteredCategorias);
-    const filtered = categorias.filter((item) =>
-      item.nome.toLowerCase().includes(term) ||
-      item.descricao.toLowerCase().includes(term)
-    );
-    setFilteredCategorias(filtered);
-    setCurrentPage(1);
-    
-  }, [searchTerm, categorias,filteredCategorias] );
+  useEffect(() => {}, []);
 
-  const handleSubmitCategoria = async (categoria: any) => {
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await fetch("https://ecotrack-udd9.onrender.com/api/Categoria/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(categoria),
-      });
-
-      const data = await response.json();
-
-      if (data.isSuccess) {
-        setShowModal(false);
-        fetchCategorias();
-      } else {
-        console.error("Erro ao adicionar categoria:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao enviar categoria:", error);
-    }
-  };
+  const handleSubmitCategoria = async () => {};
 
   const handleDeleteClick = (categoria: Categoria) => {
     setCategoriaToDelete(categoria);
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = async () => {
-    if (!categoriaToDelete) return;
-
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `https://ecotrack-udd9.onrender.com/api/Categoria/delete/${categoriaToDelete.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.isSuccess) {
-        fetchCategorias();
-      } else {
-        console.error("Erro ao deletar categoria:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
-    } finally {
-      setShowDeleteModal(false);
-      setCategoriaToDelete(null);
-    }
-  };
+  const confirmDelete = async () => {};
 
   const cancelDelete = () => {
     setShowDeleteModal(false);
@@ -138,10 +56,16 @@ const CategoriasPage = () => {
       title: "Ações",
       render: (item: Categoria) => (
         <div className="flex gap-2">
-          <GlobalButton variant="outline" onClick={() => console.log("Adicionar sub:", item)}>
+          <GlobalButton
+            variant="outline"
+            onClick={() => console.log("Adicionar sub:", item)}
+          >
             Adicionar Subcategoria
           </GlobalButton>
-          <GlobalButton variant="primary" onClick={() => handleDeleteClick(item)}>
+          <GlobalButton
+            variant="primary"
+            onClick={() => handleDeleteClick(item)}
+          >
             Deletar
           </GlobalButton>
         </div>
@@ -152,24 +76,27 @@ const CategoriasPage = () => {
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
       <GlobalHelloUser />
-
       <Card>
         <CardContent className="p-4">
-          <div className="flex justify-between items-center p-4">
-            <Typography variant="h2_bold">Lista de Categorias</Typography>
-            <div className="flex gap-2 items-center">
-              <GlobalInput
-                placeholder="Pesquisar"
-                icon={<IoSearchOutline />}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
-              />
-              <GlobalButton variant="primary" onClick={() => setShowModal(true)}>
-                Adicionar Categoria
-                <IoAddCircleOutline />
-              </GlobalButton>
-            </div>
+          <div className="flex flex-col  justify-between gap-6 items-center md:flex-row">
+            <Typography variant="h2_bold" className="w-full">
+              Lista de Categorias
+            </Typography>
+            <GlobalInput
+              placeholder="Pesquisar"
+              icon={<IoSearchOutline />}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
+            />
+            <GlobalButton
+              variant="primary"
+              fullWidth={true}
+              onClick={() => setShowModal(true)}
+            >
+              Adicionar Categoria
+              <IoAddCircleOutline />
+            </GlobalButton>
           </div>
 
           {filteredCategorias.length > 0 ? (

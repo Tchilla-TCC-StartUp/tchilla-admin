@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
 
   return (
     <>
-      {/* Sidebar Desktop */}
+  
       <div className="w-0 hidden md:w-20 lg:w-60 h-screen bg-white p-6 fixed z-40 flex-col justify-between border-r border-gray-200 md:flex">
         <div>
           <img

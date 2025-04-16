@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Typography from "../typography";
 
 export type Column<T> = {
   key: keyof T | string;
@@ -79,7 +80,7 @@ export function GlobalTable<T>({
   };
 
   const tableClasses = {
-    primary: "bg-primary-800 text-prAbril - 2025imary-50",
+    primary: "bg-primary-800 text-primary-50",
     secondary: "bg-gray-800 text-white",
     danger: "bg-red-600 text-white",
     clean: "bg-white text-gray-900",
@@ -87,7 +88,40 @@ export function GlobalTable<T>({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="w-full overflow-x-auto flex-1">
+      <div className="block lg:hidden px-2 py-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-3">
+        {paginatedData.map((item, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="border rounded-md shadow-sm p-3 bg-white"
+          >
+            <div className="flex justify-between items-center mb-2">
+              {withCheckbox && (
+                <input
+                  type="checkbox"
+                  checked={selectedRows.has(startIndex + rowIndex)}
+                  onChange={() => toggleRow(startIndex + rowIndex)}
+                  className="h-4 w-4"
+                />
+              )}
+              {actions && <div className="ml-auto">{actions(item)}</div>}
+            </div>
+
+            <div className="grid grid-cols-1 gap-y-1.5 text-xs text-gray-800">
+              {columns.map((col, colIndex) => (
+                <div key={colIndex} className="flex justify-between">
+                  <Typography variant="p_medium">{col.title}</Typography>
+
+                  <span className="text-right">
+                    {col.render ? col.render(item) : (item as any)[col.key]}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="w-full overflow-x-auto flex-1 hidden lg:block">
         <table className="min-w-[700px] w-full text-sm sm:text-base bg-white">
           <thead className={`text-left ${tableClasses[styleVariant]}`}>
             <tr>
@@ -150,6 +184,7 @@ export function GlobalTable<T>({
         </table>
       </div>
 
+      {/* 📄 Paginação */}
       {paginated && (
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-4 text-sm text-gray-500">
           <span>

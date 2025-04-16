@@ -1,6 +1,7 @@
 import { CalendarDays, MapPin, MoreHorizontal } from "lucide-react";
 import Typography from "./typography";
 import { Card } from "./Global/global_cards";
+import { AppGlobalUserAvatarName } from "./Global/global_user_avatar_name";
 
 const statusColors = {
   Confirmado: "bg-green-100 text-green-600",
@@ -20,14 +21,11 @@ export const EventoCard = ({
   status: "Confirmado" | "Pendente" | "Cancelado";
 }) => {
   return (
-    <Card className="shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-2px_rgba(0,0,0,0.05)] rounded-xl border border-transparent">
+    <Card>
       <div className="flex items-center justify-between  mt-8 p-3 ">
         <div className="flex gap-3">
-          <img
-            src="https://i.pravatar.cc/50?img=1"
-            alt={nome}
-            className="rounded-full w-9 h-9"
-          />
+          <AppGlobalUserAvatarName name={nome} />
+
           <div>
             <Typography variant="p_bold">{nome}</Typography>
             <Typography variant="p_normal">2 minutes</Typography>
@@ -47,7 +45,9 @@ export const EventoCard = ({
           <span>{local}</span>
         </div>
 
-        <div className={` w-[100px] p-1 mb-2 flex items-center justify-center  rounded-full ${statusColors[status]}`}>
+        <div
+          className={` w-[100px] p-1 mb-2 flex items-center justify-center  rounded-full ${statusColors[status]}`}
+        >
           <Typography variant="p_normal">{status}</Typography>
         </div>
       </div>
