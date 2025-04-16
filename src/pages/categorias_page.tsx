@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoAddCircleOutline, IoSearchOutline } from "react-icons/io5";
+
 import GlobalHelloUser from "../components/Global/global_hello_user";
 import { GlobalTable } from "../components/Global/global_table";
 import { Card, CardContent } from "../components/Global/global_cards";
@@ -7,90 +8,50 @@ import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
 import GlobalConfirmModal from "../components/Global/gloal_modals";
-import { CategoriaModal } from "../components/categoriamodal";
-
-type Categoria = {
-  id: number;
-  nome: string;
-  descricao: string;
-};
+import { CategoryModel } from "../model/category_model";
+import CategoryService from "../service/category_service";
+import GlobalAvatar from "../components/Global/global_avatar";
+import GlobalBackButton from "../components/Global/global_back_button";
 
 const CategoriasPage = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [filteredCategorias, setFilteredCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState<CategoryModel[]>([]);
+  const [filteredCategorias, setFilteredCategorias] = useState<CategoryModel[]>(
+    []
+  );
+  const [formFields, setFormFields] = useState({
+    nome: "",
+    descricao: "",
+    foto: null as File | null,
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
-  const [categoriaToDelete, setCategoriaToDelete] = useState<Categoria | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [categoriaToDelete, setCategoriaToDelete] =
+    useState<CategoryModel | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const fetchCategorias = async () => {
-    try {
-      const token = localStorage.getItem("token");
-  
-      const response = await fetch("https://ecotrack-udd9.onrender.com/api/Categoria/getAll", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
-      const data = await response.json();
-  
-      if (data.isSuccess && Array.isArray(data.data)) {
-        setCategorias(data.data);
-        setFilteredCategorias(data.data);
-      } else {
-        console.error("Erro ao buscar categorias:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao buscar categorias:", error);
-    }
-  };
-  
+  const { fetchAllCategories, deleteCategory, createCategory } =
+    CategoryService();
 
   useEffect(() => {
     fetchCategorias();
   }, []);
 
-  useEffect(() => {
-    const term = searchTerm.toLowerCase();
-    console.log("Categorias filtradas:", filteredCategorias);
-    const filtered = categorias.filter((item) =>
-      item.nome.toLowerCase().includes(term) ||
-      item.descricao.toLowerCase().includes(term)
-    );
-    setFilteredCategorias(filtered);
-    setCurrentPage(1);
-    
-  }, [searchTerm, categorias,filteredCategorias] );
-
-  const handleSubmitCategoria = async (categoria: any) => {
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await fetch("https://ecotrack-udd9.onrender.com/api/Categoria/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(categoria),
-      });
-
-      const data = await response.json();
-
-      if (data.isSuccess) {
-        setShowModal(false);
-        fetchCategorias();
-      } else {
-        console.error("Erro ao adicionar categoria:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao enviar categoria:", error);
-    }
+  const fetchCategorias = async () => {
+    const data = await fetchAllCategories();
+    setCategorias(data);
+    setFilteredCategorias(data);
   };
 
-  const handleDeleteClick = (categoria: Categoria) => {
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    const filtered = categorias.filter((cat) =>
+      cat.nome.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredCategorias(filtered);
+  };
+
+  const handleDeleteClick = (categoria: CategoryModel) => {
     setCategoriaToDelete(categoria);
     setShowDeleteModal(true);
   };
@@ -98,117 +59,191 @@ const CategoriasPage = () => {
   const confirmDelete = async () => {
     if (!categoriaToDelete) return;
 
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `https://ecotrack-udd9.onrender.com/api/Categoria/delete/${categoriaToDelete.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.isSuccess) {
-        fetchCategorias();
-      } else {
-        console.error("Erro ao deletar categoria:", data.message);
-      }
-    } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
-    } finally {
-      setShowDeleteModal(false);
-      setCategoriaToDelete(null);
-    }
+    await deleteCategory(categoriaToDelete.id);
+    const updatedList = categorias.filter(
+      (cat) => cat.id !== categoriaToDelete.id
+    );
+    setCategorias(updatedList);
+    setFilteredCategorias(updatedList);
+    cancelDelete();
   };
 
   const cancelDelete = () => {
-    setShowDeleteModal(false);
     setCategoriaToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+  const handleFormChange = (key: string, value: string | File) => {
+    setFormFields((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleAddCategoria = async () => {
+    const { nome, descricao, foto } = formFields;
+
+    if (!nome || !descricao || !foto) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("Nome", nome);
+    formData.append("Descricao", descricao);
+    formData.append("Foto", foto);
+
+    try {
+      await createCategory(formData);
+      await fetchCategorias();
+      resetForm();
+    } catch (error) {
+      console.error("Erro ao criar categoria:", error);
+      alert("Erro ao criar categoria. Tente novamente.");
+    }
+  };
+
+  const resetForm = () => {
+    setFormFields({ nome: "", descricao: "", foto: null });
+    setShowForm(false);
   };
 
   const columns = [
+    {
+      key: "foto",
+      title: "Imagem",
+      render: (item: CategoryModel) => (
+        <GlobalAvatar src={item.foto} alt="Imagem" />
+      ),
+    },
     { key: "nome", title: "Nome" },
     { key: "descricao", title: "Descrição" },
     {
-      key: "actions",
-      title: "Ações",
-      render: (item: Categoria) => (
-        <div className="flex gap-2">
-          <GlobalButton variant="outline" onClick={() => console.log("Adicionar sub:", item)}>
-            Adicionar Subcategoria
-          </GlobalButton>
-          <GlobalButton variant="primary" onClick={() => handleDeleteClick(item)}>
-            Deletar
-          </GlobalButton>
-        </div>
+      key: "detail",
+      title: "Ver Detalhes",
+      render: (item: CategoryModel) => (
+        <button
+          onClick={() => console.log("Adicionar sub:", item)}
+          className="bg-gray-500 p-2 rounded-md text-white"
+        >
+          Ver Detalhes
+        </button>
+      ),
+    },
+    {
+      key: "delete",
+      title: "Apagar Categoria",
+      render: (item: CategoryModel) => (
+        <button
+          onClick={() => handleDeleteClick(item)}
+          className="bg-red-500 p-2 rounded-md text-white"
+        >
+          Deletar
+        </button>
       ),
     },
   ];
 
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
-      <GlobalHelloUser />
+      {!showForm ? (
+        <>
+          <GlobalHelloUser />
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-3">
+                <Typography variant="h2_bold" className="w-full">
+                  Lista de Categorias
+                </Typography>
+                <GlobalInput
+                  placeholder="Pesquisar"
+                  icon={<IoSearchOutline />}
+                  value={searchTerm}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
+                />
+                <GlobalButton
+                  variant="primary"
+                  fullWidth
+                  onClick={() => setShowForm(true)}
+                >
+                  Adicionar Categoria <IoAddCircleOutline />
+                </GlobalButton>
+              </div>
 
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex justify-between items-center p-4">
-            <Typography variant="h2_bold">Lista de Categorias</Typography>
-            <div className="flex gap-2 items-center">
-              <GlobalInput
-                placeholder="Pesquisar"
-                icon={<IoSearchOutline />}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="border rounded-md px-1 py-3 text-primary-950 w-[25rem]"
-              />
-              <GlobalButton variant="primary" onClick={() => setShowModal(true)}>
-                Adicionar Categoria
-                <IoAddCircleOutline />
-              </GlobalButton>
+              {filteredCategorias.length > 0 ? (
+                <GlobalTable
+                  data={categorias}
+                  filteredData={filteredCategorias}
+                  columns={columns}
+                  selectable
+                  paginated
+                  itemsPerPage={5}
+                  withCheckbox={false}
+                  currentPage={currentPage}
+                  onPageChange={setCurrentPage}
+                  styleVariant="clean"
+                  onRowSelect={(selected) =>
+                    console.log("Selecionados:", selected)
+                  }
+                />
+              ) : (
+                <div className="text-center text-gray-500 py-10">
+                  <Typography variant="p_normal">
+                    Nenhuma categoria encontrada.
+                  </Typography>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <GlobalConfirmModal
+            show={showDeleteModal}
+            title="Confirmar Exclusão"
+            message={`Tem certeza que deseja excluir a categoria "${categoriaToDelete?.nome}"?`}
+            onConfirm={confirmDelete}
+            onCancel={cancelDelete}
+          />
+        </>
+      ) : (
+        <Card className="bg-white w-full p-4">
+          <GlobalBackButton onClick={() => setShowForm(false)} />
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <Typography variant="h2_bold">Nova Categoria</Typography>
+              <Typography variant="h3_normal" className="text-gray-500">
+                Adicione uma nova categoria e subcategorias associadas
+              </Typography>
             </div>
           </div>
 
-          {filteredCategorias.length > 0 ? (
-            <GlobalTable
-              data={categorias}
-              filteredData={filteredCategorias}
-              columns={columns}
-              selectable
-              paginated
-              styleVariant="clean"
-              itemsPerPage={5}
-              withCheckbox={false}
-              currentPage={currentPage}
-              onPageChange={(page) => setCurrentPage(page)}
-              onRowSelect={(selected) => console.log("Selecionados:", selected)}
+          <div className="flex flex-col gap-4">
+            <GlobalInput
+              placeholder="Imagem da categoria"
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleFormChange("foto", file);
+              }}
             />
-          ) : (
-            <div className="text-center text-gray-500 py-10">
-              <Typography variant="p_normal">
-                Nenhuma categoria encontrada.
-              </Typography>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+            <GlobalInput
+              placeholder="Nome da categoria"
+              value={formFields.nome}
+              onChange={(e) => handleFormChange("nome", e.target.value)}
+            />
+            <GlobalInput
+              placeholder="Descrição"
+              value={formFields.descricao}
+              onChange={(e) => handleFormChange("descricao", e.target.value)}
+            />
+          </div>
 
-      <GlobalConfirmModal
-        show={showDeleteModal}
-        title="Confirmar Exclusão"
-        message={`Tem certeza que deseja excluir a categoria "${categoriaToDelete?.nome}"?`}
-        onConfirm={confirmDelete}
-        onCancel={cancelDelete}
-      />
-
-      {showModal && (
-        <CategoriaModal
-          onClose={() => setShowModal(false)}
-          onSubmit={handleSubmitCategoria}
-        />
+          <div className="flex gap-4 mt-6">
+            <GlobalButton variant="primary" onClick={handleAddCategoria}>
+              Salvar Categoria
+            </GlobalButton>
+            <GlobalButton variant="outline" onClick={resetForm}>
+              Cancelar
+            </GlobalButton>
+          </div>
+        </Card>
       )}
     </div>
   );

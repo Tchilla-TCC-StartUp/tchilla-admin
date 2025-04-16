@@ -11,9 +11,10 @@ import {
 } from "react-icons/io5";
 import Typography from "./typography";
 import NavigationHooks from "../hooks/navigation_hook";
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { BiCategory } from "react-icons/bi";
+import AppRoutes from "../resource/app_routes";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -21,8 +22,25 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
-  const [activePage, setActivePage] = useState<string>("dashboard");
+  const location = useLocation();
   const navigator = NavigationHooks();
+
+  const getActivePage = () => {
+    const path = location.pathname;
+
+    if (path.startsWith(AppRoutes.AGENDAMENTO)) return "agendamentos";
+    if (path.startsWith(AppRoutes.SERVEPACOTE)) return "servicos";
+    if (path.startsWith(AppRoutes.PAGAMENTOS)) return "pagamentos";
+    if (path.startsWith(AppRoutes.CATEGORIAS)) return "categoria";
+    if (path.startsWith(AppRoutes.USERS)) return "clientes";
+    if (path.startsWith(AppRoutes.PROFILE)) return "perfil";
+    if (path.startsWith(AppRoutes.CONFIG)) return "configuracoes";
+    if (path.startsWith(AppRoutes.AGENCIAS)) return "agencias";
+
+    return "dashboard";
+  };
+
+  const activePage = getActivePage();
 
   const menuItems = [
     {
@@ -62,6 +80,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
       page: "clientes",
       navigate: navigator.navigateToUsers,
     },
+    {
+      label: "Agencias",
+      icon: <IoPersonOutline size={18} />,
+      page: "agencias",
+      navigate: navigator.navigateToAgencias,
+    },
+    
   ];
 
   const menuItems2 = [
@@ -80,28 +105,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   ];
 
   const handleNavigation = (page: string, navigate: () => void) => {
-    setActivePage(page);
     navigate();
     if (onClose) onClose();
   };
 
   return (
     <>
-      {/* Sidebar Desktop */}
-      <div className="w-0 hidden md:w-20 lg:w-60 h-screen bg-white p-6 fixed z-40 flex-col justify-between border-r border-gray-200 md:flex">
+      <div className="w-0 hidden md:w-20 lg:w-60 h-screen bg-white p-6 fixed z-40 flex-col justify-between border-r border-gray-200 md:flex cursor-pointer">
         <div>
           <img
             src={AppAssetsImages.vectores.logotipo3x}
             alt="Logo"
             className="mb-4 mt-2 w-[160px] hidden lg:block"
           />
-
-          <Typography
-            variant="p_bold"
-            className="text-gray-500 pt-10 text-xs uppercase mb-2"
-          >
-            NAVEGAÇÃO
-          </Typography>
 
           <nav>
             <ul className="space-y-4">
@@ -119,7 +135,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
                       }`}
                     >
                       <span
-                        className={isActive ? "text-[#003D4D]" : "text-gray-700"}
+                        className={
+                          isActive ? "text-[#003D4D]" : "text-gray-700"
+                        }
                       >
                         {icon}
                       </span>
@@ -144,12 +162,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
         </div>
 
         <div className="mt-auto pb-10">
-          <Typography
-            variant="p_bold"
-            className="text-gray-500 text-xs uppercase mb-2"
-          >
-            MENU DE CONTROLE
-          </Typography>
           <nav>
             <ul className="space-y-4">
               {menuItems2.map(({ label, icon, page, navigate }) => {
@@ -166,7 +178,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
                       }`}
                     >
                       <span
-                        className={isActive ? "text-[#003D4D]" : "text-gray-700"}
+                        className={
+                          isActive ? "text-[#003D4D]" : "text-gray-700"
+                        }
                       >
                         {icon}
                       </span>
@@ -278,8 +292,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
               </ul>
             </div>
           </motion.div>
-
-          {/* Clique fora do drawer fecha também */}
           <div className="flex-1" onClick={onClose} />
         </motion.div>
       )}

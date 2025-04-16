@@ -14,7 +14,7 @@ const ServiceAndPack: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(serviceData);
-  const [showModal, setShowModal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [servicos, setServicos] = useState(serviceData);
 
   const columns = [
@@ -80,7 +80,6 @@ const ServiceAndPack: React.FC = () => {
       const novoServico = await response.json();
 
       setServicos((prev) => [...prev, novoServico]);
-      setShowModal(false);
     } catch (error) {
       console.error("Erro ao salvar serviço:", error);
     }
@@ -90,51 +89,53 @@ const ServiceAndPack: React.FC = () => {
   };
   return (
     <div className="w-full flex flex-col">
-      <div className="flex justify-between items-center mb-4">
-        <GlobalHelloUser />
-        <GlobalButton variant="primary" onClick={() => setShowModal(true)}>
-          Adicionar Serviço
-          <IoAddCircleOutline />
-        </GlobalButton>
-      </div>
-      <Card className="p-4">
-        <div className="flex  flex-col justify-center items-start p-0 gap-3 mb-1 md:flex-row md:justify-between md:items-center md:gap-0 border-b pb-5">
-          <Typography variant="h2_bold" className="w-full">
-            Tipos de Serviços
-          </Typography>
-          <GlobalInput
-            placeholder="Pesquisar"
-            icon={<IoSearchOutline />}
-            value={searchTerm}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearchTerm(e.target.value)
-            }
-          />
-        </div>
-        <GlobalTable
-          data={servicos}
-          filteredData={filteredData}
-          columns={columns}
-          selectable
-          paginated
-          styleVariant="clean"
-          itemsPerPage={10}
-          withCheckbox={false}
-          currentPage={currentPage}
-          onPageChange={(page: number) => setCurrentPage(page)}
-          onRowSelect={(selectedItems) =>
-            console.log("Selecionados:", selectedItems)
-          }
-        />
-      </Card>
-      {showModal && (
+      {!showForm ? (
+        <>
+          <div className="flex justify-between items-center mb-4">
+            <GlobalHelloUser />
+            <GlobalButton variant="primary" onClick={() => setShowForm(true)}>
+              Adicionar Serviço
+              <IoAddCircleOutline />
+            </GlobalButton>
+          </div>
+          <Card className="p-4">
+            <div className="flex flex-col justify-center items-start p-0 gap-3 mb-1 md:flex-row md:justify-between md:items-center md:gap-0 border-b pb-5">
+              <Typography variant="h2_bold" className="w-full">
+                Tipos de Serviços
+              </Typography>
+              <GlobalInput
+                placeholder="Pesquisar"
+                icon={<IoSearchOutline />}
+                value={searchTerm}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchTerm(e.target.value)
+                }
+              />
+            </div>
+            <GlobalTable
+              data={servicos}
+              filteredData={filteredData}
+              columns={columns}
+              selectable
+              paginated
+              styleVariant="clean"
+              itemsPerPage={10}
+              withCheckbox={false}
+              currentPage={currentPage}
+              onPageChange={(page: number) => setCurrentPage(page)}
+              onRowSelect={(selectedItems) =>
+                console.log("Selecionados:", selectedItems)
+              }
+            />
+          </Card>
+        </>
+      ) : (
         <ServicoForm
-          onClose={() => setShowModal(false)}
+          onClose={() => setShowForm(false)}
           onSubmit={handleAddService}
         />
       )}
     </div>
   );
 };
-
 export default ServiceAndPack;

@@ -4,12 +4,9 @@ import { UserInterface } from "../interfaces/user_interface";
 import ClientRepository from "../repository/client_repository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 
-interface ClientServiceInterface {
-    getAllClients: () => Promise<UserInterface[]>;
-    deleteUser: (id: number) => Promise<DeleteUserResponse>
-}
 
-const ClientService = (): ClientServiceInterface => {
+
+const ClientService = () => {
     const { onRequest } = useBaseRequestHook();
     const { getAllClients: repositoryGetAllClients, deleteUser: repositoryDetelteUser } = ClientRepository();
     const { showSnackbar } = useSnackbarStore();
