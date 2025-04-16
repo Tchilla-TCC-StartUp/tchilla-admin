@@ -17,6 +17,7 @@ import ProtectedRoute from "./protected_route";
 import UsersPage from "./pages/users_page";
 import Categorias from "./pages/categorias_page";
 import AgenciasPage from "./pages/agencias_page";
+import PrestadoresPage from "./pages/prestadores_page";
 
 const AppRouter = () => {
   return (
@@ -103,6 +104,16 @@ const AppRouter = () => {
             <ProtectedRoute>
               <PageLayout title="Agencias">
                 <AgenciasPage />
+              </PageLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.PRESTADOR}
+          element={
+            <ProtectedRoute>
+              <PageLayout title="Parestador">
+                <PrestadoresPage />
               </PageLayout>
             </ProtectedRoute>
           }

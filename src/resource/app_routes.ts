@@ -13,6 +13,7 @@ class AppRoutes {
     public static readonly DASHBOARD = "/dashboard";
     public static readonly PROFILE = "/profile";
     public static readonly AGENCIAS = "/agencias";
+    public static readonly PRESTADOR = "/prestador";
     public static readonly USERS = "/users";
     public static readonly NOT_FOUND = "/not-found";
 }

@@ -8,6 +8,8 @@ import {
   IoSettingsOutline,
   IoStatsChartOutline,
   IoClose,
+  IoBusinessOutline,
+  IoPeopleOutline,
 } from "react-icons/io5";
 import Typography from "./typography";
 import NavigationHooks from "../hooks/navigation_hook";
@@ -36,6 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     if (path.startsWith(AppRoutes.PROFILE)) return "perfil";
     if (path.startsWith(AppRoutes.CONFIG)) return "configuracoes";
     if (path.startsWith(AppRoutes.AGENCIAS)) return "agencias";
+    if (path.startsWith(AppRoutes.PRESTADOR)) return "prestadores";
 
     return "dashboard";
   };
@@ -82,9 +85,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     },
     {
       label: "Agencias",
-      icon: <IoPersonOutline size={18} />,
+      icon: <IoBusinessOutline size={18} />,
       page: "agencias",
       navigate: navigator.navigateToAgencias,
+    },
+    {
+      label: "Prestadores",
+      icon: <IoPeopleOutline size={18} />,
+      page: "prestadores",
+      navigate: navigator.navigateToPrestador,
     },
     
   ];

@@ -1,0 +1,19 @@
+[
+    {
+      "id": "1",
+      "nome": "João da Luz",
+      "descricao": "Fotógrafo profissional com 10 anos de experiência.",
+      "nif": "123456789",
+      "tipo": 1,
+      "foto": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "2",
+      "nome": "Clara MakeUp",
+      "descricao": "Maquiadora especializada em eventos e casamentos.",
+      "nif": "987654321",
+      "tipo": 2,
+      "foto": "https://via.placeholder.com/150"
+    }
+  ]
+  
