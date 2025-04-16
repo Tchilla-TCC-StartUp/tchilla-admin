@@ -18,6 +18,7 @@ type CategoriaFormProps = {
 export const CategoriaModal = ({ onClose, onSubmit }: CategoriaFormProps) => {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [foto, setFoto] = useState<File | null>(null);
   const [subCategorias, setSubCategorias] = useState<SubCategoria[]>([]);
   const [newSubNome, setNewSubNome] = useState("");
   const [newSubDescricao, setNewSubDescricao] = useState("");
@@ -60,6 +61,12 @@ export const CategoriaModal = ({ onClose, onSubmit }: CategoriaFormProps) => {
           <GlobalInput
             placeholder="Imagem da categoria"
             type="file"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                setFoto(file);
+              }
+            }}
             value={nome}
           />
           <GlobalInput

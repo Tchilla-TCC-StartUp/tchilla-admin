@@ -1,10 +1,10 @@
 import { useBaseRequestHook } from "../hooks/base_request_hook";
-import { CategoryModel, deleteCategoryResponse } from "../model/category_model";
+import { CategoryData, CategoryModel, deleteCategoryResponse } from "../model/category_model";
 import CategoryRepository from "../repository/category_repository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 
 const CategoryService = () => {
-    const { getAllCategories, deleteCategory } = CategoryRepository();
+    const { getAllCategories, deleteCategory, createCategory } = CategoryRepository();
     const { onRequest } = useBaseRequestHook();
     const { showSnackbar } = useSnackbarStore();
     return {
@@ -25,7 +25,16 @@ const CategoryService = () => {
                 true,
                 true
             );
-        }
+        },
+        createCategory: async (data: FormData): Promise<deleteCategoryResponse> => {
+            return onRequest(
+                (token?: string) => createCategory(token!, data),
+                (response) => showSnackbar(response.message ?? "", "success"),
+                undefined,
+                true,
+                true
+            );
+        },
     }
 }
 

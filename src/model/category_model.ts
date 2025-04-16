@@ -11,3 +11,9 @@ export interface deleteCategoryResponse {
     errorMessage?: string;
     data?: any;
 }
+
+export interface CategoryData {
+    Nome: string;
+    Descricao: string;
+    Foto: File
+}

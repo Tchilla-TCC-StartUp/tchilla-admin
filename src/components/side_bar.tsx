@@ -35,6 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     if (path.startsWith(AppRoutes.USERS)) return "clientes";
     if (path.startsWith(AppRoutes.PROFILE)) return "perfil";
     if (path.startsWith(AppRoutes.CONFIG)) return "configuracoes";
+    if (path.startsWith(AppRoutes.AGENCIAS)) return "agencias";
 
     return "dashboard";
   };

@@ -53,11 +53,10 @@ const AgenciasPage = () => {
   return (
     <div className="flex flex-col bg-white min-h-screen gap-5">
       <GlobalHelloUser />
-
       <Card>
         <CardContent className="p-4">
           <div className="flex justify-between items-center p-4">
-            <Typography variant="h2_bold">Lista de Agências</Typography>
+            <Typography variant="h2_bold" className="w-full">Lista de Agências</Typography>
             <GlobalInput
               placeholder="Pesquisar agência"
               icon={<IoSearchOutline />}
