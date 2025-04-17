@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalModalLoading from "../components/Global/global_modal_loading";
+import GlobalModalLoading from "../components/Global/GlobalModal_loading";
 import GlobalSnackbar from "../components/Global/global_snackbar";
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 

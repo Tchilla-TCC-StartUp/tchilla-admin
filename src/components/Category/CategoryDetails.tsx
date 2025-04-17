@@ -6,8 +6,8 @@ import GlobalButton from "../Global/global_button";
 import { Card } from "../Global/global_cards";
 import GlobalInput from "../Global/global_input";
 import Typography from "../typography";
-import { CategoryFormFields } from "../../interfaces/CategoryInterface";
-import { CategoryData } from "../../model/category_model";
+import { CategoryData, CategoryFormFields } from "../../interfaces/CategoryInterface";
+
 
 
 interface CategoryDetailsProps {
@@ -28,8 +28,8 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
   onBack,
 }) => {
   const [formFields, setFormFields] = useState<CategoryFormFields>({
-    nome: categoria?.Nome || "",
-    descricao: categoria?.Descricao || "",
+    nome: categoria?.nome || "",
+    descricao: categoria?.descricao || "",
     foto: null,
   });
 
@@ -46,7 +46,7 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
           <GlobalBackButton onClick={onBack} />
         </div>
 
-        {/* Content Section */}
+
         {!isEditing ? (
           <div className="flex flex-col gap-4">
             <GlobalAvatar src={categoria?.foto ?? ""} alt="Imagem" />

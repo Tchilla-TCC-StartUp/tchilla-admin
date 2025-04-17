@@ -47,6 +47,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       </div>
 
       <div className="flex flex-col gap-4">
+        <label className="text-gray-500">Imagem</label>
         <GlobalInput
           placeholder="Imagem da categoria"
           type="file"
@@ -55,11 +56,13 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             if (file) handleFormChange("foto", file);
           }}
         />
+        <label className="text-gray-500">Nome</label>
         <GlobalInput
           placeholder="Nome da categoria"
           value={formFields.nome}
           onChange={(e) => handleFormChange("nome", e.target.value)}
         />
+        <label className="text-gray-500">Descrição</label>
         <GlobalInput
           placeholder="Descrição"
           value={formFields.descricao}

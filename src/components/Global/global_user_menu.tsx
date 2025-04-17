@@ -4,7 +4,7 @@ import { AppGlobalUserAvatarName } from "./global_user_avatar_name";
 import { IoChevronDownOutline, IoLogOutOutline } from "react-icons/io5";
 
 import Shimmer from "./global_shimmers";
-import GlobalModalLoading from "./global_modal_loading";
+import GlobalModalLoading from "./GlobalModal_loading";
 import UserService from "../../service/user_service";
 import Typography from "../typography";
 

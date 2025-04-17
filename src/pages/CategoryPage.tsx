@@ -4,7 +4,7 @@ import { useCategories } from "../hooks/CategoryHook";
 import { CategoryDetails } from "../components/Category/CategoryDetails";
 import { CategoryForm } from "../components/Category/CategoryForm";
 import GlobalConfirmModal from "../components/Global/gloal_modals";
-import CategoryService from "../service/category_service";
+import CategoryService from "../service/CategoryService";
 import { useSnackbarStore } from "../stores/snackbar_store";
 import { CategoryTable } from "../components/Category/CategoryTable";
 

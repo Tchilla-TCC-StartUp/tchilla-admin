@@ -3,7 +3,7 @@ import Sidebar from "../components/side_bar";
 import Typography from "../components/typography";
 import GlobalUserMenu from "../components/Global/global_user_menu";
 import GlobalSnackbar from "../components/Global/global_snackbar";
-import GlobalModalLoading from "../components/Global/global_modal_loading";
+import GlobalModalLoading from "../components/Global/GlobalModal_loading";
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 import { useErrorHandlerHook } from "../hooks/ErrorHandlerHook";
 import ErrorScreen from "../pages/error_page";

@@ -1,6 +1,7 @@
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
-import { CategoryModel, deleteCategoryResponse } from "../model/category_model";
-import CategoryRepository from "../repository/category_repository";
+import { CategoryData } from "../interfaces/CategoryInterface";
+import ResponseInterface from "../interfaces/response_interface";
+import CategoryRepository from "../repository/CategoryRepository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 
 const CategoryService = () => {
@@ -8,7 +9,7 @@ const CategoryService = () => {
     const { onRequest } = useBaseRequestHook();
     const { showSnackbar } = useSnackbarStore();
     return {
-        fetchAllCategories: async (): Promise<CategoryModel[]> => {
+        fetchAllCategories: async (): Promise<CategoryData[]> => {
             return onRequest(
                 (token?: string) => getAllCategories(token!),
                 undefined,
@@ -17,7 +18,7 @@ const CategoryService = () => {
                 true
             );
         },
-        deleteCategory: async (id: number): Promise<deleteCategoryResponse> => {
+        deleteCategory: async (id: number): Promise<ResponseInterface> => {
             return onRequest(
                 (token?: string) => deleteCategory(token!, id),
                 (response) => showSnackbar(response.message ?? "", "success"),
@@ -26,7 +27,7 @@ const CategoryService = () => {
                 true
             );
         },
-        createCategory: async (data: FormData): Promise<deleteCategoryResponse> => {
+        createCategory: async (data: FormData): Promise<ResponseInterface> => {
             return onRequest(
                 (token?: string) => createCategory(token!, data),
                 (response) => showSnackbar(response.message ?? "", "success"),

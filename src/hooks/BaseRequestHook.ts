@@ -15,7 +15,6 @@ interface BaseRequestHook {
     ) => Promise<R>;
 }
 
-// Tipos de erro que devem sempre usar tela cheia
 const FULL_SCREEN_ERROR_TYPES: ApiErrorType[] = [
     ApiErrorType.NETWORK,
     ApiErrorType.TIMEOUT,

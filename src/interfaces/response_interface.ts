@@ -1,6 +1,6 @@
 export default interface ResponseInterface {
     isSuccess: boolean;
-    name: string;
+    message: string;
     errorMessage: string;
-    data: string;
+    data: any;
 }

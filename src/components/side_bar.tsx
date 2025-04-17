@@ -89,16 +89,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
       page: "agencias",
       navigate: navigator.navigateToAgencias,
     },
-<<<<<<< HEAD
     {
       label: "Prestadores",
       icon: <IoPeopleOutline size={18} />,
       page: "prestadores",
       navigate: navigator.navigateToPrestador,
     },
-    
-=======
->>>>>>> f273bdc (add..)
   ];
 
   const menuItems2 = [
@@ -132,12 +128,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
           />
 
           <nav>
-          <Typography
-                variant="p_bold"
-                className="text-gray-500 pt-4 text-xs uppercase mb-2"
-              >
-                NAVEGAÇÃO
-              </Typography>
+            <Typography
+              variant="p_bold"
+              className="text-gray-500 pt-4 text-xs uppercase mb-2"
+            >
+              NAVEGAÇÃO
+            </Typography>
             <ul className="space-y-4">
               {menuItems.map(({ label, icon, page, navigate, badge }) => {
                 const isActive = activePage === page;
@@ -181,12 +177,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
 
         <div className="mt-auto pb-10">
           <nav>
-          <Typography
-                variant="p_bold"
-                className="text-gray-500 text-xs uppercase mb-2"
-              >
-                MENU DE CONTROLE
-              </Typography>
+            <Typography
+              variant="p_bold"
+              className="text-gray-500 text-xs uppercase mb-2"
+            >
+              MENU DE CONTROLE
+            </Typography>
             <ul className="space-y-4">
               {menuItems2.map(({ label, icon, page, navigate }) => {
                 const isActive = activePage === page;
