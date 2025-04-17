@@ -1,6 +1,6 @@
-import { useBaseRequestHook } from "../hooks/base_request_hook";
-import NavigationHooks from "../hooks/navigation_hook";
-import useValidation from "../hooks/validation_hook";
+import { useBaseRequestHook } from "../hooks/BaseRequestHook";
+import NavigationHooks from "../hooks/NavigationHook";
+import useValidation from "../hooks/ValidationHook";
 import LoginInterface from "../interfaces/login_interface";
 import RegisterInterface from "../interfaces/register_interface";
 import {

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import AppAssetsImages from "../resource/app_assets_images";
-import NavigationHooks from "../hooks/navigation_hook";
+import NavigationHooks from "../hooks/NavigationHook";
 import GlobalButton from "../components/Global/global_button";
 import AppRoutes from "../resource/app_routes";
 import AuthLayout from "../layouts/auth_layout";

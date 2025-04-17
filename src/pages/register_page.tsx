@@ -5,7 +5,7 @@ import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
-import NavigationHooks from "../hooks/navigation_hook";
+import NavigationHooks from "../hooks/NavigationHook";
 import GlobalDropdown from "../components/Global/global_dropdown";
 import RegisterInterface from "../interfaces/register_interface";
 import AuthLayout from "../layouts/auth_layout";

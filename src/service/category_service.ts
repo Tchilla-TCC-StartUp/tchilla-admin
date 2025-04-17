@@ -1,5 +1,5 @@
-import { useBaseRequestHook } from "../hooks/base_request_hook";
-import {  CategoryModel, deleteCategoryResponse } from "../model/category_model";
+import { useBaseRequestHook } from "../hooks/BaseRequestHook";
+import { CategoryModel, deleteCategoryResponse } from "../model/category_model";
 import CategoryRepository from "../repository/category_repository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 

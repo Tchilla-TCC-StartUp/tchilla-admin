@@ -1,19 +1,18 @@
-import { useBaseRequestHook } from "../hooks/base_request_hook";
-import { DeleteUserResponse } from "../interfaces/clients_interface";
-import { UserInterface } from "../interfaces/user_interface";
-import ClientRepository from "../repository/client_repository";
+import { useBaseRequestHook } from "../hooks/BaseRequestHook";
+import { ClientesData, DeleteClientResponse } from "../interfaces/ClientsInterface";
+import ClientRepository from "../repository/ClientRepository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 
 
 
-const ClientService = () => {
+const useClientService = () => {
     const { onRequest } = useBaseRequestHook();
     const { getAllClients: repositoryGetAllClients, deleteUser: repositoryDetelteUser } = ClientRepository();
     const { showSnackbar } = useSnackbarStore();
 
 
     return {
-        getAllClients: async (): Promise<UserInterface[]> => {
+        getAllClients: async (): Promise<ClientesData[]> => {
             return onRequest(
                 (token?: string) => repositoryGetAllClients(token!),
                 undefined,
@@ -23,7 +22,7 @@ const ClientService = () => {
             );
         },
 
-        deleteUser: async (id: number): Promise<DeleteUserResponse> => {
+        deleteUser: async (id: number): Promise<DeleteClientResponse> => {
             return onRequest(
                 (token?: string) => repositoryDetelteUser(token!, id),
                 (response) => showSnackbar(response.message ?? "", "success"),
@@ -35,4 +34,4 @@ const ClientService = () => {
     };
 };
 
-export default ClientService;
+export default useClientService;

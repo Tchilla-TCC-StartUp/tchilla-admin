@@ -1,4 +1,4 @@
-import { useBaseRequestHook } from "../hooks/base_request_hook";
+import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 import AgenciaRepository from "../repository/agencia_repository";
 import { AgenciaInterface } from "../interfaces/agencia_interface";
 

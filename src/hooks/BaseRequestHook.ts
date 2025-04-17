@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { ApiErrorType, ApiException } from "../resource/app_exceptions";
 import { useAuthStore } from "../stores/auth_store";
-import { useErrorHandlerHook } from "./error_handler_hook";
-import NavigationHooks from "./navigation_hook";
+import { useErrorHandlerHook } from "./ErrorHandlerHook";
+import NavigationHooks from "./NavigationHook";
 
 interface BaseRequestHook {
     isLoading: boolean;
@@ -35,7 +35,7 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     ): Promise<R> => {
         const { token } = useAuthStore.getState();
         const { setError, clearError } = useErrorHandlerHook.getState();
-        
+
         if (checkToken && !token) {
             const message = "Token não encontrado.";
 

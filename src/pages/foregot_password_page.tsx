@@ -7,7 +7,7 @@ import GlobalButton from "../components/Global/global_button";
 import AppRoutes from "../resource/app_routes";
 import { useState } from "react";
 import GlobalAbsolutBackButton from "../components/Global/global_absolut_back_button";
-import NavigationHooks from "../hooks/navigation_hook";
+import NavigationHooks from "../hooks/NavigationHook";
 import AuthLayout from "../layouts/auth_layout";
 
 const ForegotPasswordPage = () => {

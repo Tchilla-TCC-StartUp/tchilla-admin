@@ -3,12 +3,11 @@ import AppAssetsImages from "../resource/app_assets_images";
 import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
-import NavigationHooks from "../hooks/navigation_hook";
+import NavigationHooks from "../hooks/NavigationHook";
 
 import { useState } from "react";
 import UserService from "../service/user_service";
 import AuthLayout from "../layouts/auth_layout";
-
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
@@ -85,7 +84,6 @@ const LoginPage = () => {
   return (
     <>
       <AuthLayout left={LeftContent} right={RightContent} />
-   
     </>
   );
 };

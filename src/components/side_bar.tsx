@@ -12,7 +12,7 @@ import {
   IoPeopleOutline,
 } from "react-icons/io5";
 import Typography from "./typography";
-import NavigationHooks from "../hooks/navigation_hook";
+import NavigationHooks from "../hooks/NavigationHook";
 import { useLocation } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { BiCategory } from "react-icons/bi";
@@ -89,6 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
       page: "agencias",
       navigate: navigator.navigateToAgencias,
     },
+<<<<<<< HEAD
     {
       label: "Prestadores",
       icon: <IoPeopleOutline size={18} />,
@@ -96,6 +97,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
       navigate: navigator.navigateToPrestador,
     },
     
+=======
+>>>>>>> f273bdc (add..)
   ];
 
   const menuItems2 = [
