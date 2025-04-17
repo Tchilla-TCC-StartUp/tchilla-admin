@@ -34,13 +34,18 @@ export const useErrorHandlerHook = create<ErrorHandlerState>((set, get) => ({
     lastRequestCallback: undefined,
 
     setError: (
-        message,
-        type,
-        screenType = "snackbar",
-        status,
-        details,
-        lastRequestCallback
+        message: string,
+        type: ApiErrorType,
+        screenType: ErrorScreenType = "snackbar",
+        status?: number,
+        details?: Record<string, unknown>,
+        lastRequestCallback?: () => Promise<unknown>
     ) => {
+        if (!message) {
+            console.warn("Tentativa de definir erro com mensagem vazia.");
+            return;
+        }
+
         set({
             isError: true,
             errorMessage: message,
@@ -56,7 +61,7 @@ export const useErrorHandlerHook = create<ErrorHandlerState>((set, get) => ({
         }
     },
 
-    clearError: () =>
+    clearError: () => {
         set({
             isError: false,
             errorMessage: "",
@@ -65,28 +70,50 @@ export const useErrorHandlerHook = create<ErrorHandlerState>((set, get) => ({
             errorDetails: undefined,
             screenType: "snackbar",
             lastRequestCallback: undefined,
-        }),
+        });
+    },
 
     retryLastRequest: async () => {
         const { lastRequestCallback, clearError } = get();
+
         if (!lastRequestCallback) {
             set({
+                isError: true,
                 errorMessage: "Nenhuma requisição anterior para tentar novamente.",
+                errorType: ApiErrorType.UNKNOWN,
+                screenType: "snackbar",
             });
+            useSnackbarStore.getState().showSnackbar(
+                "Nenhuma requisição anterior para tentar novamente.",
+                "error",
+                3000
+            );
             return;
         }
 
         try {
-            const result = await lastRequestCallback();
             clearError();
+            const result = await lastRequestCallback();
             return result;
         } catch (error) {
-            const message =
-                error instanceof Error ? error.message : "Erro ao tentar novamente";
+            const isApiException = error instanceof ApiException;
+            const errorType = isApiException ? error.type : ApiErrorType.UNKNOWN;
+            const message = isApiException
+                ? error.message || "Erro ao tentar novamente"
+                : error instanceof Error
+                    ? error.message || "Erro desconhecido"
+                    : "Erro desconhecido";
+
             set({
+                isError: true,
                 errorMessage: message,
-                errorType: error instanceof ApiException ? error.type : ApiErrorType.UNKNOWN,
+                errorType,
+                errorStatus: isApiException ? error.status : undefined,
+                errorDetails: isApiException ? error.details : undefined,
+                screenType: "snackbar",
             });
+
+            useSnackbarStore.getState().showSnackbar(message, "error", 3000);
         }
     },
 }));

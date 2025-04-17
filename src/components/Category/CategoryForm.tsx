@@ -3,16 +3,8 @@ import GlobalInput from "../Global/global_input";
 import GlobalButton from "../Global/global_button";
 import GlobalBackButton from "../Global/global_back_button";
 import Typography from "../typography";
-import { CategoryFormFields } from "../../interfaces/CategoryInterface";
+import { CategoryFormFields, CategoryFormProps } from "../../interfaces/CategoryInterface";
 import { Card } from "../Global/global_cards";
-
-
-interface CategoryFormProps {
-  onSubmit: (formFields: CategoryFormFields) => void;
-  onCancel: () => void;
-  title: string;
-  subtitle: string;
-}
 
 export const CategoryForm: React.FC<CategoryFormProps> = ({
   onSubmit,

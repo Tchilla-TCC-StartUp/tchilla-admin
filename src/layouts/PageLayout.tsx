@@ -3,10 +3,8 @@ import Sidebar from "../components/side_bar";
 import Typography from "../components/typography";
 import GlobalUserMenu from "../components/Global/global_user_menu";
 import GlobalSnackbar from "../components/Global/global_snackbar";
-import GlobalModalLoading from "../components/Global/GlobalModal_loading";
+import GlobalModalLoading from "../components/Global/GlobalModalLoading";
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
-import { useErrorHandlerHook } from "../hooks/ErrorHandlerHook";
-import ErrorScreen from "../pages/error_page";
 import { IoClose, IoMenuOutline } from "react-icons/io5";
 
 interface PageLayoutProps {
@@ -16,11 +14,7 @@ interface PageLayoutProps {
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
   const { isLoading } = useBaseRequestHook();
-  const { isError, screenType } = useErrorHandlerHook();
-
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const showErrorScreen = isError && screenType === "fullScreen";
 
   return (
     <div className="flex min-h-screen">
@@ -52,7 +46,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
         </header>
 
         <main className="lg:ml-60 md:ml-20 ms:ml-0 p-5 flex-1 mt-20 overflow-hidden relative z-0">
-          {showErrorScreen ? <ErrorScreen /> : children}
+          {children}
         </main>
       </div>
 

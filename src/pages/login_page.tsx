@@ -7,7 +7,7 @@ import NavigationHooks from "../hooks/NavigationHook";
 
 import { useState } from "react";
 import UserService from "../service/user_service";
-import AuthLayout from "../layouts/auth_layout";
+import AuthLayout from "../layouts/AuthLayout";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");

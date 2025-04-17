@@ -8,7 +8,7 @@ import AppRoutes from "../resource/app_routes";
 import { useState } from "react";
 import GlobalAbsolutBackButton from "../components/Global/global_absolut_back_button";
 import NavigationHooks from "../hooks/NavigationHook";
-import AuthLayout from "../layouts/auth_layout";
+import AuthLayout from "../layouts/AuthLayout";
 
 const ForegotPasswordPage = () => {
   const { navigateToConfirm } = NavigationHooks();

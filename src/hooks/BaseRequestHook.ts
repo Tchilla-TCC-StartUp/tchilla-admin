@@ -23,6 +23,17 @@ const FULL_SCREEN_ERROR_TYPES: ApiErrorType[] = [
     ApiErrorType.UNKNOWN,
 ];
 
+const errorMessages: Record<ApiErrorType, string> = {
+    [ApiErrorType.NETWORK]: "Falha na conexão com a rede. Verifique sua internet.",
+    [ApiErrorType.TIMEOUT]: "A requisição demorou muito para responder.",
+    [ApiErrorType.UNAUTHORIZED]: "Sessão expirada. Faça login novamente.",
+    [ApiErrorType.FORBIDDEN]: "Você não tem permissão para acessar este recurso.",
+    [ApiErrorType.NOT_FOUND]: "O recurso solicitado não foi encontrado.",
+    [ApiErrorType.VALIDATION]: "Os dados enviados contêm erros. Verifique e tente novamente.",
+    [ApiErrorType.SERVER]: "Erro no servidor. Tente novamente mais tarde.",
+    [ApiErrorType.UNKNOWN]: "Ocorreu um erro inesperado. Tente novamente.",
+};
+
 export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
     isLoading: false,
     onRequest: async <R>(
@@ -32,12 +43,13 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
         checkToken: boolean = false,
         useFullScreenError: boolean = false
     ): Promise<R> => {
-        const { token } = useAuthStore.getState();
+        const { token, clearToken } = useAuthStore.getState();
         const { setError, clearError } = useErrorHandlerHook.getState();
 
-        if (checkToken && !token) {
-            const message = "Token não encontrado.";
+        clearError();
 
+        if (checkToken && !token) {
+            const message = "Sessão não autenticada. Faça login.";
             setError(
                 message,
                 ApiErrorType.UNAUTHORIZED,
@@ -56,47 +68,55 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
             throw new ApiException(message, 401, ApiErrorType.UNAUTHORIZED);
         }
 
-        const errorMessages: Record<ApiErrorType, string> = {
-            [ApiErrorType.NETWORK]: "Erro de conexão com a rede.",
-            [ApiErrorType.TIMEOUT]: "Tempo limite da requisição esgotado.",
-            [ApiErrorType.UNAUTHORIZED]: "Não autorizado. Faça login novamente.",
-            [ApiErrorType.FORBIDDEN]: "Acesso proibido.",
-            [ApiErrorType.NOT_FOUND]: "Recurso não encontrado.",
-            [ApiErrorType.VALIDATION]: "Erro de validação nos dados enviados.",
-            [ApiErrorType.SERVER]: "Erro interno do servidor.",
-            [ApiErrorType.UNKNOWN]: "Ocorreu um erro inesperado.",
-        };
-
         try {
             set({ isLoading: true });
-            clearError();
 
             const response = await request(checkToken ? token : undefined);
             onSuccess?.(response);
             return response;
         } catch (error) {
-            const isApiException = error instanceof ApiException;
-            const errorType = isApiException ? error.type : ApiErrorType.UNKNOWN;
-            const message = isApiException
-                ? error.message !== "Erro desconhecido"
+            let errorType = ApiErrorType.UNKNOWN;
+            let message = errorMessages[ApiErrorType.UNKNOWN];
+            let status: number | undefined;
+            let details: Record<string, unknown> | undefined;
+
+            if (error instanceof ApiException) {
+                errorType = error.type;
+                status = error.status;
+                if (error.details && typeof error.details === 'object' && !Array.isArray(error.details)) {
+                    details = error.details as Record<string, unknown>;
+                } else {
+                    details = undefined;
+                }
+                message = error.message && error.message !== "Erro desconhecido"
                     ? error.message
-                    : errorMessages[errorType]
-                : error instanceof Error
-                    ? error.message
-                    : "Erro desconhecido";
+                    : errorMessages[errorType] || message;
+            } else if (error instanceof Error) {
+                message = error.message || message;
+                if (error.message.includes("network")) {
+                    errorType = ApiErrorType.NETWORK;
+                    message = errorMessages[ApiErrorType.NETWORK];
+                } else if (error.message.includes("timeout")) {
+                    errorType = ApiErrorType.TIMEOUT;
+                    message = errorMessages[ApiErrorType.TIMEOUT];
+                }
+                details = undefined;
+            }
 
             const shouldUseFullScreen =
                 useFullScreenError || FULL_SCREEN_ERROR_TYPES.includes(errorType);
+
             if (errorType === ApiErrorType.UNAUTHORIZED) {
+                clearToken();
                 NavigationHooks().navigateToLogin();
-                useAuthStore.getState().clearToken();
             }
+
             setError(
                 message,
                 errorType,
                 shouldUseFullScreen ? "fullScreen" : "snackbar",
-                isApiException ? error.status : undefined,
-                isApiException ? error.details : undefined,
+                status,
+                details,
                 () =>
                     useBaseRequestHook.getState().onRequest(
                         request,
@@ -107,8 +127,10 @@ export const useBaseRequestHook = create<BaseRequestHook>((set) => ({
                     )
             );
 
-            onError?.(error instanceof Error ? error : new Error(message));
-            throw error;
+
+            const errorToThrow = error instanceof Error ? error : new Error(message);
+            onError?.(errorToThrow);
+            throw errorToThrow;
         } finally {
             set({ isLoading: false });
         }

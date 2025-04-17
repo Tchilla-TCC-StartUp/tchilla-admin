@@ -6,7 +6,7 @@ import HomePage from "./pages/home_page";
 import ForegotPasswordPage from "./pages/foregot_password_page";
 import DashboardPage from "./pages/dashboard_page";
 import ProfilePage from "./pages/profile_page";
-import PageLayout from "./layouts/page_layout";
+import PageLayout from "./layouts/PageLayout";
 import ConfirmEmail from "./pages/confirmEmail";
 import ResetPassword from "./pages/resetPassword";
 import AgendamentoPage from "./pages/agendamento_page";

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useClientService from "../service/ClientService";
 import { ClientesData, DeleteClientResponse } from "../interfaces/ClientsInterface";
+import { useErrorHandlerHook } from "./ErrorHandlerHook";
 
 
 export const useClients = () => {
@@ -11,7 +12,8 @@ export const useClients = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [userToDelete, setUserToDelete] = useState<ClientesData | null>(null);
-
+    const { isError, screenType } = useErrorHandlerHook();
+     const showErrorScreen = isError && screenType === "fullScreen";
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -81,5 +83,6 @@ export const useClients = () => {
         handleDeleteClick,
         confirmDelete,
         cancelDelete,
+        showErrorScreen,
     };
 };

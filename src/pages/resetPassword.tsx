@@ -3,7 +3,7 @@ import { MdLockOutline } from "react-icons/md";
 import AppAssetsImages from "../resource/app_assets_images";
 import GlobalAbsolutBackButton from "../components/Global/global_absolut_back_button";
 import AppRoutes from "../resource/app_routes";
-import AuthLayout from "../layouts/auth_layout";
+import AuthLayout from "../layouts/AuthLayout";
 import Typography from "../components/typography";
 import GlobalButton from "../components/Global/global_button";
 import GlobalInput from "../components/Global/global_input";

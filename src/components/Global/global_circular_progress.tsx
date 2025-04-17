@@ -10,7 +10,7 @@ type GlobalCircularProgressProps = {
 const GlobalCircularProgress: React.FC<GlobalCircularProgressProps> = ({
   className = "",
   size = "h-12 w-12",
-  color = "border-primary-500",
+  color = "border-primary-700",
   speed = "animate-spin",
 }) => {
   return (
