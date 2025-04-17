@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import UserService from "./service/user_service";
+import UserService from "./service/UserService";
 import AppRoutes from "./resource/app_routes";
 import { JSX } from "react";
 

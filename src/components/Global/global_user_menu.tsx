@@ -5,7 +5,7 @@ import { IoChevronDownOutline, IoLogOutOutline } from "react-icons/io5";
 
 import Shimmer from "./global_shimmers";
 import GlobalModalLoading from "./GlobalModalLoading";
-import UserService from "../../service/user_service";
+import UserService from "../../service/UserService";
 import Typography from "../typography";
 
 const GlobalUserMenu = () => {

@@ -7,8 +7,8 @@ import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
 import NavigationHooks from "../hooks/NavigationHook";
 import GlobalDropdown from "../components/Global/global_dropdown";
-import RegisterInterface from "../interfaces/register_interface";
 import AuthLayout from "../layouts/AuthLayout";
+import { RegisterInterface } from "../interfaces/UserInterface";
 
 const RegisterPage = () => {
   const categories = [

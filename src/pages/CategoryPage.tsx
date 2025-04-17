@@ -8,7 +8,7 @@ import { CategoryDetails } from "../components/Category/CategoryDetails";
 import { CategoryForm } from "../components/Category/CategoryForm";
 import GlobalConfirmModal from "../components/Global/gloal_modals"; // Note: Fix typo in 'gloal_modals' if applicable
 import { CategoryTable } from "../components/Category/CategoryTable";
-import ErrorScreen from "./error_page";
+import ErrorScreen from "./ErrorPage";
 
 const CategoriasPage = () => {
   const [showForm, setShowForm] = useState(false);

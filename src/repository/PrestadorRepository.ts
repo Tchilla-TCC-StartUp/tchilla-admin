@@ -1,5 +1,4 @@
-import { Prestador } from "../interfaces/prestador_interface";
-
+import { Prestador } from "../interfaces/PrestadorInterface";
 
 export async function getAllPrestadores(token: string): Promise<Prestador[]> {
   const response = await fetch("/api/Prestador/getAll", {

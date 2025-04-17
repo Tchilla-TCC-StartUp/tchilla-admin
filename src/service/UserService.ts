@@ -1,14 +1,13 @@
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 import NavigationHooks from "../hooks/NavigationHook";
 import useValidation from "../hooks/ValidationHook";
-import LoginInterface from "../interfaces/login_interface";
-import RegisterInterface from "../interfaces/register_interface";
-import {
+import LoginInterface, {
+  RegisterInterface,
   ResetPasswordInterface,
   UpdateUserInterface,
   UserInterface,
-} from "../interfaces/user_interface";
-import UserRepository from "../repository/user_repository";
+} from "../interfaces/UserInterface";
+import UserRepository from "../repository/UserRepository";
 import AppConstants from "../resource/app_constants";
 import { useUserStore } from "../stores/ userStore";
 import { useAuthStore } from "../stores/auth_store";

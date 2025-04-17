@@ -1,23 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppRoutes from "./resource/app_routes";
-import LoginPage from "./pages/login_page";
-import RegisterPage from "./pages/register_page";
-import HomePage from "./pages/home_page";
-import ForegotPasswordPage from "./pages/foregot_password_page";
-import DashboardPage from "./pages/dashboard_page";
-import ProfilePage from "./pages/profile_page";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import ForegotPasswordPage from "./pages/ForegotPasswordPage";
+import DashboardPage from "./pages/DashboardPage";
+import ProfilePage from "./pages/ProfilePage";
 import PageLayout from "./layouts/PageLayout";
-import ConfirmEmail from "./pages/confirmEmail";
-import ResetPassword from "./pages/resetPassword";
-import AgendamentoPage from "./pages/agendamento_page";
-import ConfiguracaoPage from "./pages/configuracoes_page";
-import PagamentoPage from "./pages/payments_page";
-import ServEPacotes from "./pages/services_page";
+import ConfirmEmail from "./pages/ConfirmEmailPage";
+import ResetPassword from "./pages/ResetPasswordPage";
+import AgendamentoPage from "./pages/AgendamentoPage";
+import ConfiguracaoPage from "./pages/ConfiguracoesPage";
+import PagamentoPage from "./pages/PaymentsPage";
+import ServEPacotes from "./pages/ServicesPage";
 import ProtectedRoute from "./protected_route";
 import UsersPage from "./pages/ClientsPage";
 import Categorias from "./pages/CategoryPage";
-import AgenciasPage from "./pages/agencias_page";
-import PrestadoresPage from "./pages/prestadores_page";
+import AgenciasPage from "./pages/AgenciasPage";
+import PrestadoresPage from "./pages/PrestadoresPage";
 
 const AppRouter = () => {
   return (

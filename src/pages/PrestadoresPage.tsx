@@ -5,7 +5,7 @@ import { Card, CardContent } from "../components/Global/global_cards";
 import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
 import { IoSearchOutline } from "react-icons/io5";
-import { Prestador } from "../interfaces/prestador_interface";
+import { Prestador } from "../interfaces/PrestadorInterface";
 import prestadoresData from "../data/jsons/prestadores_fake.json";
 
 const PrestadoresPage = () => {
@@ -21,10 +21,11 @@ const PrestadoresPage = () => {
 
   useEffect(() => {
     const term = searchTerm.toLowerCase();
-    const filtered = data.filter((item) =>
-      item.nome.toLowerCase().includes(term) ||
-      item.descricao.toLowerCase().includes(term) ||
-      item.nif.toLowerCase().includes(term)
+    const filtered = data.filter(
+      (item) =>
+        item.nome.toLowerCase().includes(term) ||
+        item.descricao.toLowerCase().includes(term) ||
+        item.nif.toLowerCase().includes(term)
     );
     setFilteredData(filtered);
     setCurrentPage(1);

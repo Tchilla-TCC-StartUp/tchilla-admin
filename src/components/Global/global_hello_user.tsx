@@ -1,4 +1,4 @@
-import UserService from "../../service/user_service";
+import UserService from "../../service/UserService";
 import Shimmer from "./global_shimmers";
 import Typography from "../typography";
 

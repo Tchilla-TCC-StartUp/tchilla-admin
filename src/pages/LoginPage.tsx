@@ -6,7 +6,7 @@ import GlobalButton from "../components/Global/global_button";
 import NavigationHooks from "../hooks/NavigationHook";
 
 import { useState } from "react";
-import UserService from "../service/user_service";
+import UserService from "../service/UserService";
 import AuthLayout from "../layouts/AuthLayout";
 
 const LoginPage = () => {

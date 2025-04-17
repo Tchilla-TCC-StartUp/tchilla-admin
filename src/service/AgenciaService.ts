@@ -1,6 +1,6 @@
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
-import AgenciaRepository from "../repository/agencia_repository";
-import { AgenciaInterface } from "../interfaces/agencia_interface";
+import AgenciaRepository from "../repository/AgenciaRepository";
+import { AgenciaInterface } from "../interfaces/AgenciaInterface";
 
 interface AgenciaServiceInterface {
   getAllAgencias: () => Promise<AgenciaInterface[]>;
@@ -19,7 +19,7 @@ const AgenciaService = (): AgenciaServiceInterface => {
         true,
         true
       );
-    }
+    },
   };
 };
 

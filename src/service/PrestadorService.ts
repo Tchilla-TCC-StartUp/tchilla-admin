@@ -1,5 +1,8 @@
-import { Prestador } from "../interfaces/prestador_interface";
-import { getAllPrestadoresFake, getAllPrestadores } from "../repository/prestador_repository";
+import { Prestador } from "../interfaces/PrestadorInterface";
+import {
+  getAllPrestadoresFake,
+  getAllPrestadores,
+} from "../repository/PrestadorRepository";
 
 const USE_FAKE_DATA = false;
 

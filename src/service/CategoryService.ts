@@ -1,6 +1,6 @@
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 import { CategoryData } from "../interfaces/CategoryInterface";
-import ResponseInterface from "../interfaces/response_interface";
+import ResponseInterface from "../interfaces/ResponseInterface";
 import CategoryRepository from "../repository/CategoryRepository";
 import { useSnackbarStore } from "../stores/snackbar_store";
 

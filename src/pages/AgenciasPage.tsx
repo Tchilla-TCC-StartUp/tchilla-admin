@@ -5,7 +5,7 @@ import { Card, CardContent } from "../components/Global/global_cards";
 import Typography from "../components/typography";
 import GlobalInput from "../components/Global/global_input";
 import { IoSearchOutline } from "react-icons/io5";
-import { AgenciaInterface } from "../interfaces/agencia_interface";
+import { AgenciaInterface } from "../interfaces/AgenciaInterface";
 import agenciasData from "../data/jsons/agencias_fake.json";
 
 const AgenciasPage = () => {
@@ -21,10 +21,11 @@ const AgenciasPage = () => {
 
   useEffect(() => {
     const term = searchTerm.toLowerCase();
-    const filtered = data.filter((item) =>
-      item.nome.toLowerCase().includes(term) ||
-      item.descricao.toLowerCase().includes(term) ||
-      item.nif.toLowerCase().includes(term)
+    const filtered = data.filter(
+      (item) =>
+        item.nome.toLowerCase().includes(term) ||
+        item.descricao.toLowerCase().includes(term) ||
+        item.nif.toLowerCase().includes(term)
     );
     setFilteredData(filtered);
     setCurrentPage(1);
@@ -35,7 +36,7 @@ const AgenciasPage = () => {
       key: "fotoUrl",
       title: "Foto",
       render: (item: AgenciaInterface) =>
-        item.foto? (
+        item.foto ? (
           <img
             src={item.foto}
             alt={item.nome}
@@ -56,7 +57,9 @@ const AgenciasPage = () => {
       <Card>
         <CardContent className="p-4">
           <div className="flex justify-between items-center p-4">
-            <Typography variant="h2_bold" className="w-full">Lista de Agências</Typography>
+            <Typography variant="h2_bold" className="w-full">
+              Lista de Agências
+            </Typography>
             <GlobalInput
               placeholder="Pesquisar agência"
               icon={<IoSearchOutline />}
