@@ -1,4 +1,4 @@
-import Typography from "./typography";
+import Typography from "./Global/typography";
 import GlobalInput from "./Global/global_input";
 import GlobalDropdown from "./Global/global_dropdown";
 

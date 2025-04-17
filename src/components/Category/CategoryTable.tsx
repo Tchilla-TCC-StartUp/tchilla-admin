@@ -9,7 +9,7 @@ import { Card, CardContent } from "../Global/global_cards";
 import GlobalHelloUser from "../Global/global_hello_user";
 import GlobalInput from "../Global/global_input";
 import { GlobalTable } from "../Global/global_table";
-import Typography from "../typography";
+import Typography from "../Global/typography";
 
 export const CategoryTable: React.FC<CategoryTableProps> = ({
   categorias,

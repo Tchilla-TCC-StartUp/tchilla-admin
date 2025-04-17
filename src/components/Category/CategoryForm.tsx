@@ -2,8 +2,11 @@ import { useState } from "react";
 import GlobalInput from "../Global/global_input";
 import GlobalButton from "../Global/global_button";
 import GlobalBackButton from "../Global/global_back_button";
-import Typography from "../typography";
-import { CategoryFormFields, CategoryFormProps } from "../../interfaces/CategoryInterface";
+import Typography from "../Global/typography";
+import {
+  CategoryFormFields,
+  CategoryFormProps,
+} from "../../interfaces/CategoryInterface";
 import { Card } from "../Global/global_cards";
 
 export const CategoryForm: React.FC<CategoryFormProps> = ({

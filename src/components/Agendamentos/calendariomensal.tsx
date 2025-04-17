@@ -9,7 +9,8 @@ import {
   isToday,
 } from "date-fns";
 import { pt, ptBR } from "date-fns/locale";
-import Typography from "./typography";
+import Typography from "../Global/typography";
+
 
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
 

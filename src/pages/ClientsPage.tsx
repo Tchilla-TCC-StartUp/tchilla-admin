@@ -1,5 +1,5 @@
 import GlobalHelloUser from "../components/Global/global_hello_user";
-import GlobalConfirmModal from "../components/Global/gloal_modals";
+import GlobalConfirmModal from "../components/Global/GloalModals";
 import { ClientsTable } from "../components/Clients/ClientsTable";
 import { useClients } from "../hooks/ClientsHook";
 import ErrorScreen from "./ErrorPage";

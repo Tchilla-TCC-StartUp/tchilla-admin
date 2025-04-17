@@ -1,14 +1,14 @@
 import { CalendarDays, Search } from "lucide-react";
 import GlobalHelloUser from "../components/Global/global_hello_user";
 import GlobalButton from "../components/Global/global_button";
-import { EventoCard } from "../components/eventocard";
 import FiltroHeader from "../components/filtroheader";
 import { useEffect, useState } from "react";
-import CalendarioMensal from "../components/calendariomensal";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalInput from "../components/Global/global_input";
 import GlobalDropdown from "../components/Global/global_dropdown";
 import { Card } from "../components/Global/global_cards";
+import CalendarioMensal from "../components/Agendamentos/calendariomensal";
+import { EventoCard } from "../components/Agendamentos/eventocard";
 
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
 type Evento = {

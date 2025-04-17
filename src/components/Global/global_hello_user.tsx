@@ -1,6 +1,6 @@
 import UserService from "../../service/UserService";
 import Shimmer from "./global_shimmers";
-import Typography from "../typography";
+import Typography from "./typography";
 
 const GlobalHelloUser = () => {
   const { storedUser } = UserService();

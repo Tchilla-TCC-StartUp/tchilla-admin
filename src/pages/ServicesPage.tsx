@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GlobalButton from "../components/Global/global_button";
 import GlobalHelloUser from "../components/Global/global_hello_user";
 import { IoAddCircleOutline, IoSearchOutline } from "react-icons/io5";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalAvatar from "../components/Global/global_avatar";
 import { GlobalTable } from "../components/Global/global_table";
 import GlobalInput from "../components/Global/global_input";

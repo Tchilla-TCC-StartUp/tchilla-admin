@@ -1,5 +1,5 @@
 import { CalendarDays, LayoutGrid } from "lucide-react";
-import Typography from "./typography";
+import Typography from "./Global/typography";
 
 interface Props {
   abaAtiva: string;

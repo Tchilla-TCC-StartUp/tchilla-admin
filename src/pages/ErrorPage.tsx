@@ -1,5 +1,5 @@
 import { useErrorHandlerHook } from "../hooks/ErrorHandlerHook";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalButton from "../components/Global/global_button";
 
 const ErrorScreen = () => {

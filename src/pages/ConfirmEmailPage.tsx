@@ -5,8 +5,8 @@ import NavigationHooks from "../hooks/NavigationHook";
 import GlobalButton from "../components/Global/global_button";
 import AppRoutes from "../resource/app_routes";
 import AuthLayout from "../layouts/AuthLayout";
-import GlobalAbsolutBackButton from "../components/Global/global_absolut_back_button";
-import Typography from "../components/typography";
+import GlobalAbsolutBackButton from "../components/Global/GlobalAbsolutBackButton";
+import Typography from "../components/Global/typography";
 import GlobalInput from "../components/Global/global_input";
 const ConfirmEmail = () => {
   const [pin, setPin] = useState(["", "", "", "", "", ""]);

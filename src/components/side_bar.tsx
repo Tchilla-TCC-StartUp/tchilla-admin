@@ -11,7 +11,7 @@ import {
   IoBusinessOutline,
   IoPeopleOutline,
 } from "react-icons/io5";
-import Typography from "./typography";
+import Typography from "./Global/typography";
 import NavigationHooks from "../hooks/NavigationHook";
 import { useLocation } from "react-router-dom";
 import { GoPerson } from "react-icons/go";

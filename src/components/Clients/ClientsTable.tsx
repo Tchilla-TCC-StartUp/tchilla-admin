@@ -1,7 +1,7 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { GlobalTable } from "../Global/global_table";
 import { Card, CardContent } from "../Global/global_cards";
-import Typography from "../typography";
+import Typography from "../Global/typography";
 import GlobalInput from "../Global/global_input";
 import { AppGlobalUserAvatarName } from "../Global/global_user_avatar_name";
 import { ClientesData } from "../../interfaces/ClientsInterface";

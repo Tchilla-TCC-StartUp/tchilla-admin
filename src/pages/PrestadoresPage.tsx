@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import GlobalHelloUser from "../components/Global/global_hello_user";
 import { GlobalTable } from "../components/Global/global_table";
 import { Card, CardContent } from "../components/Global/global_cards";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalInput from "../components/Global/global_input";
 import { IoSearchOutline } from "react-icons/io5";
 import { Prestador } from "../interfaces/PrestadorInterface";

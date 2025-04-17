@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { MdAlternateEmail, MdCategory, MdLockOutline } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 import AppAssetsImages from "../resource/app_assets_images";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalInput from "../components/Global/global_input";
 import GlobalButton from "../components/Global/global_button";
 import NavigationHooks from "../hooks/NavigationHook";

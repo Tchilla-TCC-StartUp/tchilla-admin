@@ -5,7 +5,7 @@ import GlobalBackButton from "../Global/global_back_button";
 import GlobalButton from "../Global/global_button";
 import { Card } from "../Global/global_cards";
 import GlobalInput from "../Global/global_input";
-import Typography from "../typography";
+import Typography from "../Global/typography";
 import {
   CategoryDetailsProps,
   CategoryFormFields,

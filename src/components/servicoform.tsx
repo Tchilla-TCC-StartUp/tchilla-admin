@@ -1,10 +1,10 @@
 import { useState } from "react";
 import GlobalButton from "./Global/global_button";
-import Typography from "./typography";
+import Typography from "./Global/typography";
 import CategoriaDiasForm from "./categoriadiasform";
 import PromocaoForm from "./promocaoform";
 import NomePrecoForm from "./servicoselecionadores";
-import FotosForm from "./fotosform";
+import FotosForm from "./Global/fotosform";
 import DescricaoForm from "./descricaoform";
 import HorarioDisponibilidadeForm from "./horariodisponibilidadeform";
 import { Card } from "./Global/global_cards";

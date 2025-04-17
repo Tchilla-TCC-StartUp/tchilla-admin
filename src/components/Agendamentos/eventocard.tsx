@@ -1,7 +1,8 @@
 import { CalendarDays, MapPin, MoreHorizontal } from "lucide-react";
-import Typography from "./typography";
-import { Card } from "./Global/global_cards";
-import { AppGlobalUserAvatarName } from "./Global/global_user_avatar_name";
+import { Card } from "../Global/global_cards";
+import { AppGlobalUserAvatarName } from "../Global/global_user_avatar_name";
+import Typography from "../Global/typography";
+
 
 const statusColors = {
   Confirmado: "bg-green-100 text-green-600",

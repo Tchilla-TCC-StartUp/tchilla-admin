@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Typography from "../typography";
+import Typography from "./typography";
 
 export type Column<T> = {
   key: keyof T | string;

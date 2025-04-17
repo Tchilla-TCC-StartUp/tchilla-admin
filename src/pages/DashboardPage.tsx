@@ -3,7 +3,7 @@ import GlobalHelloUser from "../components/Global/global_hello_user";
 import MetricCard from "../components/metric_card";
 import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import newUserData from "../data/jsons/new_users.json";
 const mockMetrics = [
   {

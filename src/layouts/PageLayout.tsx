@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../components/side_bar";
-import Typography from "../components/typography";
+import Typography from "../components/Global/typography";
 import GlobalUserMenu from "../components/Global/global_user_menu";
 import GlobalSnackbar from "../components/Global/global_snackbar";
 import GlobalModalLoading from "../components/Global/GlobalModalLoading";
