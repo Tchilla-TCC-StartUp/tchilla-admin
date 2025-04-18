@@ -1,4 +1,4 @@
-import GlobalInput from "./Global/global_input";
+import GlobalInput from "./Global/GlobalInput";
 
 type PromocaoFormProps = {
   valorAtual: string;

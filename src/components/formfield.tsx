@@ -1,5 +1,5 @@
-import React from 'react';
-import Typography from './typography';
+import React from "react";
+import Typography from "./Global/Typography";
 
 type Props = {
   label: string;
@@ -7,7 +7,10 @@ type Props = {
 };
 const FormField = ({ label, children }: Props) => (
   <div>
-    <Typography className="block text-sm font-medium text-gray-600 mb-1" variant={'h2_bold'}>
+    <Typography
+      className="block text-sm font-medium text-gray-600 mb-1"
+      variant={"h2_bold"}
+    >
       {label}
     </Typography>
     {children}
