@@ -1,15 +1,17 @@
-import { useState } from "react";
-
-import GlobalAvatar from "../Global/global_avatar";
-import GlobalBackButton from "../Global/global_back_button";
-import GlobalButton from "../Global/global_button";
-import { Card } from "../Global/global_cards";
-import GlobalInput from "../Global/global_input";
-import Typography from "../Global/typography";
+import { useEffect, useState } from "react";
+import GlobalBackButton from "../Global/GlobalBackButton";
+import GlobalButton from "../Global/GlobalButton";
+import { Card } from "../Global/GlobalCards";
+import GlobalInput from "../Global/GlobalInput";
+import Typography from "../Global/Typography";
 import {
   CategoryDetailsProps,
   CategoryFormFields,
 } from "../../interfaces/CategoryInterface";
+import UploadImagemPreview from "../Global/UploadImagemPreview";
+import useSubCategory from "../../hooks/SubCategoryHook";
+import { SubCategoryTable } from "../SubCategory/SubCategoryTable";
+import GlobalConfirmModal from "../Global/GloalModals";
 
 export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
   categoria,
@@ -22,9 +24,28 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
     foto: null,
   });
 
-  const handleFormChange = (key: string, value: string | File) => {
-    setFormFields((prev: CategoryFormFields) => ({ ...prev, [key]: value }));
+  const handleFormChange = (
+    key: keyof CategoryFormFields,
+    value: string | File | null
+  ) => {
+    setFormFields((prev) => ({ ...prev, [key]: value }));
   };
+
+  const {
+    subCategory,
+    fetchSubCategories,
+    currentPage,
+    setCurrentPage,
+    handleDeleteClick,
+    addSubCategory,
+    showDeleteModal,
+    subcategoriaToDelete,
+    confirmDelete,
+    cancelDelete,
+  } = useSubCategory();
+  useEffect(() => {
+    fetchSubCategories(categoria?.id || 0);
+  }, []);
 
   return (
     <Card className="bg-white w-full p-6">
@@ -37,15 +58,14 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
           </GlobalButton>
         </div>
         <div className="flex flex-col gap-4">
-          <GlobalAvatar src={categoria?.foto ?? ""} alt="Imagem" />
-        </div>
-        <div className="flex flex-col gap-4">
           <label className="text-gray-500">Imagem</label>
-          <GlobalInput
-            type="file"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) handleFormChange("foto", file);
+          <UploadImagemPreview
+            foto={formFields.foto}
+            index={0}
+            initialImage={categoria?.foto}
+            className="w-[200px] h-[200px]"
+            onChange={(_, file) => {
+              handleFormChange("foto", file);
             }}
           />
           <label className="text-gray-500">Name</label>
@@ -60,9 +80,25 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
             value={formFields.descricao}
             onChange={(e) => handleFormChange("descricao", e.target.value)}
           />
-          <div className="flex gap-4 mt-4"></div>
+          <div className="flex flex-col gap-4 mt-4">
+            <SubCategoryTable
+              categoriaId={categoria?.id || 0}
+              subCategorias={subCategory}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+              onAdd={addSubCategory}
+              onDelete={handleDeleteClick}
+            />
+          </div>
         </div>
       </div>
+      <GlobalConfirmModal
+        show={showDeleteModal}
+        title="Confirmar Exclusão"
+        message={`Você tem certeza que deseja excluir a subcategoria "${subcategoriaToDelete?.nome}"?`}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
     </Card>
   );
 };

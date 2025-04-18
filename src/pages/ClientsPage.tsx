@@ -1,4 +1,4 @@
-import GlobalHelloUser from "../components/Global/global_hello_user";
+import GlobalHelloUser from "../components/Global/GlobalHelloUser";
 import GlobalConfirmModal from "../components/Global/GloalModals";
 import { ClientsTable } from "../components/Clients/ClientsTable";
 import { useClients } from "../hooks/ClientsHook";

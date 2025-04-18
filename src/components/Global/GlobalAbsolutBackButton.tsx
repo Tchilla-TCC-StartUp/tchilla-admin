@@ -1,4 +1,4 @@
-import GlobalBackButton from "./global_back_button";
+import GlobalBackButton from "./GlobalBackButton";
 
 const GlobalAbsolutBackButton = ({ href }: { href: string }) => {
   return (

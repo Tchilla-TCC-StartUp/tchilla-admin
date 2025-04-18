@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/side_bar";
+import Sidebar from "../components/Global/GlobalSideBar";
 import NavigationHooks from "../hooks/NavigationHook";
 
 const Layout = () => {

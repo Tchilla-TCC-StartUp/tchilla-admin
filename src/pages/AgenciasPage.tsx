@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import GlobalHelloUser from "../components/Global/global_hello_user";
-import { GlobalTable } from "../components/Global/global_table";
-import { Card, CardContent } from "../components/Global/global_cards";
-import Typography from "../components/Global/typography";
-import GlobalInput from "../components/Global/global_input";
+import GlobalHelloUser from "../components/Global/GlobalHelloUser";
+import { GlobalTable } from "../components/Global/GlobalTable";
+import { Card, CardContent } from "../components/Global/GlobalCards";
+import Typography from "../components/Global/Typography";
+import GlobalInput from "../components/Global/GlobalInput";
 import { IoSearchOutline } from "react-icons/io5";
 import { AgenciaInterface } from "../interfaces/AgenciaInterface";
 import agenciasData from "../data/jsons/agencias_fake.json";

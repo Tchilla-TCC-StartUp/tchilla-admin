@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalModalLoading from "../components/Global/GlobalModalLoading";
-import GlobalSnackbar from "../components/Global/global_snackbar";
+import GlobalSnackbar from "../components/Global/GlobalSnackbar";
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 
 interface AuthLayoutProps {

@@ -30,7 +30,7 @@ export interface CategoryTableProps {
 }
 
 export interface CategoryDetailsProps {
-  categoria: CategoryData | null;
+  categoria: CategoryData;
   isEditing: boolean;
   onEdit: () => void;
   onCancelEdit: () => void;

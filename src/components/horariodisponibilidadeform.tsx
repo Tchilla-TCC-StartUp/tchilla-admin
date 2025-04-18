@@ -1,6 +1,6 @@
-import Typography from "./Global/typography";
-import GlobalInput from "./Global/global_input";
-import GlobalDropdown from "./Global/global_dropdown";
+import Typography from "./Global/Typography";
+import GlobalInput from "./Global/GlobalInput";
+import GlobalDropdown from "./Global/GlobalDropdown";
 
 type HorarioDisponibilidadeProps = {
   tipoDisponibilidade: "sempre" | "intervalo" | "nenhum";

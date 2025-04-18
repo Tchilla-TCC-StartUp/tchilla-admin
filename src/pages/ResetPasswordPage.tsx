@@ -4,9 +4,9 @@ import AppAssetsImages from "../resource/app_assets_images";
 import GlobalAbsolutBackButton from "../components/Global/GlobalAbsolutBackButton";
 import AppRoutes from "../resource/app_routes";
 import AuthLayout from "../layouts/AuthLayout";
-import Typography from "../components/Global/typography";
-import GlobalButton from "../components/Global/global_button";
-import GlobalInput from "../components/Global/global_input";
+import Typography from "../components/Global/Typography";
+import GlobalButton from "../components/Global/GlobalButton";
+import GlobalInput from "../components/Global/GlobalInput";
 
 const ResetPassword = () => {
   return (

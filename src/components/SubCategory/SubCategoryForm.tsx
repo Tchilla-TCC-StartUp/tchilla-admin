@@ -1,37 +1,44 @@
 import React, { useState } from "react";
 import GlobalInput from "../Global/GlobalInput";
 import GlobalButton from "../Global/GlobalButton";
-import GlobalBackButton from "../Global/GlobalBackButton";
 import Typography from "../Global/Typography";
-import {
-  CategoryFormFields,
-  CategoryFormProps,
-} from "../../interfaces/CategoryInterface";
-import { Card } from "../Global/GlobalCards";
-import UploadImagemPreview from "../Global/UploadImagemPreview";
 import { useSnackbarStore } from "../../stores/snackbar_store";
+import {
+  SubCategoryData,
+  SubCategoryFormData,
+  SubCategoryFormProps,
+} from "../../interfaces/SubCategoryInterface";
+import GlobalDropdown from "../Global/GlobalDropdown";
+import { useSettings } from "../../hooks/SettingsHook";
+import { mapToDropdownOptions } from "../../utils/Mapers";
 
-export const CategoryForm: React.FC<CategoryFormProps> = ({
+export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
   onSubmit,
-  onCancel,
   title,
-  subtitle,
+  categoriaId,
 }) => {
-  const [formFields, setFormFields] = useState<CategoryFormFields>({
+  const [formFields, setFormFields] = useState<SubCategoryFormData>({
     nome: "",
     descricao: "",
-    foto: null,
+    tipo: 0,
+    categoriaId: categoriaId,
   });
+
+
+
+  const { getEnum } = useSettings();
+  const tipoEnum = getEnum("SubCategoriaTipo");
+  const options = mapToDropdownOptions(tipoEnum);
 
   const { showSnackbar } = useSnackbarStore();
 
   const validateForm = (): boolean => {
     const errors: string[] = [];
     if (!formFields.nome.trim()) {
-      errors.push("O nome da categoria é obrigatório");
+      errors.push("O nome da subcategoria é obrigatório");
     }
-    if (!formFields.foto) {
-      errors.push("A imagem da categoria é obrigatória");
+    if (formFields.tipo == null) {
+      errors.push("O tipo da subcategoria é obrigatório");
     }
     if (errors.length > 0) {
       showSnackbar(errors.join(" e "), "warning");
@@ -41,8 +48,8 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
   };
 
   const handleFormChange = (
-    key: keyof CategoryFormFields,
-    value: string | File | null
+    key: keyof SubCategoryData,
+    value: string | number | File | null
   ) => {
     setFormFields((prev) => ({ ...prev, [key]: value }));
   };
@@ -50,34 +57,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
   const handleSubmit = () => {
     if (validateForm()) {
       onSubmit(formFields);
+      console.log("Form submitted:", formFields);
     }
   };
 
   return (
-    <Card className="bg-white w-full p-4">
-      <GlobalBackButton onClick={onCancel} />
-      <div className="flex justify-between items-start mb-6">
-        <div>
-          <Typography variant="h2_bold">{title}</Typography>
-          <Typography variant="h3_normal" className="text-gray-500">
-            {subtitle}
-          </Typography>
-        </div>
-      </div>
-
+    <div className="bg-white w-full">
+      <Typography variant="h2_bold">{title}</Typography>
       <div className="flex flex-col gap-4">
-        <label htmlFor="foto" className="text-gray-500 font-medium">
-          Imagem
-        </label>
-        <UploadImagemPreview
-          foto={formFields.foto}
-          index={0}
-          className="w-[200px] h-[200px]"
-          onChange={(_, file) => {
-            handleFormChange("foto", file);
-          }}
-        />
-
         <label htmlFor="nome" className="text-gray-500 font-medium">
           Nome
         </label>
@@ -97,16 +84,21 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
           value={formFields.descricao}
           onChange={(e) => handleFormChange("descricao", e.target.value)}
         />
+
+        <GlobalDropdown
+          options={options}
+          onChange={(value) => handleFormChange("tipo", value)}
+          selectedValue={formFields.tipo}
+          placeholder="Tipo de Subcategoria"
+          label="Tipo"
+        />
       </div>
 
       <div className="flex gap-4 mt-6">
         <GlobalButton variant="primary" onClick={handleSubmit}>
-          Salvar Categoria
-        </GlobalButton>
-        <GlobalButton variant="outline" onClick={onCancel}>
-          Cancelar
+          Adicionar Sub Categoria
         </GlobalButton>
       </div>
-    </Card>
+    </div>
   );
 };

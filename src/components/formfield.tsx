@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "./Global/typography";
+import Typography from "./Global/Typography";
 
 type Props = {
   label: string;

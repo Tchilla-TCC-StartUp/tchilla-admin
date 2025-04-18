@@ -18,8 +18,22 @@ import UsersPage from "./pages/ClientsPage";
 import Categorias from "./pages/CategoryPage";
 import AgenciasPage from "./pages/AgenciasPage";
 import PrestadoresPage from "./pages/PrestadoresPage";
+import { useEffect } from "react";
+import SettingsService from "./service/SettingsService";
+import { useSettings } from "./hooks/SettingsHook";
 
 const AppRouter = () => {
+  const { getAllEnumsApp } = SettingsService();
+  const { setEnums } = useSettings();
+
+  const fetchSettings = async () => {
+    const enums = await getAllEnumsApp();
+    setEnums(enums);
+  };
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
   return (
     <Router>
       <Routes>

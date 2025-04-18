@@ -3,13 +3,13 @@ import {
   CategoryData,
   CategoryTableProps,
 } from "../../interfaces/CategoryInterface";
-import GlobalAvatar from "../Global/global_avatar";
-import GlobalButton from "../Global/global_button";
-import { Card, CardContent } from "../Global/global_cards";
-import GlobalHelloUser from "../Global/global_hello_user";
-import GlobalInput from "../Global/global_input";
-import { GlobalTable } from "../Global/global_table";
-import Typography from "../Global/typography";
+import GlobalAvatar from "../Global/GlobalAvatar";
+import GlobalButton from "../Global/GlobalButton";
+import { Card, CardContent } from "../Global/GlobalCards";
+import GlobalHelloUser from "../Global/GlobalHelloUser";
+import GlobalInput from "../Global/GlobalInput";
+import { GlobalTable } from "../Global/GlobalTable";
+import Typography from "../Global/Typography";
 
 export const CategoryTable: React.FC<CategoryTableProps> = ({
   categorias,

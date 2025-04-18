@@ -1,12 +1,12 @@
 import { CalendarDays, Search } from "lucide-react";
-import GlobalHelloUser from "../components/Global/global_hello_user";
-import GlobalButton from "../components/Global/global_button";
+import GlobalHelloUser from "../components/Global/GlobalHelloUser";
+import GlobalButton from "../components/Global/GlobalButton";
 import FiltroHeader from "../components/filtroheader";
 import { useEffect, useState } from "react";
-import Typography from "../components/Global/typography";
-import GlobalInput from "../components/Global/global_input";
-import GlobalDropdown from "../components/Global/global_dropdown";
-import { Card } from "../components/Global/global_cards";
+import Typography from "../components/Global/Typography";
+import GlobalInput from "../components/Global/GlobalInput";
+import GlobalDropdown from "../components/Global/GlobalDropdown";
+import { Card } from "../components/Global/GlobalCards";
 import CalendarioMensal from "../components/Agendamentos/calendariomensal";
 import { EventoCard } from "../components/Agendamentos/eventocard";
 

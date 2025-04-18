@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalCircularProgress from "./global_circular_progress";
+import GlobalCircularProgress from "./GlobalCircularProgress";
 
 type GlobalModalLoadingProps = {
   isVisible: boolean;

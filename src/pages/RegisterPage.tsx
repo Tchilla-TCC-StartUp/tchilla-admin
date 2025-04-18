@@ -2,11 +2,11 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { MdAlternateEmail, MdCategory, MdLockOutline } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 import AppAssetsImages from "../resource/app_assets_images";
-import Typography from "../components/Global/typography";
-import GlobalInput from "../components/Global/global_input";
-import GlobalButton from "../components/Global/global_button";
+import Typography from "../components/Global/Typography";
+import GlobalInput from "../components/Global/GlobalInput";
+import GlobalButton from "../components/Global/GlobalButton";
 import NavigationHooks from "../hooks/NavigationHook";
-import GlobalDropdown from "../components/Global/global_dropdown";
+import GlobalDropdown from "../components/Global/GlobalDropdown";
 import AuthLayout from "../layouts/AuthLayout";
 import { RegisterInterface } from "../interfaces/UserInterface";
 

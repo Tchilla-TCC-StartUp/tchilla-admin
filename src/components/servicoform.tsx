@@ -1,14 +1,14 @@
 import { useState } from "react";
-import GlobalButton from "./Global/global_button";
-import Typography from "./Global/typography";
+import GlobalButton from "./Global/GlobalButton";
+import Typography from "./Global/Typography";
 import CategoriaDiasForm from "./categoriadiasform";
 import PromocaoForm from "./promocaoform";
 import NomePrecoForm from "./servicoselecionadores";
-import FotosForm from "./Global/fotosform";
+import FotosForm from "./Global/FotosForm";
 import DescricaoForm from "./descricaoform";
 import HorarioDisponibilidadeForm from "./horariodisponibilidadeform";
-import { Card } from "./Global/global_cards";
-import GlobalBackButton from "./Global/global_back_button";
+import { Card } from "./Global/GlobalCards";
+import GlobalBackButton from "./Global/GlobalBackButton";
 type ServicoData = {
   nome?: string;
   preco?: string;

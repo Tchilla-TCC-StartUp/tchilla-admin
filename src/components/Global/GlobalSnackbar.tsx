@@ -7,7 +7,7 @@ import {
   FaTimesCircle,
 } from "react-icons/fa";
 import { useSnackbarStore } from "../../stores/snackbar_store";
-import Typography from "./typography";
+import Typography from "./Typography";
 
 const GlobalSnackbar = () => {
   const { isVisible, message, type } = useSnackbarStore();

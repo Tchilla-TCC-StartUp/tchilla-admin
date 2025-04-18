@@ -1,8 +1,8 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import AppAssetsImages from "../resource/app_assets_images";
-import Typography from "../components/Global/typography";
-import GlobalInput from "../components/Global/global_input";
-import GlobalButton from "../components/Global/global_button";
+import Typography from "../components/Global/Typography";
+import GlobalInput from "../components/Global/GlobalInput";
+import GlobalButton from "../components/Global/GlobalButton";
 import NavigationHooks from "../hooks/NavigationHook";
 
 import { useState } from "react";

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import AppAssetsImages from "../resource/app_assets_images";
+import AppAssetsImages from "../../resource/app_assets_images";
 import {
   IoCalendarOutline,
   IoCashOutline,
@@ -11,12 +11,12 @@ import {
   IoBusinessOutline,
   IoPeopleOutline,
 } from "react-icons/io5";
-import Typography from "./Global/typography";
-import NavigationHooks from "../hooks/NavigationHook";
+import Typography from "./Typography";
+import NavigationHooks from "../../hooks/NavigationHook";
 import { useLocation } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { BiCategory } from "react-icons/bi";
-import AppRoutes from "../resource/app_routes";
+import AppRoutes from "../../resource/app_routes";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -130,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
           <nav>
             <Typography
               variant="p_bold"
-              className="text-gray-500 pt-4 text-xs uppercase mb-2"
+              className="text-gray-500 pt-4 text-xs uppercase mb-2 block md:hidden lg:block"
             >
               NAVEGAÇÃO
             </Typography>
@@ -179,7 +179,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
           <nav>
             <Typography
               variant="p_bold"
-              className="text-gray-500 text-xs uppercase mb-2"
+              className="text-gray-500 text-xs uppercase mb-2 block md:hidden lg:block"
             >
               MENU DE CONTROLE
             </Typography>

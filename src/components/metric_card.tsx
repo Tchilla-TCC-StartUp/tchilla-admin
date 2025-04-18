@@ -1,5 +1,5 @@
-import { Card } from "./Global/global_cards";
-import Typography from "./Global/typography";
+import { Card } from "./Global/GlobalCards";
+import Typography from "./Global/Typography";
 import { Box } from "lucide-react";
 
 type MetricCardProps = {

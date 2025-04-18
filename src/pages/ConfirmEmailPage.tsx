@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import AppAssetsImages from "../resource/app_assets_images";
 import NavigationHooks from "../hooks/NavigationHook";
-import GlobalButton from "../components/Global/global_button";
+import GlobalButton from "../components/Global/GlobalButton";
 import AppRoutes from "../resource/app_routes";
 import AuthLayout from "../layouts/AuthLayout";
 import GlobalAbsolutBackButton from "../components/Global/GlobalAbsolutBackButton";
-import Typography from "../components/Global/typography";
-import GlobalInput from "../components/Global/global_input";
+import Typography from "../components/Global/Typography";
+import GlobalInput from "../components/Global/GlobalInput";
 const ConfirmEmail = () => {
   const [pin, setPin] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);

@@ -1,9 +1,9 @@
-import { Card, CardContent } from "../components/Global/global_cards";
-import GlobalHelloUser from "../components/Global/global_hello_user";
+import { Card, CardContent } from "../components/Global/GlobalCards";
+import GlobalHelloUser from "../components/Global/GlobalHelloUser";
 import MetricCard from "../components/metric_card";
 import NewUserList from "../components/news_user_list";
 import SalesChart from "../components/sales_chart";
-import Typography from "../components/Global/typography";
+import Typography from "../components/Global/Typography";
 import newUserData from "../data/jsons/new_users.json";
 const mockMetrics = [
   {

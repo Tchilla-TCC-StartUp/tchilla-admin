@@ -1,4 +1,4 @@
-import UploadImagemPreview from "./uploadImagempreview";
+import UploadImagemPreview from "./UploadImagemPreview";
 
 type FotosFormProps = {
   fotos: (File | null)[];

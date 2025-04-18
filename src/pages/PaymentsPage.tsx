@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { GlobalTable } from "../components/Global/global_table";
-import { AppGlobalUserAvatarName } from "../components/Global/global_user_avatar_name";
-import GlobalHelloUser from "../components/Global/global_hello_user";
-import Typography from "../components/Global/typography";
-import GlobalButton from "../components/Global/global_button";
-import GlobalInput from "../components/Global/global_input";
+import { GlobalTable } from "../components/Global/GlobalTable";
+import { AppGlobalUserAvatarName } from "../components/Global/GlobalUserAvatarName";
+import GlobalHelloUser from "../components/Global/GlobalHelloUser";
+import Typography from "../components/Global/Typography";
+import GlobalButton from "../components/Global/GlobalButton";
+import GlobalInput from "../components/Global/GlobalInput";
 import { IoArrowDownOutline, IoSearchOutline } from "react-icons/io5";
 import paymentsData from "../data/jsons/payments.json";
-import { Card } from "../components/Global/global_cards";
+import { Card } from "../components/Global/GlobalCards";
 
 const PaymentsPage = () => {
   return (

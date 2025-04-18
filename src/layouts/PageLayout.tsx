@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "../components/side_bar";
-import Typography from "../components/Global/typography";
+import Sidebar from "../components/Global/GlobalSideBar";
+import Typography from "../components/Global/Typography";
 import GlobalUserMenu from "../components/Global/global_user_menu";
-import GlobalSnackbar from "../components/Global/global_snackbar";
+import GlobalSnackbar from "../components/Global/GlobalSnackbar";
 import GlobalModalLoading from "../components/Global/GlobalModalLoading";
 import { useBaseRequestHook } from "../hooks/BaseRequestHook";
 import { IoClose, IoMenuOutline } from "react-icons/io5";
@@ -41,15 +41,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
           >
             {title}
           </Typography>
-
           <GlobalUserMenu />
         </header>
-
         <main className="lg:ml-60 md:ml-20 ms:ml-0 p-5 flex-1 mt-20 overflow-hidden relative z-0">
           {children}
         </main>
       </div>
-
       <GlobalSnackbar />
       {isLoading && (
         <GlobalModalLoading isVisible={isLoading} message="Carregando..." />

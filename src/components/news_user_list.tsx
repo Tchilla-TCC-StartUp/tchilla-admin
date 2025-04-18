@@ -1,5 +1,5 @@
-import { GlobalTable } from "./Global/global_table";
-import { AppGlobalUserAvatarName } from "./Global/global_user_avatar_name";
+import { GlobalTable } from "./Global/GlobalTable";
+import { AppGlobalUserAvatarName } from "./Global/GlobalUserAvatarName";
 interface NewUser {
   name: string;
   joinedAt: string;

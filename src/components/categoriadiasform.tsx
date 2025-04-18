@@ -1,5 +1,5 @@
-import GlobalDropdown from "./Global/global_dropdown";
-import GlobalSelect from "./Global/global_select";
+import GlobalDropdown from "./Global/GlobalDropdown";
+import GlobalSelect from "./Global/GlobalSelect";
 
 type CategoriaDiasFormProps = {
   categoria: string | number;
@@ -9,14 +9,14 @@ type CategoriaDiasFormProps = {
   setDiasDisponiveis: (diasDisponiveis: string[]) => void;
 };
 const DiasDaSemana = [
-  { label: 'Segunda', value: 'Segunda' },
-  { label: 'Terça', value: 'Terça' },
-  { label: 'Quarta', value: 'Quarta' },
-  { label: 'Quinta', value: 'Quinta' },
-  { label: 'Sexta', value: 'Sexta' },
-  { label: 'Sábado', value: 'Sabado' },
-  { label: 'Domingo', value: 'Domingo' },
-]
+  { label: "Segunda", value: "Segunda" },
+  { label: "Terça", value: "Terça" },
+  { label: "Quarta", value: "Quarta" },
+  { label: "Quinta", value: "Quinta" },
+  { label: "Sexta", value: "Sexta" },
+  { label: "Sábado", value: "Sabado" },
+  { label: "Domingo", value: "Domingo" },
+];
 const CategoriaDiasForm = ({
   categoria,
   setCategoria,
@@ -25,11 +25,13 @@ const CategoriaDiasForm = ({
 }: CategoriaDiasFormProps) => (
   <>
     <div>
-      <label className="block text-sm font-medium mt-2 text-gray-600 mb-1">Categoria</label>
+      <label className="block text-sm font-medium mt-2 text-gray-600 mb-1">
+        Categoria
+      </label>
       <GlobalDropdown
         options={[
-          { label: 'Categoria 1', value: 'categoria1' },
-          { label: 'Categoria 2', value: 'categoria2' },
+          { label: "Categoria 1", value: "categoria1" },
+          { label: "Categoria 2", value: "categoria2" },
         ]}
         selectedValue={categoria}
         onChange={setCategoria}
@@ -38,12 +40,18 @@ const CategoriaDiasForm = ({
     </div>
 
     <div className="md:col-span-2">
-      <label className="block text-sm font-medium mt-8 text-gray-600 mb-1">Dias disponíveis</label>
-      <GlobalSelect 
-      isMulti
-      options={DiasDaSemana} 
-      value={DiasDaSemana.filter(opt=> diasDisponiveis.includes(opt.value))} 
-      onChange={selected=> setDiasDisponiveis(selected.map(opt=>opt.value))}
+      <label className="block text-sm font-medium mt-8 text-gray-600 mb-1">
+        Dias disponíveis
+      </label>
+      <GlobalSelect
+        isMulti
+        options={DiasDaSemana}
+        value={DiasDaSemana.filter((opt) =>
+          diasDisponiveis.includes(opt.value)
+        )}
+        onChange={(selected) =>
+          setDiasDisponiveis(selected.map((opt) => opt.value))
+        }
       />
     </div>
   </>
