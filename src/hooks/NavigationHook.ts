@@ -20,6 +20,7 @@ const NavigationHooks = () => {
     navigateToServicosEpacote: () => navigate(AppRoutes.SERVEPACOTE),
     navigateTopagemantos: () => navigate(AppRoutes.PAGAMENTOS),
     navigateToProfile: () => navigate(AppRoutes.PROFILE),
+    navigateToWelcome: () => navigate(AppRoutes.WELCOME),
   };
 };
 

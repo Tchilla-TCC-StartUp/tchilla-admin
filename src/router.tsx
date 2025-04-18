@@ -21,6 +21,7 @@ import PrestadoresPage from "./pages/PrestadoresPage";
 import { useEffect } from "react";
 import SettingsService from "./service/SettingsService";
 import { useSettings } from "./hooks/SettingsHook";
+import WelcomePage from "./pages/WelcomePage";
 
 const AppRouter = () => {
   const { getAllEnumsApp } = SettingsService();
@@ -38,6 +39,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
+        <Route path={AppRoutes.WELCOME} element={<WelcomePage />} />
         <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
         <Route path={AppRoutes.CONFIRM} element={<ConfirmEmail />} />
         <Route path={AppRoutes.Reset} element={<ResetPassword />} />

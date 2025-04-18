@@ -38,7 +38,7 @@ const GlobalInput = forwardRef<HTMLInputElement, GlobalInputProps>(
           <input
             tabIndex={tabIndex}
             ref={ref}
-            className={`w-full p-4 border border-gray-400 rounded-md text-sm transition-colors focus:border-primary-800 focus:outline-none ${
+            className={`w-full p-4 border border-gray-400 rounded-md text-sm transition-colors focus:border-primary-400 focus:outline-none ${
               icon ? "pl-12" : ""
             } ${error ? "border-red-500" : ""} ${
               props.disabled

@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   return isUserLoggedIn() ? (
     children
   ) : (
-    <Navigate to={AppRoutes.LOGIN} replace />
+    <Navigate to={AppRoutes.WELCOME} replace />
   );
 };
 
