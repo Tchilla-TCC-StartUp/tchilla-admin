@@ -31,7 +31,7 @@ const ServiceAndPack: React.FC = () => {
       title: "Apagar",
       render: (item: any) => (
         <button
-          className="bg-red-500 text-white px-2 py-1 rounded"
+          className="bg-red-500 text-white w-[100px] h-[30px]  rounded"
           onClick={() => handleDelete(item.id)}
         >
           <Typography variant="p_normal">Apagar</Typography>
@@ -43,7 +43,7 @@ const ServiceAndPack: React.FC = () => {
       title: "Editar",
       render: (item: any) => (
         <button
-          className="bg-primary-500 text-white px-2 py-1 rounded"
+          className="bg-primary-700 text-white w-[100px] h-[30px]  rounded"
           onClick={() => console.log("Editar", item.id)}
         >
           <Typography variant="p_normal">Editar</Typography>

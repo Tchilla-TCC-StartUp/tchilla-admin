@@ -38,9 +38,9 @@ export const CategoryTable: React.FC<CategoryTableProps> = ({
       render: (item: CategoryData) => (
         <button
           onClick={() => onViewDetails(item)}
-          className="bg-gray-500 p-2 rounded-md text-white"
+          className="bg-gray-500 w-[100px] h-[30px]   rounded-md text-white"
         >
-          Ver Detalhes
+          Detalhes
         </button>
       ),
     },
@@ -50,9 +50,9 @@ export const CategoryTable: React.FC<CategoryTableProps> = ({
       render: (item: CategoryData) => (
         <button
           onClick={() => onDelete(item)}
-          className="bg-red-500 p-2 rounded-md text-white"
+          className="bg-red-500 w-[100px] h-[30px]   rounded-md text-white"
         >
-          Deletar
+          Apagar
         </button>
       ),
     },

@@ -109,8 +109,7 @@ export function GlobalTable<T>({
             <div className="grid grid-cols-1 gap-y-1.5 text-xs text-gray-800">
               {columns.map((col, colIndex) => (
                 <div key={colIndex} className="flex justify-between">
-                  <Typography variant="p_medium">{col.title}</Typography>
-
+                  <Typography variant="p_bold">{col.title}</Typography>
                   <span className="text-right">
                     {col.render ? col.render(item) : (item as any)[col.key]}
                   </span>

@@ -18,12 +18,24 @@ export const SubCategoryTable: React.FC<SubCategoryTableProps> = ({
     { key: "nome", title: "Nome" },
     { key: "descricao", title: "Descrição" },
     {
+      key: "edit",
+      title: "Editar SubCategoria",
+      render: (item: SubCategoryData) => (
+        <button
+          onClick={() => onDelete(item)}
+          className="bg-blue-500 w-[100px] h-[30px]  rounded-md text-white"
+        >
+          Editar
+        </button>
+      ),
+    },
+    {
       key: "delete",
       title: "Apagar SubCategoria",
       render: (item: SubCategoryData) => (
         <button
           onClick={() => onDelete(item)}
-          className="bg-red-500 p-2 rounded-md text-white"
+          className="bg-red-500 w-[100px] h-[30px]   rounded-md text-white"
         >
           Deletar
         </button>

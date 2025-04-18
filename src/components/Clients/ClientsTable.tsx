@@ -26,7 +26,6 @@ export const ClientsTable = ({
   handleDeleteClick,
 }: ClientsTableProps) => {
   const columns = [
-    { key: "id", title: "Id" },
     {
       key: "avatar",
       title: "Avatar",
@@ -38,27 +37,28 @@ export const ClientsTable = ({
     { key: "nome", title: "Nome" },
     { key: "email", title: "Email" },
     { key: "telefone", title: "Telefone" },
-    {
-      key: "delete",
-      title: "Apagar",
-      render: (item: ClientesData) => (
-        <button
-          className="bg-red-500 text-white px-2 py-1 rounded"
-          onClick={() => handleDeleteClick(item)}
-        >
-          <Typography variant="p_normal">Apagar</Typography>
-        </button>
-      ),
-    },
+
     {
       key: "details",
       title: "Ver Detalhes",
       render: (item: ClientesData) => (
         <button
-          className="bg-gray-500 text-white px-2 py-1 rounded"
+          className="bg-gray-500 text-white w-[100px] h-[30px] rounded"
           onClick={() => console.log("Ver Detalhes", item.id)}
         >
           <Typography variant="p_normal">Detalhes</Typography>
+        </button>
+      ),
+    },
+    {
+      key: "delete",
+      title: "Apagar",
+      render: (item: ClientesData) => (
+        <button
+          className="bg-red-500 text-white w-[100px] h-[30px]   rounded"
+          onClick={() => handleDeleteClick(item)}
+        >
+          <Typography variant="p_normal">Apagar</Typography>
         </button>
       ),
     },
