@@ -86,7 +86,7 @@ const CategoriasPage = () => {
           />
         ) : (
           <CategoryDetails
-            categoria={selectedCategoria}
+            categoria={selectedCategoria!}
             isEditing={isEditing}
             onEdit={() => setIsEditing(true)}
             onCancelEdit={() => setIsEditing(false)}
