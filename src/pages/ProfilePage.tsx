@@ -1,3 +1,4 @@
+import GlobalButton from "../components/Global/GlobalButton";
 import { Card } from "../components/Global/GlobalCards";
 import GlobalInput from "../components/Global/GlobalInput";
 import GlobalPhoneNumberInput from "../components/Global/GlobalPhoneNumberInput";
@@ -13,7 +14,7 @@ const ProfilePage = () => {
         {userData ? (
           <>
             <AppGlobalUserAvatarName name={userData?.nome ?? ""} size={100} />
-            <Card className=" w-full lg:w-[50%]  md:w-[80%] flex flex-col items-start justify-center gap-2 md:gap-3 p-2 md:p-5">
+            <Card className=" w-full lg:w-[50%]  md:w-[80%] flex flex-col items-start justify-center gap-2 md:gap-4 p-2 md:p-5">
               <GlobalInput value={userData?.nome} label="Nome" />
               <GlobalInput value={userData?.email} label="Email" />
               <GlobalPhoneNumberInput
@@ -23,6 +24,7 @@ const ProfilePage = () => {
                 value={userData?.telefone}
               />
               <GlobalInput value="ddddddddd" type="password" label="Password" />
+              <GlobalButton fullWidth className="mt-1">Salvar Alterações</GlobalButton>
             </Card>
           </>
         ) : (

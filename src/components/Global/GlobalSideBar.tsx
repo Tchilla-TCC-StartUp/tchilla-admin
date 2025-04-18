@@ -134,7 +134,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
             >
               NAVEGAÇÃO
             </Typography>
-            <ul className="space-y-4">
+            <ul className="space-y-4 cursor-pointer">
               {menuItems.map(({ label, icon, page, navigate, badge }) => {
                 const isActive = activePage === page;
                 return (
@@ -183,7 +183,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
             >
               MENU DE CONTROLE
             </Typography>
-            <ul className="space-y-4">
+            <ul className="space-y-4  cursor-pointer">
               {menuItems2.map(({ label, icon, page, navigate }) => {
                 const isActive = activePage === page;
                 return (
