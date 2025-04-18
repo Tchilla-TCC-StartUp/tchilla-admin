@@ -5,6 +5,14 @@ export interface UserInterface {
   telefone: string;
 }
 
+export interface UserData {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+}
+
+
 export interface UpdateUserInterface {
   nome: string;
   email: string;

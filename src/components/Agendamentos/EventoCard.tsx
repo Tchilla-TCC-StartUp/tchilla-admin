@@ -21,7 +21,7 @@ export const EventoCard = ({
   status: "Confirmado" | "Pendente" | "Cancelado";
 }) => {
   return (
-    <Card className="shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-2px_rgba(0,0,0,0.05)] rounded-xl border border-transparent">
+    <Card>
       <div className="flex items-center justify-between  mt-3 p-3 ">
         <div className="flex gap-3">
           <AppGlobalUserAvatarName name={nome} />

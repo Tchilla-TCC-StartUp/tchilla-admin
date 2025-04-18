@@ -78,20 +78,16 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
           }}
         />
 
-        <label htmlFor="nome" className="text-gray-500 font-medium">
-          Nome
-        </label>
         <GlobalInput
+          label="  Nome"
           id="nome"
           placeholder="Nome da categoria"
           value={formFields.nome}
           onChange={(e) => handleFormChange("nome", e.target.value)}
         />
 
-        <label htmlFor="descricao" className="text-gray-500 font-medium">
-          Descrição
-        </label>
         <GlobalInput
+          label="Descrição"
           id="descricao"
           placeholder="Descrição"
           value={formFields.descricao}

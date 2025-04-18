@@ -53,8 +53,8 @@ export const CategoryDetails: React.FC<CategoryDetailsProps> = ({
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <Typography variant="h2_bold">Detalhes da Categoria</Typography>
-          <GlobalButton variant="primary" onClick={() => onSave(formFields)}>
-            Salvar Alterações
+          <GlobalButton variant="primary" className="w-[30%]" onClick={() => onSave(formFields)}>
+            Salvar
           </GlobalButton>
         </div>
         <div className="flex flex-col gap-4">

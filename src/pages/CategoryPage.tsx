@@ -6,7 +6,7 @@ import {
 import { useCategories } from "../hooks/CategoryHook";
 import { CategoryDetails } from "../components/Category/CategoryDetails";
 import { CategoryForm } from "../components/Category/CategoryForm";
-import GlobalConfirmModal from "../components/Global/GloalModals"; // Note: Fix typo in 'gloal_modals' if applicable
+import GlobalConfirmModal from "../components/Global/GloalModals";
 import { CategoryTable } from "../components/Category/CategoryTable";
 import ErrorScreen from "./ErrorPage";
 
@@ -41,13 +41,19 @@ const CategoriasPage = () => {
 
   const updateCategoria = async (formFields: CategoryFormFields) => {
     if (!selectedCategoria) return;
+
     try {
-      await handleEditCategory(selectedCategoria.id, formFields);
+      const success = await handleEditCategory(
+        selectedCategoria.id,
+        formFields
+      );
+
+      if (!success) return;
+
       setIsEditing(false);
       setShowDetails(false);
     } catch (error) {
       console.error("Error updating category:", error);
-      // Optionally, show user-facing error (e.g., toast notification)
     }
   };
 

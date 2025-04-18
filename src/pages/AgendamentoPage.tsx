@@ -7,8 +7,8 @@ import Typography from "../components/Global/Typography";
 import GlobalInput from "../components/Global/GlobalInput";
 import GlobalDropdown from "../components/Global/GlobalDropdown";
 import { Card } from "../components/Global/GlobalCards";
-import CalendarioMensal from "../components/Agendamentos/calendariomensal";
-import { EventoCard } from "../components/Agendamentos/eventocard";
+import CalendarioMensal from "../components/Agendamentos/CalendarioMensal";
+import { EventoCard } from "../components/Agendamentos/EventoCard";
 
 type StatusEvento = "Confirmado" | "Pendente" | "Cancelado";
 type Evento = {

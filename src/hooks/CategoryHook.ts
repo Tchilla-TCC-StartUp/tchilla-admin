@@ -20,8 +20,8 @@ export const useCategories = () => {
     useState<CategoryData | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-   const { isError, screenType } = useErrorHandlerHook();
-   const showErrorScreen = isError && screenType === "fullScreen";
+  const { isError, screenType } = useErrorHandlerHook();
+  const showErrorScreen = isError && screenType === "fullScreen";
 
   const { fetchAllCategories, deleteCategory, updateCategory, createCategory } =
     CategoryService();
@@ -48,17 +48,23 @@ export const useCategories = () => {
     setCategoriaToDelete(categoria);
     setShowDeleteModal(true);
   };
-  const handleEditCategory = async (id: number, data: CategoryFormFields) => {
+  const handleEditCategory = async (
+    id: number,
+    data: CategoryFormFields
+  ): Promise<boolean> => {
     const { nome, descricao, foto } = data;
     if (!nome || !descricao || !foto) {
       showSnackbar("Todos os campos são obrigatórios", "warning");
-      return;
+      return false;
     }
+
     const formData = new FormData();
     formData.append("Nome", nome);
     formData.append("Descricao", descricao);
     formData.append("Foto", foto);
+
     await updateCategory(id, formData);
+    return true;
   };
 
   const handleAddCategoria = async (formFields: CategoryFormFields) => {

@@ -24,8 +24,6 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
     categoriaId: categoriaId,
   });
 
-
-
   const { getEnum } = useSettings();
   const tipoEnum = getEnum("SubCategoriaTipo");
   const options = mapToDropdownOptions(tipoEnum);
@@ -65,20 +63,16 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
     <div className="bg-white w-full">
       <Typography variant="h2_bold">{title}</Typography>
       <div className="flex flex-col gap-4">
-        <label htmlFor="nome" className="text-gray-500 font-medium">
-          Nome
-        </label>
         <GlobalInput
           id="nome"
+          label="Nome"
           placeholder="Nome da categoria"
           value={formFields.nome}
           onChange={(e) => handleFormChange("nome", e.target.value)}
         />
 
-        <label htmlFor="descricao" className="text-gray-500 font-medium">
-          Descrição
-        </label>
         <GlobalInput
+          label="  Descrição"
           id="descricao"
           placeholder="Descrição"
           value={formFields.descricao}

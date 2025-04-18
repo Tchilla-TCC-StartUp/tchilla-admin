@@ -10,7 +10,7 @@ interface RequestHeaders extends Record<string, string | undefined> {
 
 const api: AxiosInstance = axios.create({
   baseURL: AppConstants.baseURL,
-  timeout: 30000,
+  timeout: 5000,
   headers: {},
 });
 
