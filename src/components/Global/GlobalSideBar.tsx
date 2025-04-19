@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import AppAssetsImages from "../../resource/app_assets_images";
 import {
@@ -117,8 +118,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     if (onClose) onClose();
   };
 
+  // Bloquear scroll do body quando a sidebar mobile estiver aberta
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <>
+      {/* Sidebar desktop */}
       <div className="w-0 hidden md:w-20 lg:w-60 h-screen bg-white p-6 fixed z-40 flex-col justify-between border-r border-gray-200 md:flex cursor-pointer">
         <div>
           <img
@@ -126,7 +141,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
             alt="Logo"
             className="mb-4 mt-2 w-[160px] hidden lg:block"
           />
-
           <nav>
             <Typography
               variant="p_bold"
@@ -183,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
             >
               MENU DE CONTROLE
             </Typography>
-            <ul className="space-y-4  cursor-pointer">
+            <ul className="space-y-4 cursor-pointer">
               {menuItems2.map(({ label, icon, page, navigate }) => {
                 const isActive = activePage === page;
                 return (
@@ -220,7 +234,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
         </div>
       </div>
 
-      {/* Drawer Mobile */}
+      {/* Sidebar mobile */}
       {isOpen && (
         <motion.div
           className="fixed inset-0 z-50 bg-black bg-opacity-30 flex md:hidden"
@@ -230,7 +244,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="w-64 bg-white h-full p-6 flex flex-col justify-between"
+            className="w-64 bg-white h-full p-6 flex flex-col justify-between overflow-y-auto"
             initial={{ x: -1000 }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
